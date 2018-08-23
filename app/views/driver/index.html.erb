@@ -1,0 +1,10 @@
+<h1>Driver#index</h1>
+<h2>Hello <%= current_driver.name %></h2>
+
+<% if current_driver %>
+	<%= link_to "Logout", destroy_driver_session_path, :method => :delete %>
+<% else %>
+	<%= link_to "Login", new_driver_session_path %>
+	<%= link_to "Register", new_driver_registration_path %>
+<% end %>
+
