@@ -18,28 +18,38 @@ ActiveRecord::Schema.define(version: 20180823165236) do
   create_table "drivers", force: :cascade do |t|
     t.string   "name",                   default: "", null: false
     t.string   "email",                  default: "", null: false
+    t.string   "dob",                    default: "", null: false
+    t.string   "phone",                  default: "", null: false
+    t.string   "license_plate",          default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.index ["dob"], name: "index_drivers_on_dob", using: :btree
     t.index ["email"], name: "index_drivers_on_email", unique: true, using: :btree
+    t.index ["license_plate"], name: "index_drivers_on_license_plate", unique: true, using: :btree
     t.index ["name"], name: "index_drivers_on_name", using: :btree
+    t.index ["phone"], name: "index_drivers_on_phone", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_drivers_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   default: "", null: false
     t.string   "email",                  default: "", null: false
+    t.string   "dob",                    default: "", null: false
+    t.string   "phone",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.index ["dob"], name: "index_users_on_dob", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["name"], name: "index_users_on_name", using: :btree
+    t.index ["phone"], name: "index_users_on_phone", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 

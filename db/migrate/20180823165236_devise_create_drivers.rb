@@ -6,6 +6,9 @@ class DeviseCreateDrivers < ActiveRecord::Migration[5.0]
       ## Database authenticatable
       t.string :name,               null: false, default: ""
       t.string :email,              null: false, default: ""
+      t.string :dob,                null: false, default: ""
+      t.string :phone,              null: false, default: ""
+      t.string :license_plate,      null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -39,6 +42,9 @@ class DeviseCreateDrivers < ActiveRecord::Migration[5.0]
     
     add_index :drivers, :name
     add_index :drivers, :email,                unique: true
+    add_index :drivers, :dob
+    add_index :drivers, :phone,                unique: true
+    add_index :drivers, :license_plate,        unique: true
     add_index :drivers, :reset_password_token, unique: true
     # add_index :drivers, :confirmation_token,   unique: true
     # add_index :drivers, :unlock_token,         unique: true

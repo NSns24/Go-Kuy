@@ -5,7 +5,7 @@ FactoryGirl.define do
   	name { Faker::Name.name }
   	email { Faker::Internet.free_email }
   	dob { Faker::Date.birthday(18, 65) }
-  	phone { Faker::PhoneNumber.cell_phone }
+  	phone { Faker::Number.number(10) }
 	password { Faker::Internet.password }
   end
 end
