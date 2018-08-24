@@ -27,6 +27,40 @@ describe Driver do
 		expect(driver.errors[:email]).to include("can't be blank")
 	end
 
+	it "is invalid without date of birth" do
+		driver = build(:driver, dob: nil)
+		driver.valid?
+		expect(driver.errors[:dob]).to include("can't be blank")
+	end
+
+	# it "is invalid with age less than 16" do
+		
+	# end
+
+	it "is invalid without a phone" do
+		driver = build(:driver, phone: nil)
+		driver.valid?
+		expect(driver.errors[:phone]).to include("can't be blank")
+	end
+
+	it "is invalid with a phone length less than 10" do
+		driver = build(:driver, phone: "123456789")
+		driver.valid?
+		expect(driver.errors[:phone]).to include("is not valid")
+	end
+
+	it "is invalid without numeric phone" do
+		driver = build(:driver, phone: "asd")
+		driver.valid?
+		expect(driver.errors[:phone]).to include("must be a number")
+	end
+
+	it "is invalid without a license plate" do
+		driver = build(:driver, license_plate: nil)
+		driver.valid?
+		expect(driver.errors[:license_plate]).to include("can't be blank")
+	end
+
 	it "is invalid without a password" do
 		driver = build(:driver, password: nil)
 		driver.valid?

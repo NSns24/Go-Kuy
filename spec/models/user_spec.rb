@@ -26,6 +26,30 @@ describe User do
 		expect(user.errors[:email]).to include("can't be blank")
 	end
 
+	it "is invalid without date of birth" do
+		user = build(:user, dob: nil)
+		user.valid?
+		expect(user.errors[:dob]).to include("can't be blank")
+	end
+
+	it "is invalid without a phone" do
+		user = build(:user, phone: nil)
+		user.valid?
+		expect(user.errors[:phone]).to include("can't be blank")
+	end
+
+	it "is invalid with a phone length less than 10" do
+		user = build(:user, phone: "123456789")
+		user.valid?
+		expect(user.errors[:phone]).to include("is not valid")
+	end
+
+	it "is invalid without numeric phone" do
+		user = build(:user, phone: "asd")
+		user.valid?
+		expect(user.errors[:phone]).to include("must be a number")
+	end
+
 	it "is invalid without a password" do
 		user = build(:user, password: nil)
 		user.valid?
