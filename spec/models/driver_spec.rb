@@ -27,6 +27,13 @@ describe Driver do
 		expect(driver.errors[:email]).to include("can't be blank")
 	end
 
+	it "is invalid with a duplicate email" do
+		driver1 = create(:driver, email: "tommywillianto@yahoo.com")
+		driver2 = build(:driver, email: "tommywillianto@yahoo.com")
+		driver2.valid?
+		expect(driver2.errors[:email]).to include("has already been taken")
+	end
+
 	it "is invalid without date of birth" do
 		driver = build(:driver, dob: nil)
 		driver.valid?
@@ -55,10 +62,24 @@ describe Driver do
 		expect(driver.errors[:phone]).to include("must be a number")
 	end
 
+	it "is invalid with a duplicate phone" do
+		driver1 = create(:driver, phone: "081234567890")
+		driver2 = build(:driver, phone: "081234567890")
+		driver2.valid?
+		expect(driver2.errors[:phone]).to include("has already been taken")
+	end
+
 	it "is invalid without a license plate" do
 		driver = build(:driver, license_plate: nil)
 		driver.valid?
 		expect(driver.errors[:license_plate]).to include("can't be blank")
+	end
+
+	it "is invalid with a duplicate license plate" do
+		driver1 = create(:driver, license_plate: "1812")
+		driver2 = build(:driver, license_plate: "1812")
+		driver2.valid?
+		expect(driver2.errors[:license_plate]).to include("has already been taken")
 	end
 
 	it "is invalid without a password" do
@@ -73,12 +94,7 @@ describe Driver do
 		expect(driver.errors[:password]).to include("is too short (minimum is 6 characters)")
 	end
 
-	it "is invalid with a duplicate email" do
-		driver1 = create(:driver, email: "tommywillianto@yahoo.com")
-		driver2 = build(:driver, email: "tommywillianto@yahoo.com")
-		driver2.valid?
-		expect(driver2.errors[:email]).to include("has already been taken")
-	end
+	
 
 	# belum register
 	it "is invalid " do

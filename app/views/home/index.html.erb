@@ -1,8 +1,16 @@
 <h1>Home#index</h1>
 
-<% if current_user %>
-	<%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+<% if current_user || current_driver %>
+
 <% else %>
+	User : 
+	<br>
 	<%= link_to "Login", new_user_session_path %>
 	<%= link_to "Register", new_user_registration_path %>
+
+	<br>
+	Driver:
+	<br>
+	<%= link_to "Login", new_driver_session_path %>
+	<%= link_to "Register", new_driver_registration_path %>
 <% end %>

@@ -26,6 +26,13 @@ describe User do
 		expect(user.errors[:email]).to include("can't be blank")
 	end
 
+	it "is invalid with a duplicate email" do
+		user1 = create(:user, email: "tommywillianto@yahoo.com")
+		user2 = build(:user, email: "tommywillianto@yahoo.com")
+		user2.valid?
+		expect(user2.errors[:email]).to include("has already been taken")
+	end
+
 	it "is invalid without date of birth" do
 		user = build(:user, dob: nil)
 		user.valid?
@@ -36,6 +43,13 @@ describe User do
 		user = build(:user, phone: nil)
 		user.valid?
 		expect(user.errors[:phone]).to include("can't be blank")
+	end
+
+	it "is invalid with a duplicate phone" do
+		user1 = create(:user, phone: "081234567890")
+		user2 = build(:user, phone: "081234567890")
+		user2.valid?
+		expect(user2.errors[:phone]).to include("has already been taken")
 	end
 
 	it "is invalid with a phone length less than 10" do
@@ -62,12 +76,7 @@ describe User do
 		expect(user.errors[:password]).to include("is too short (minimum is 6 characters)")
 	end
 
-	it "is invalid with a duplicate email" do
-		user1 = create(:user, email: "tommywillianto@yahoo.com")
-		user2 = build(:user, email: "tommywillianto@yahoo.com")
-		user2.valid?
-		expect(user2.errors[:email]).to include("has already been taken")
-	end
+	
 
 	# belum register
 	it "is invalid " do
