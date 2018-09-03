@@ -97,7 +97,7 @@ describe Driver do
 	
 
 	# belum register
-	it "is invalid " do
+	it "is invalid when driver is not registered" do
 		
 	end
 
