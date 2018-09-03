@@ -1,0 +1,195 @@
+// Place all the styles related to the Order controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro');
+@import url('https://fonts.googleapis.com/css?family=Cuprum');
+
+body {
+	font-family: 'Cuprum';
+}
+
+.orange-color {
+	color: #fdbb1c;
+}
+
+.leaflet-routing-container {
+	display: none !important;
+}
+
+#main-map {
+	width: 100%;
+	height: 500px;
+}
+
+.header-order {
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	padding-bottom: 7px;
+	padding-top: 15px;
+	margin-bottom: 10px;
+	font-size: 25px;
+}
+
+.header-order span {
+	font-weight: bold;
+}
+
+.img-loc {
+	width: 40px;
+	height: 40px;
+	margin-top: 8px;
+}
+
+.img-logo {
+	width: 50px;
+	height: 50px;
+	margin-top: -8px;
+}
+
+#pickup, #dest {
+	font-size: 20px;
+	padding: 5px 0;
+}
+
+#pickup span, #dest span {
+	display: block;
+}
+
+#pickup .img-logo, #dest .img-logo {
+	margin: 2px 0;
+}
+
+ul {
+	margin: 0;
+	margin-top: -5px;
+	margin-left: 3px;
+}
+
+.container-fluid {
+	margin-bottom: 20px;
+}
+
+.img-arrow {
+	width: 30px;
+	margin: 10px 0;
+}
+
+.set-pickup, .set-dest {
+	cursor: pointer;
+}
+
+.set-pickup:hover, .set-dest:hover {
+	color: #f6546a;
+}
+
+.btn {
+	padding: 15px 25px;
+	border-radius: 5px;
+	background-color: #2e8b57;
+	color: #ffffff;
+	font-size: 20px;
+}
+
+.btn:hover {
+	background-color: #fdbb1c;
+	color: #000000;
+}
+
+#pickup-map, #dest-map {
+	width: 100%;
+	height: 500px;
+}
+
+#pickup-loc, #dest-loc {
+	width: 75%;
+	padding: 15px;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin-right: 15px;
+}
+
+#modal-pickup .modal-footer, #modal-dest .modal-footer {
+	text-align: left;
+}
+
+.pac-container {
+    z-index: 10000 !important;	
+    cursor: pointer;
+    top: 720px !important;
+    left: 17px !important;
+}
+
+#img-center {
+	cursor: pointer;
+	width: 40px;
+	margin-top: -5px;
+}
+
+#payment {
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	padding: 15px 0;
+	margin: 15px 0;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#btnOrder {
+	margin-top: 10px;
+}
+
+.modal-footer .row span {
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.modal-footer img {
+	margin-top: -10px;
+	margin-left: 8px;
+}
+
+#modal-dest .modal-footer img {
+	height: 60px;
+}
+
+.modal-footer .row {
+	margin-bottom: 12px;
+}
+
+#dest-name, #pickup-name {
+	font-weight: bold;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10000;
+    cursor: pointer;
+}
+
+#text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: #ffffff;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+input[type='text'] {
+	background-image: url('<%= asset_path("order/destination.png") %>');
+    background-position: 7px 7px;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    padding-left: 50px;
+    text-indent: 30px;
+}

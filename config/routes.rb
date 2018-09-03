@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get 'user/index', as: :user_home
   get 'driver/index', as: :driver_home
 
+  get 'order', :to => 'user#order'
+  get 'job', :to => 'driver#job'
+
   get 'user/profile'
   get 'driver/profile'
 

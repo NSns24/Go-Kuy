@@ -1,0 +1,138 @@
+<% content_for :assets do %>
+  <%= stylesheet_link_tag    'https://unpkg.com/leaflet@1.2.0/dist/leaflet.css' %>
+  <%= javascript_include_tag 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js' %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places' %>
+  <%= javascript_include_tag 'https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js' %>
+
+  <%= stylesheet_link_tag    'leaflet-routing-machine' %>
+  <%= stylesheet_link_tag    'order' %>
+
+  <%= javascript_include_tag 'jquery.geocomplete' %>
+  <%= javascript_include_tag 'leaflet-routing-machine' %>
+  <%= javascript_include_tag 'leaflet.smoothmarkerbouncing' %>
+  <%= javascript_include_tag 'order' %>
+<% end %>
+
+<div class="container-fluid">
+  <div id='main-map'></div>
+  <div class="header-order">
+    <div class="row">
+      <div class="col col-lg-9">
+        <%= image_tag 'order/icon_gokuy_circle.png', alt: 'logo', class: 'img-logo' %>
+        <span>GO-KUY<span class="orange-color">!</span></span>
+      </div>   
+      <div class="col col-lg-2 col-lg-push-1 text-center">
+        <span>1 Person</span>
+        <%= image_tag 'order/compass.svg', alt: 'center-map', id: 'img-center' %>
+      </div> 
+    </div>
+  </div>
+  <div id="pickup">
+    <div class="row">
+      <div class="col col-lg-1">
+        <%= image_tag 'order/stick_man.png', class: 'img-loc' %>
+      </div>
+      <div class="set-pickup">
+        <div class="col col-lg-10">
+          <span>PICKUP LOCATION</span>
+          <span id="pickup-name"></span>
+        </div>
+        <div class="col col-lg-1">
+          <%= image_tag 'order/arrow.png', alt: 'arrow-clickable', class: 'img-arrow' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <ul>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <div id="dest">
+    <div class="row">
+      <div class="col col-lg-1">
+        <%= image_tag 'order/destination.png', class: 'img-loc' %>
+      </div>
+      <div class="set-dest">
+        <div class="col col-lg-10">
+          <span id="distance">DESTINATION . 0 KM</span>
+          <span id="dest-name">Set your destination</span>
+        </div>
+        <div class="col col-lg-1">
+          <%= image_tag 'order/arrow.png', alt: 'arrow-clickable', class: 'img-arrow' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="payment">
+    <div class="row">
+      <div class="col col-lg-10">
+        <%= image_tag 'order/payment.png', alt: 'payment', class: 'img-logo' %>
+        <span>PAYMENT</span>
+      </div>
+      <div class="col col-lg-2 text-center">
+        <span id="totalPrice">Rp 0</span>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <button type="button" id="btnOrder" class="btn btn-primary">ORDER GO-KUY!</button>
+  </div>
+</div>
+  
+<!-- modal set pickup -->
+<div class="modal fade" id="modal-pickup">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">Set Your Pickup Location</h4>
+      </div>
+      <div class="modal-body">
+        <div id="pickup-map"></div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+           <%= image_tag 'order/stick_man.png', class: 'img-loc' %>
+           <span>Where should we pick you up?</span>
+        </div>
+        <input type="text" name="pickupLoc" id="pickup-loc" placeholder="Search pickup location">
+        <!-- <button type="button" id="btn-search-pickup" class="btn btn-info">Search</button> -->
+        <button type="button" id="btn-save-pickup" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal set dest -->
+<div class="modal fade" id="modal-dest">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">Set Your Destination Location</h4>
+      </div>
+      <div class="modal-body">
+        <div id="dest-map"></div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <%= image_tag 'order/logo_gokuy.png', class: 'img-loc' %>
+          <span>Where would you like to go?</span>
+        </div>
+        <input type="text" name="destLoc" id="dest-loc" placeholder="Search for a destination">
+        <!-- <button type="button" id="btn-search-dest" class="btn btn-info">Search</button> -->
+        <button type="button" id="btn-save-dest" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="overlay">
+  <div id="text" class="text-center">
+    Searching...
+    <br>
+    Click anywhere to cancel
+  </div>
+</div>

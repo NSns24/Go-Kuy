@@ -1,0 +1,35 @@
+<% content_for :assets do %>
+  <%= stylesheet_link_tag    'https://unpkg.com/leaflet@1.2.0/dist/leaflet.css' %>
+  <%= javascript_include_tag 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js' %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places' %>
+  <%= javascript_include_tag 'https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js' %>
+
+  <%= stylesheet_link_tag    'leaflet-routing-machine' %>
+  <%= stylesheet_link_tag    'job' %>
+
+  <%= javascript_include_tag 'jquery.geocomplete' %>
+  <%= javascript_include_tag 'leaflet-routing-machine' %>
+  <%= javascript_include_tag 'job' %>
+<% end %>
+
+<div class="container-fluid">
+  <div id='main-map'></div>
+  <div class="row">
+    <div class="col col-lg-4 text-center" id="find-customer">
+      <div id="circle">
+        <span id="circle-text">FIND A CUSTOMER NEARBY</span>
+      </div>
+    </div>
+    <div class="col col-lg-8 text-center" id="set-location">
+      <span>YOUR LOCATION</span>
+      <div id="current">
+        <img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">
+        <span id="current-loc"></span>
+      </div>
+      <div id="dest"> 
+        <img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">
+        <span id="dest-loc"></span>
+      </div>
+    </div>
+  </div>
+</div>

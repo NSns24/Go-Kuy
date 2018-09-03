@@ -1,0 +1,407 @@
+var mainMap;
+var pickupMap;
+var destMap;
+
+var allowGPS = false;
+var drag = false;
+
+var currentLoc;
+var destIcon = L.icon({
+  iconUrl: "<%= asset_path('order/destination.png') %>",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -30]
+});
+
+$(document).ready(function(){
+  getCurrentLocation().then(function(msg){
+    mainMap = new Map('main-map');
+    let marker = mainMap.setPickupMarker(currentLoc, false, '#pickup-name');
+    mainMap.setMarkerPopup(marker, msg);
+  }); 
+
+  $('#pickup-loc, #dest-loc').on('focus', function(){
+    $(this).parent().append($('.pac-container'));
+  });
+
+  $('#pickup-name, #pickup-loc, #dest-name, #dest-loc').geocomplete({
+    country: 'id',
+    types: []
+  }).bind('geocode:result', function(event, result) {
+  	let address = result.formatted_address;
+  	let name = (result.name === undefined) ? "" : result.name + ", ";
+  	let str = address.substr(0, address.indexOf(','));
+    
+    if($(this)[0] instanceof HTMLInputElement) {
+      $(this).val(name + str);
+    }
+  	else {
+      $(this).html(name + str);
+    }
+
+    if(!drag) {
+      if($(this).attr('id') == 'pickup-loc') {
+        if(pickupMap) {
+          let location = L.latLng(result.geometry.location.lat(), result.geometry.location.lng());
+          pickupMap.setPickupMarker(location, true);
+        }
+      }
+      else if($(this).attr('id') == 'dest-loc') {
+        if(destMap) {
+          let location = L.latLng(result.geometry.location.lat(), result.geometry.location.lng());
+          destMap.setDestMarker(location, true);
+        }
+      }
+    }
+
+    drag = false;
+	});
+
+	$('.set-pickup').click(function(){
+    if(allowGPS) {
+      if(!pickupMap) {
+        pickupMap = new Map('pickup-map');
+      }
+
+      getCurrentLocation().then(function(){
+        pickupMap.setPickupMarker(currentLoc, true, '#pickup-loc');
+        $('#modal-pickup').modal('toggle');
+      });
+    }
+	});
+
+  $('.set-dest').click(function(){
+    if(allowGPS) {
+      if(!destMap) {
+        destMap = new Map('dest-map');
+      }
+
+      getCurrentLocation().then(function(){
+        destMap.setDestMarker(currentLoc, true, '#dest-loc');
+        $('#modal-dest').modal('toggle');
+      });
+    }
+  });
+
+	$('#modal-pickup').on('show.bs.modal', function(){
+    if(pickupMap) {
+      setInterval(function(){
+        pickupMap.map.invalidateSize();
+      }, 100);
+    }
+  });
+
+  $('#modal-dest').on('show.bs.modal', function(){
+    if(destMap) {
+      setInterval(function(){
+        destMap.map.invalidateSize();
+      }, 100);
+    }
+  });
+
+  // $('#btn-search-pickup').click(function(){
+  //   if($('#pickup-loc').val().trim() != "") {
+  //     getLatLng($('#pickup-loc').val().trim()).then(function(location) {
+  //       pickupMap.setPickupMarker(location, true, '#pickup-loc');
+  //     }).catch(alert);
+  //   }
+  // });
+
+  $('#btn-save-pickup').click(function(){
+    $('#modal-pickup').modal('toggle');
+    if(pickupMap && mainMap) {
+      setTimeout(function(){
+        let pickupLoc = pickupMap.pickupMarker.getLatLng();
+        let marker = mainMap.setPickupMarker(pickupLoc, false, '#pickup-name');
+        mainMap.setMarkerPopup(marker, 'You are here');
+      }, 500);
+    }
+  });
+
+  $('#btn-save-dest').click(function(){
+    $('#modal-dest').modal('toggle');
+    if(destMap && mainMap) {
+      setTimeout(function(){
+        let destLoc = destMap.destMarker.getLatLng();
+        let marker = mainMap.setDestMarker(destLoc, false, '#dest-name');
+        mainMap.getRoute();
+      }, 500);
+    }
+  });
+
+  $('#img-center').click(function(){
+    if(mainMap) {
+      mainMap.setView();
+    }
+  });
+
+  $('#btnOrder').click(function(){
+    if(allowGPS) {
+      mainMap.markerBounce();
+      $('#overlay').show();
+    }
+    else {
+      alert('Please enable your GPS first');
+    }
+  });
+
+  $('#overlay').click(function(){
+    $(this).hide();
+    mainMap.markerBounce();
+  });
+});
+
+function getCurrentLocationPromise() {
+  return new Promise(function(resolve, reject) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        allowGPS = true;
+        resolve(L.latLng(position.coords.latitude, position.coords.longitude));
+        //resolve(L.latLng(-6.199872015046871, 106.78535020370487));
+      });
+    }
+    else {
+      reject('GPS Not Supported');
+    }
+  });
+}
+
+function getCurrentLocation() {
+  return new Promise(function(resolve) {
+    if(currentLoc == null) {
+      getCurrentLocationPromise().then(function(location){
+        currentLoc = location;
+        resolve('You are here');
+      }).catch(function(error){
+        alert(error);
+        //set a random location
+        currentLoc = L.latLng(-6.199872015046871, 106.78535020370487);
+        resolve('Random Location');
+      });
+    }
+    else {
+      resolve();
+    }
+  });
+}
+
+function getLatLng(address) {
+  let geocoder = new google.maps.Geocoder();
+  
+  return new Promise(function(resolve, reject) {
+    geocoder.geocode({ 'address': address }, function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        resolve(
+          L.latLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
+        );
+      }
+      else {
+        reject('Location not found');
+      }
+    });
+  });
+}
+
+function calculatePrice(distance) {
+  let price = 5000;
+
+  if(distance <= 5) {
+    return price;
+  }
+  else {
+    return Math.ceil(distance * price);
+  }
+}
+
+
+
+//CLASS MAP
+function Map(mapContainer) {
+  this.pickupMarker;
+  this.destMarker;
+  this.route;
+
+  this.map = L.map(mapContainer, {
+    zoom: 18,
+    scrollWheelZoom: false,
+    doubleClickZoom: false
+  });
+
+  L.tileLayer('http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(this.map);
+
+  //L.gridLayer.googleMutant({ type: 'roadmap' }).addTo(this.map);
+}
+
+Map.prototype.setView = function() {
+  let latLngs = [];
+  let markerBounds;
+
+  if(this.pickupMarker) {
+    latLngs.push(this.pickupMarker.getLatLng());
+  }
+
+  if(this.destMarker) {
+    latLngs.push(this.destMarker.getLatLng());
+  }
+  
+  if(latLngs.length > 0) {
+    markerBounds = L.latLngBounds(latLngs);
+    this.map.fitBounds(markerBounds);
+  }
+}
+
+Map.prototype.setPickupMarker = function(location, draggable, placeNameCon) {
+  if(this.pickupMarker) {
+    //this.pickupMarker.remove();
+    this.pickupMarker.setLatLng(location);
+  }
+  else {
+    this.pickupMarker = L.marker(location, {
+      draggable: draggable,
+      title: 'Pick Up Location'
+    }).addTo(this.map);
+
+    if(draggable) {
+      this.pickupMarker.on('dragend', function(ret) { 
+        drag = true;
+        $(placeNameCon).geocomplete("find", ret.target._latlng.lat + "," + ret.target._latlng.lng);
+      });
+    }
+  }
+
+  if(placeNameCon) {
+    $(placeNameCon).geocomplete("find", location.lat + "," + location.lng);
+  }
+
+  this.setView();
+
+  return this.pickupMarker;
+}
+
+Map.prototype.setDestMarker = function(location, draggable, placeNameCon) {
+  if(this.destMarker) {
+    //this.destMarker.remove();
+    this.destMarker.setLatLng(location);
+  }
+  else {
+    this.destMarker = L.marker(location, {
+      draggable: draggable,
+      title: 'Your Destination',
+      icon: destIcon
+    }).addTo(this.map);
+
+    if(draggable) {
+      this.destMarker.on('dragend', function(ret) { 
+        drag = true;
+        $(placeNameCon).geocomplete("find", ret.target._latlng.lat + "," + ret.target._latlng.lng);
+      });
+    }
+  }
+
+  if(placeNameCon) {
+    $(placeNameCon).geocomplete("find", location.lat + "," + location.lng);
+  }
+  
+  this.setView();
+
+  return this.destMarker;
+}
+
+Map.prototype.setMarkerPopup = function(marker, message, options = {}) {
+  marker.bindPopup(message, options).addTo(this.map).openPopup();
+}
+
+Map.prototype.getRoute = function() {
+  let pickupTemp;
+  let destTemp;
+  let pickupLatLng = this.pickupMarker.getLatLng();
+  let destLatLng = this.destMarker.getLatLng();
+  
+  this.pickupMarker.remove();
+  this.destMarker.remove();
+
+  if(this.route) {
+    this.route.remove();
+  }
+
+  this.route = L.Routing.control({
+    waypoints: [
+      pickupLatLng,
+      destLatLng
+    ],
+    addWaypoints: false,
+    draggableWaypoints: false,
+    createMarker: function (i, start, n){
+      let marker;
+
+      if (i == n-1) {
+        marker = L.marker(start.latLng, {
+          draggable: false,
+          title: 'Your Destination',
+          icon: destIcon,
+        });
+        
+        destTemp = marker;
+      }
+      else {
+        marker = L.marker(start.latLng, {
+          draggable: false,
+          title: 'Pick Up Location'
+        });
+        
+        pickupTemp = marker;
+      }
+
+      return marker;
+    },
+    lineOptions: {
+      styles: [{color: '#2e8b57', weight: 5}]
+    },
+    router: L.Routing.mapbox('pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw')
+  }).addTo(this.map);
+
+  this.pickupMarker = pickupTemp;
+  this.destMarker = destTemp;
+
+  this.setMarkerPopup(this.pickupMarker, 'Pick Up Location', { closeOnClick: false, autoClose: false });
+  this.setMarkerPopup(this.destMarker, 'Your Destination', { closeOnClick: false, autoClose: false });
+  
+  let tempMap = this.map;
+  let destMarkerTemp = this.destMarker;
+  let pickupMarkerTemp = this.pickupMarker;
+  let routeTemp = this.route;
+
+  this.route.on('routesfound', function(result) {
+    let distance = result.routes[0].summary.totalDistance;
+    let distanceInKm = (distance/1000).toFixed(1);
+    let totalPrice = calculatePrice(distanceInKm);
+
+    if(distanceInKm > 30) {
+      alert('Kejauhan bangg');
+      // destMarkerTemp.remove();
+      // let markerBounds = L.latLngBounds(pickupMarkerTemp.getLatLng());
+      //this.map.fitBounds(markerBounds);
+      $('#distance').html('DESTINATION . ' + 0 + ' KM');
+      $('#totalPrice').html('Rp ' + 0);
+    }
+    else {
+      $('#distance').html('DESTINATION . ' + distanceInKm + ' KM');
+      $('#totalPrice').html('Rp ' + totalPrice);
+      let line = L.Routing.line(result.routes[0]);
+      let bounds = line.getBounds();
+      tempMap.fitBounds(bounds);
+    }
+  });
+}
+
+Map.prototype.markerBounce = function() {
+  if(this.pickupMarker) {
+    this.pickupMarker.toggleBouncing();
+  }
+
+  if(this.destMarker) {
+    this.destMarker.toggleBouncing();
+  }
+}
