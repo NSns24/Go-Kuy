@@ -203,10 +203,10 @@ function getLatLng(address) {
 }
 
 function calculatePrice(distance) {
-  let price = 5000;
+  let price = 2000;
 
   if(distance <= 5) {
-    return price;
+    return 5000;
   }
   else {
     return Math.ceil(distance * price);
@@ -314,17 +314,18 @@ Map.prototype.setMarkerPopup = function(marker, message, options = {}) {
 }
 
 Map.prototype.getRoute = function() {
-  let pickupTemp;
-  let destTemp;
-  let pickupLatLng = this.pickupMarker.getLatLng();
-  let destLatLng = this.destMarker.getLatLng();
-  
-  this.pickupMarker.remove();
-  this.destMarker.remove();
-
   if(this.route) {
     this.route.remove();
   }
+
+  let pickupLatLng = this.pickupMarker.getLatLng();
+  let destLatLng = this.destMarker.getLatLng();
+
+  let pickupTemp;
+  let destTemp;
+  
+  this.pickupMarker.remove();
+  this.destMarker.remove();
 
   this.route = L.Routing.control({
     waypoints: [
@@ -371,28 +372,30 @@ Map.prototype.getRoute = function() {
   let tempMap = this.map;
   let destMarkerTemp = this.destMarker;
   let pickupMarkerTemp = this.pickupMarker;
-  let routeTemp = this.route;
 
   this.route.on('routesfound', function(result) {
     let distance = result.routes[0].summary.totalDistance;
     let distanceInKm = (distance/1000).toFixed(1);
-    let totalPrice = calculatePrice(distanceInKm);
+    let bounds;
 
     if(distanceInKm > 30) {
-      alert('Kejauhan bangg');
-      // destMarkerTemp.remove();
-      // let markerBounds = L.latLngBounds(pickupMarkerTemp.getLatLng());
-      //this.map.fitBounds(markerBounds);
+      alert('Kejauhan nihh, harus di bawah 30 km');
+      destMarkerTemp.remove();
+      $('#main-map').find('.leaflet-overlay-pane').remove();
       $('#distance').html('DESTINATION . ' + 0 + ' KM');
+      $('#dest-name').html('Set your destination');
       $('#totalPrice').html('Rp ' + 0);
+      bounds = L.latLngBounds([pickupMarkerTemp.getLatLng()]);
     }
     else {
+      let totalPrice = calculatePrice(distanceInKm);
       $('#distance').html('DESTINATION . ' + distanceInKm + ' KM');
       $('#totalPrice').html('Rp ' + totalPrice);
       let line = L.Routing.line(result.routes[0]);
-      let bounds = line.getBounds();
-      tempMap.fitBounds(bounds);
+      bounds = line.getBounds();
     }
+
+    tempMap.fitBounds(bounds);
   });
 }
 
