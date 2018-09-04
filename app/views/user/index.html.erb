@@ -1,8 +1,9 @@
 <h1>User#index</h1>
 <h2>Hi <%= current_user.name %></h2>
 <% if current_user %>
-	<%= link_to "My Account", user_profile_path %>
-	<%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+	<%= link_to "My Account", user_profile_path %> <br>
+	<%= link_to "Logout", destroy_user_session_path, :method => :delete %> <br>
+	<%= link_to "Order", order_path %> <br>
 <% else %>
 	<%= link_to "Login", new_user_session_path %>
 	<%= link_to "Register", new_user_registration_path %>
