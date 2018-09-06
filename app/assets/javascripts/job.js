@@ -30,8 +30,8 @@ function getCurrentLocation() {
   return new Promise(function(resolve, reject) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        //currentLoc = L.latLng(position.coords.latitude, position.coords.longitude);
-        resolve(L.latLng(-6.199872015046871, 106.78535020370487));
+        //resolve(L.latLng(-6.199872015046871, 106.78535020370487));
+        resolve(L.latLng(position.coords.latitude, position.coords.longitude));
       });
     }
     else {
@@ -47,14 +47,16 @@ function Map(mapContainer, location, placeNameCon) {
 
   this.map = L.map(mapContainer, {
     center: this.location,
-    zoom: 30
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    zoom: 19
   });
 
-  L.tileLayer('http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(this.map);
+  // L.tileLayer('http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+  //   attribution: '© OpenStreetMap contributors'
+  // }).addTo(this.map);
 
-  //L.gridLayer.googleMutant({ type: 'roadmap' }).addTo(this.map);
+  L.gridLayer.googleMutant({ type: 'roadmap', maxZoom: 22 }).addTo(this.map);
 
   this.marker = L.marker(this.location, {
     draggable: false,

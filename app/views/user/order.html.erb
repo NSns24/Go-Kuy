@@ -1,7 +1,7 @@
 <% content_for :assets do %>
   <%= stylesheet_link_tag    'https://unpkg.com/leaflet@1.2.0/dist/leaflet.css' %>
   <%= javascript_include_tag 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js' %>
-  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places' %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_JzzSA9iylcZqkcVOEs6J_sTLVOg_fE&libraries=places' %>
   <%= javascript_include_tag 'https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js' %>
 
   <%= stylesheet_link_tag    'leaflet-routing-machine' %>
@@ -10,6 +10,8 @@
   <%= javascript_include_tag 'jquery.geocomplete' %>
   <%= javascript_include_tag 'leaflet-routing-machine' %>
   <%= javascript_include_tag 'leaflet.smoothmarkerbouncing' %>
+  <%= javascript_include_tag 'lrm-google' %>
+  <%= javascript_include_tag 'polyline' %>
   <%= javascript_include_tag 'order' %>
 <% end %>
 
@@ -17,11 +19,11 @@
   <div id='main-map'></div>
   <div class="header-order">
     <div class="row">
-      <div class="col col-lg-9">
+      <div class="col col-lg-11 col-md-11 col-sm-11">
         <%= image_tag 'order/icon_gokuy_circle.png', alt: 'logo', class: 'img-logo' %>
         <span>GO-KUY<span class="orange-color">!</span></span>
       </div>   
-      <div class="col col-lg-2 col-lg-push-1 text-center">
+      <div class="col col-lg-1 col-md-1 col-sm-1">
         <span>1 Person</span>
         <%= image_tag 'order/compass.svg', alt: 'center-map', id: 'img-center' %>
       </div> 
@@ -29,15 +31,15 @@
   </div>
   <div id="pickup">
     <div class="row">
-      <div class="col col-lg-1">
+      <div class="col col-lg-1 col-md-1 col-sm-1">
         <%= image_tag 'order/stick_man.png', class: 'img-loc' %>
       </div>
       <div class="set-pickup">
-        <div class="col col-lg-10">
+        <div class="col col-lg-10 col-md-10 col-sm-10">
           <span>PICKUP LOCATION</span>
           <span id="pickup-name"></span>
         </div>
-        <div class="col col-lg-1">
+        <div class="col col-lg-1 col-md-1 col-sm-1">
           <%= image_tag 'order/arrow.png', alt: 'arrow-clickable', class: 'img-arrow' %>
         </div>
       </div>
@@ -51,15 +53,15 @@
   </div>
   <div id="dest">
     <div class="row">
-      <div class="col col-lg-1">
+      <div class="col col-lg-1 col-md-1 col-sm-1">
         <%= image_tag 'order/destination.png', class: 'img-loc' %>
       </div>
       <div class="set-dest">
-        <div class="col col-lg-10">
+        <div class="col col-lg-10 col-md-10 col-sm-10">
           <span id="distance">DESTINATION . 0 KM</span>
           <span id="dest-name">Set your destination</span>
         </div>
-        <div class="col col-lg-1">
+        <div class="col col-lg-1 col-md-1 col-sm-1">
           <%= image_tag 'order/arrow.png', alt: 'arrow-clickable', class: 'img-arrow' %>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <% content_for :assets do %>
   <%= stylesheet_link_tag    'https://unpkg.com/leaflet@1.2.0/dist/leaflet.css' %>
   <%= javascript_include_tag 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js' %>
-  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places' %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_JzzSA9iylcZqkcVOEs6J_sTLVOg_fE&libraries=places' %>
   <%= javascript_include_tag 'https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js' %>
 
   <%= stylesheet_link_tag    'leaflet-routing-machine' %>
@@ -9,6 +9,9 @@
 
   <%= javascript_include_tag 'jquery.geocomplete' %>
   <%= javascript_include_tag 'leaflet-routing-machine' %>
+  <%= javascript_include_tag 'leaflet.smoothmarkerbouncing' %>
+  <%= javascript_include_tag 'lrm-google' %>
+  <%= javascript_include_tag 'polyline' %>
   <%= javascript_include_tag 'job' %>
 <% end %>
 

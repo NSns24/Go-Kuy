@@ -20,6 +20,8 @@ $(document).ready(function(){
     mainMap.setMarkerPopup(marker, msg);
   }); 
 
+  if($('.header-order').)
+
   $('#pickup-loc, #dest-loc').on('focus', function(){
     $(this).parent().append($('.pac-container'));
   });
@@ -64,7 +66,7 @@ $(document).ready(function(){
       }
 
       getCurrentLocation().then(function(){
-        pickupMap.setPickupMarker(currentLoc, true, '#pickup-loc');
+        pickupMap.setPickupMarker(mainMap.pickupMarker.getLatLng(), true, '#pickup-loc');
         $('#modal-pickup').modal('toggle');
       });
     }
@@ -222,16 +224,15 @@ function Map(mapContainer) {
   this.route;
 
   this.map = L.map(mapContainer, {
-    zoom: 18,
     scrollWheelZoom: false,
     doubleClickZoom: false
   });
 
-  L.tileLayer('http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(this.map);
+  // L.tileLayer('http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+  //   attribution: '© OpenStreetMap contributors'
+  // }).addTo(this.map);
 
-  //L.gridLayer.googleMutant({ type: 'roadmap' }).addTo(this.map);
+  L.gridLayer.googleMutant({ type: 'roadmap', maxZoom: 22 }).addTo(this.map);
 }
 
 Map.prototype.setView = function() {
@@ -248,7 +249,7 @@ Map.prototype.setView = function() {
   
   if(latLngs.length > 0) {
     markerBounds = L.latLngBounds(latLngs);
-    this.map.fitBounds(markerBounds);
+    this.map.fitBounds(markerBounds, { maxZoom: 19 });
   }
 }
 
@@ -360,7 +361,12 @@ Map.prototype.getRoute = function() {
     lineOptions: {
       styles: [{color: '#2e8b57', weight: 5}]
     },
-    router: L.Routing.mapbox('pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw')
+    // router: L.Routing.mapbox('pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw')
+    router: L.Routing.google({
+      travelMode: 'DRIVING',
+      avoidTolls: true,
+      unitSystem: google.maps.UnitSystem.METRIC
+    })
   }).addTo(this.map);
 
   this.pickupMarker = pickupTemp;
