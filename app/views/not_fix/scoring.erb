@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GO-KUY</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+	<div class="scoring">
+		<div class="scoring-header">
+			<div class="overlay">
+				<div class="scoring-header-content">
+					<h2>Thank you for using GO-KUY !</h2>	
+					<div class="scoring-header-content-item">
+						<img src="assets/img/scoring/user.png">
+					</div>
+					<div class="scoring-header-content-item">
+						<p>
+							Donald Trump
+						</p>
+						<p>
+							+62 815 877 9898
+						</p>
+						<p class="scoring-price">
+							Rp. 9.000
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="scoring-content container">
+			<h2>RATE YOUR BOOKING</h2>
+			<form>
+				<div class="scoring-content-rating">
+					<img src="assets/img/scoring/rating.png">
+					<img src="assets/img/scoring/rating.png">
+					<img src="assets/img/scoring/rating.png">
+					<img src="assets/img/scoring/rating.png">
+					<img src="assets/img/scoring/rating.png">
+					<input class="input-rating-score" type="hidden" name="rating" value="0">
+				</div>
+				<div class="scoring-content-comments">
+					<textarea rows="4" placeholder="Enter your comments here . . ." name="comments"></textarea>
+				</div>
+				<div class="scoring-content-helmet">
+					<input type="checkbox" name="helm" > This Driver doesn't provide helm.
+				</div>
+				<div class="scoring-content-submit">
+					<input class="btn btn-success" type="submit" name="1" value="SUBMIT">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		var ratingStar = $('.scoring-content-rating img');
+		ratingStar.on('mouseover', ratingScore);
+
+		function ratingScore(){
+			if($(this).index() == 0){
+				ratingStar.attr('src', 'assets/img/scoring/rating.png');
+				$('.scoring-content-rating img:nth-of-type(1)').attr('src', 'assets/img/scoring/star.png');
+				$('.input-rating-score').attr('value', '1');
+			}else if($(this).index() == 1){
+				ratingStar.attr('src', 'assets/img/scoring/rating.png');
+				$('.scoring-content-rating img:nth-of-type(1)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(2)').attr('src', 'assets/img/scoring/star.png');
+				$('.input-rating-score').attr('value', '2');				
+			}else if($(this).index() == 2){
+				ratingStar.attr('src', 'assets/img/scoring/rating.png');
+				$('.scoring-content-rating img:nth-of-type(1)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(2)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(3)').attr('src', 'assets/img/scoring/star.png');
+				$('.input-rating-score').attr('value', '3');				
+			}else if($(this).index() == 3){
+				ratingStar.attr('src', 'assets/img/scoring/rating.png');
+				$('.scoring-content-rating img:nth-of-type(1)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(2)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(3)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(4)').attr('src', 'assets/img/scoring/star.png');
+				$('.input-rating-score').attr('value', '4');				
+			}else if($(this).index() == 4){
+				ratingStar.attr('src', 'assets/img/scoring/rating.png');
+				$('.scoring-content-rating img:nth-of-type(1)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(2)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(3)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(4)').attr('src', 'assets/img/scoring/star.png');
+				$('.scoring-content-rating img:nth-of-type(5)').attr('src', 'assets/img/scoring/star.png');
+				$('.input-rating-score').attr('value', '5');				
+			}
+		}
+	</script>
+</body>
+</html>
