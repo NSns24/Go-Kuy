@@ -1,49 +1,59 @@
-<h2>Sign up for Driver</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :date_of_birth %><br />
-    <%= f.date_field :dob, value: f.object.dob %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.telephone_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :license_plate %><br />
-    <%= f.text_field :license_plate %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+<% content_for :assets do %>
+  <%= stylesheet_link_tag    'style' %>
+  <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
-<%= render "drivers/shared/links" %>
+<% content_for :js do %>
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+  <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<% end %>
+
+
+<div class="login-driver">
+    <div class="login-driver-item">
+      <div class="login-driver-table signup-driver-table">
+        <div class="signup-driver-table-header">
+          <%= image_tag 'logo.png' %>
+          <h2>Registration</h2>
+        </div>
+        <div class="signup-driver-table-content">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+            <div>
+              <%= f.email_field :email, autocomplete: "email", placeholder: 'Email' %>
+            </div>
+            <div>
+              <%= f.text_field :name, autofocus: true, placeholder: 'Name' %>
+            </div>
+            <div>
+              <%= f.date_field :dob, value: f.object.dob, placeholder: "ASD" %>
+            </div>
+            <div>
+              <%= f.telephone_field :phone, placeholder: 'Phone Number' %>
+            </div>
+            <div>
+              <%= f.text_field :license_plate, placeholder: 'Vehicle License Plate' %>
+            </div>
+            <div>
+              <%= f.password_field :password, autocomplete: "new-password", placeholder: 'Password' %>
+            </div>
+            <div>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Confirm Password' %>
+            </div>
+            <div class="login-driver-submit">
+              <%= f.submit "Sign Up", class: 'login-driver-submit-button' %>
+            </div>
+          <% end %>
+          </form>
+          <div class="driver-sign-up">
+            <p>Already have an account?<%= link_to "SIGN IN", root_path %></p></p>
+          </div>
+        </div>
+      </div>
+            
+    </div>
+    <div class="login-driver-item logo-driver">
+      <%= image_tag 'login_driver/logo_driver.png' %>
+    </div>
+  </div>

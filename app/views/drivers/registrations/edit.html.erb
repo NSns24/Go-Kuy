@@ -1,36 +1,91 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% content_for :assets do %>
+  <%= stylesheet_link_tag    'style' %>
+  <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+<% end %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<% content_for :js do %>
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+  <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+<div class="profile-driver">
+    <ul class="order-nav">
+      <li class="order-nav-item order-logo">
+        <a href="#"><%= image_tag 'logo.png' %></a>    
+      </li>
+      <li class="order-nav-item">
+        <%= link_to "My Account", driver_profile_path %>
+      </li>
+      <li class="order-nav-item">
+        <a href="order_history.html.erb">History</a>
+      </li>
+      <li class="order-nav-item order-account">
+        <ul>
+          <li><%= image_tag 'order/login_icon.png' %></li>
+          <li>
+            <a href="profile_driver.html.erb"><%= current_driver.name %></a>
+          </li>
+        </ul>       
+      </li>
+    </ul>
+    <div class="container-fluid">
+      <div class="row">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+
+        <div class="col-lg-3 profile-driver-portrait profile-driver-item">
+          <div class="profile-driver-portrait-image profile-driver-edit-image">
+            <%= image_tag 'profile_driver/edit_profile.png' %>
+          </div>
+          <!-- <button onclick="window.location ='profile_driver.html';">SAVE</button> -->
+          <button><%= f.submit "SAVE" %></button>
+        </div>
+
+        <div class="col-lg-5 profile-driver-detail profile-driver-item profile-driver-edit-detail">
+          <div class="profile-driver-detail-item">
+            <%= image_tag 'profile_driver/email_icon.png' %>
+            <%= f.email_field :email, autocomplete: "email", class: 'profile-driver-detail-item-input' %>
+          </div>
+          <div class="profile-driver-detail-item">
+            <%= image_tag 'profile_driver/name_icon.png' %>
+            <%= f.text_field :name, autofocus: true, class: 'profile-driver-detail-item-input' %>
+          </div>
+          <div class="profile-driver-detail-item">
+            <%= image_tag 'order/call_icon.png' %>
+            <%= f.telephone_field :phone, class: 'profile-driver-detail-item-input' %>
+          </div>
+          <div class="profile-driver-detail-item">
+            <%= image_tag 'profile_driver/email_icon.png' %>
+            <%= f.text_field :license_plate, class: 'profile-driver-detail-item-input' %>
+          </div>
+        </div>
+
+        <div class="col-lg-4 profile-driver-rating profile-driver-item">
+          <p>75% Rating Scale</p>
+          <div class="profile-driver-rating-star">
+            <%= image_tag 'order/star.png' %>
+            <%= image_tag 'order/star.png' %>
+            <%= image_tag 'order/star.png' %>
+            <%= image_tag 'order/half_star.png' %>
+            <%= image_tag 'order/empty_star.png' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
 
   <div class="field">
     <%= f.label :date_of_birth %><br />
     <%= f.date_field :dob, value: f.object.dob %>
   </div>
 
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.telephone_field :phone %>
-  </div>
+  
 
-  <div class="field">
-    <%= f.label :license_plate %><br />
-    <%= f.text_field :license_plate %>
-  </div>
+    
 
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
@@ -51,13 +106,10 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+  
+    
+  
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
