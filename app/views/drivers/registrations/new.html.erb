@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :date_of_birth %><br />
-    <%= f.date_field :dob %>
+    <%= f.date_field :dob, value: f.object.dob %>
   </div>
 
   <div class="field">
