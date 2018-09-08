@@ -1,12 +1,13 @@
-<% content_for :assets do %>
+<% content_for :css do %>
   <%= stylesheet_link_tag    'https://unpkg.com/leaflet@1.2.0/dist/leaflet.css' %>
-  <%= javascript_include_tag 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js' %>
-  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_JzzSA9iylcZqkcVOEs6J_sTLVOg_fE&libraries=places' %>
-  <%= javascript_include_tag 'https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js' %>
-
   <%= stylesheet_link_tag    'leaflet-routing-machine' %>
   <%= stylesheet_link_tag    'order' %>
+<% end %>
 
+<% content_for :js do %>
+  <%= javascript_include_tag 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js' %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?libraries=places' %>
+  <%= javascript_include_tag 'https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js' %>
   <%= javascript_include_tag 'jquery.geocomplete' %>
   <%= javascript_include_tag 'leaflet-routing-machine' %>
   <%= javascript_include_tag 'leaflet.smoothmarkerbouncing' %>
@@ -19,11 +20,11 @@
   <div id='main-map'></div>
   <div class="header-order">
     <div class="row">
-      <div class="col col-lg-11 col-md-11 col-sm-11">
+      <div class="col col-lg-10 col-md-10 col-sm-10">
         <%= image_tag 'order/icon_gokuy_circle.png', alt: 'logo', class: 'img-logo' %>
         <span>GO-KUY<span class="orange-color">!</span></span>
       </div>   
-      <div class="col col-lg-1 col-md-1 col-sm-1">
+      <div class="col col-lg-2 col-md-2 col-sm-2 text-center">
         <span>1 Person</span>
         <%= image_tag 'order/compass.svg', alt: 'center-map', id: 'img-center' %>
       </div> 

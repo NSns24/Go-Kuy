@@ -1,4 +1,4 @@
-<% content_for :assets do %>
+<% content_for :css do %>
 	<%= stylesheet_link_tag    'style' %>
 	<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
 	<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
@@ -12,12 +12,9 @@
 
 <div class="login-home">
 		<div class="login-home-video-wrapper">
-			<video autoplay muted loop class="login-home-background">
-			<source src="../../assets/videos/gojek.mp4" type="video/mp4">
-			<%= video_tag "gojek.mp4" %>
-
-			Error;
-		</video>
+			<video autoplay loop class="login-home-background">
+				<source src="<%= asset_path('gojek.mp4', type: :video) %>" type="video/mp4">
+			</video>
 		</div>
 		
 		<div class="overlay">

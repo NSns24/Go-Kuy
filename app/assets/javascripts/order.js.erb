@@ -7,7 +7,7 @@ var drag = false;
 
 var currentLoc;
 var destIcon = L.icon({
-  iconUrl: "<%= asset_path('order/destination.png') %>",
+  iconUrl: "<%= asset_path('order/destination.png', type: :images) %>",
   iconSize: [40, 40],
   iconAnchor: [20, 40],
   popupAnchor: [0, -30]
@@ -19,8 +19,6 @@ $(document).ready(function(){
     let marker = mainMap.setPickupMarker(currentLoc, false, '#pickup-name');
     mainMap.setMarkerPopup(marker, msg);
   }); 
-
-  if($('.header-order').)
 
   $('#pickup-loc, #dest-loc').on('focus', function(){
     $(this).parent().append($('.pac-container'));
@@ -139,8 +137,44 @@ $(document).ready(function(){
 
   $('#btnOrder').click(function(){
     if(allowGPS) {
-      mainMap.markerBounce();
-      $('#overlay').show();
+      if(!mainMap.pickupMarker) {
+        alert('Please select your pickup place');
+      }
+      else if(!mainMap.destMarker) {
+        alert('Please select your destination place');
+      }
+      else {
+        let pickup = {
+          lat: mainMap.pickupMarker.getLatLng().lat,
+          lng: mainMap.pickupMarker.getLatLng().lng
+        }
+
+        let dest = {
+          lat: mainMap.destMarker.getLatLng().lat,
+          lng: mainMap.destMarker.getLatLng().lng
+        }
+
+        $.ajax({
+          method: 'POST',
+          url: 'order/orderDriver',
+          data: {
+            pickupLoc: pickup,
+            destLoc: dest
+          },
+          beforeSend: function() {
+            mainMap.markerBounce();
+            $('#overlay').show();
+          },
+          success: function(result) {
+            console.log(result);
+            mainMap.markerBounce();
+            $('#overlay').hide();
+          },
+          error: function(xhr) {
+            alert(xhr.statusText + xhr.responseText);
+          }
+        });
+      }
     }
     else {
       alert('Please enable your GPS first');

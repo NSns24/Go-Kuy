@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180827111512) do
+ActiveRecord::Schema.define(version: 20180907032624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,26 @@ ActiveRecord::Schema.define(version: 20180827111512) do
     t.index ["name"], name: "index_drivers_on_name", using: :btree
     t.index ["phone"], name: "index_drivers_on_phone", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_drivers_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "online_drivers", force: :cascade do |t|
+    t.integer  "driver_id",   null: false
+    t.decimal  "current_lat", null: false
+    t.decimal  "current_lng", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["driver_id"], name: "index_online_drivers_on_driver_id", using: :btree
+  end
+
+  create_table "online_users", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.decimal  "pickup_lat", null: false
+    t.decimal  "pickup_lng", null: false
+    t.decimal  "dest_lat",   null: false
+    t.decimal  "dest_lng",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_online_users_on_user_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -58,4 +78,6 @@ ActiveRecord::Schema.define(version: 20180827111512) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "online_drivers", "drivers"
+  add_foreign_key "online_users", "users"
 end
