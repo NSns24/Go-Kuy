@@ -64,6 +64,36 @@
 	</div>
 </div>
 
+<div class="overlay-home">
+	<div class="login-customer" style="position: absolute; top: 0;left: 0;z-index: 9999; display: none;">
+    <div class="overlay">
+      <div class="login-customer-form">
+        <h2>Log in to <%= image_tag 'logo.png' %></h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+          <div class="form-group">
+            <%= f.email_field :email, class: 'form-control', autofocus:true, autocomplete: "current-email", placeholder: 'Email'%>
+          </div>
+
+          <div class="form-group">
+            <%= f.password_field :password, class: 'form-control', autocomplete: "current-password", placeholder: 'Password'%>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit 'Log in', class: 'btn btn-warning' %>
+          </div>
+        <% end %>
+        <div class="login-customer-form-footer">
+          New to <span class="login-customer-form-footer-brand">GO-KUY<span class="login-customer-form-footer-symbol">!</span></span>?
+          <span class="login-customer-signup-link"><a href="signup_customer.html">Sign Up now >></a></span>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <% if current_user || current_driver %>
 
 <% else %>

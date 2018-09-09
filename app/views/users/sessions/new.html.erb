@@ -1,4 +1,4 @@
-<h2>Log in for User</h2>
+<!-- <h2>Log in for User</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -22,5 +22,45 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
+ -->
+
+<% content_for :css do %>
+  <%= stylesheet_link_tag    'style' %>
+  <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+<% end %>
+
+<% content_for :js do %>
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.min.js' %>
+  <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+  <%= javascript_include_tag 'main_login_page.js' %>
+<% end %>
+
+  <div class="login-customer">
+    <div class="overlay">
+      <div class="login-customer-form">
+        <h2>Log in to <%= image_tag 'logo.png', class: 'login-goride-image' %></h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+          <div class="form-group">
+            <%= f.email_field :email, class: 'form-control', autofocus:true, autocomplete: "current-email", placeholder: 'Email'%>
+          </div>
+
+          <div class="form-group">
+            <%= f.password_field :password, class: 'form-control', autocomplete: "current-password", placeholder: 'Password'%>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit 'Log in', class: 'btn btn-warning' %>
+          </div>
+        <% end %>
+        <div class="login-customer-form-footer">
+          New to <span class="login-customer-form-footer-brand">GO-KUY<span class="login-customer-form-footer-symbol">!</span></span>?
+          <span class="login-customer-signup-link"><a href="signup_customer.html">Sign Up now >></a></span>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
 <%= render "users/shared/links" %>
