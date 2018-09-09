@@ -44,6 +44,10 @@ body{
 	font-family: 'Montserrat-Light';
 }
 
+input {
+	outline: none;
+}
+
 .span-align-helper{
 	display: inline-block;
 	height: 100%;
@@ -346,19 +350,25 @@ body{
     padding: 20px;
 }
 
+.profile-customer-nav-item a:hover {
+	color: white;
+}
+
 .profile-customer-nav-rev a{
 	text-align: right;
 	padding: 0;
 }
 
 .profile-customer-nav-item img{
-	width: 80%;
+	width: 58%;
 	margin-left: auto;
+	height: 50px;
+	margin: 12px 0;
 }
 
 .profile-customer-content{
-	margin-top: 50px;
-	padding-left: 50px;
+	margin-top: 80px;
+	padding-left: 100px;
 	padding-right: 50px;
 }
 
@@ -375,8 +385,8 @@ body{
 }
 
 .profile-customer-content-item-2{
-	padding-top: 50px;
-	padding-left: 20px;
+	padding-left: 100px;
+	width: 45% !important;
 }
 
 .profile-customer-content-detail{
@@ -398,7 +408,7 @@ body{
 }
 
 .profile-customer-footer{
-	margin-top: 30px;
+	margin-top: 60px;
 	text-align: center;
 	border-top: solid 1px grey;
 	border-bottom: solid 1px grey;
@@ -407,20 +417,33 @@ body{
 }
 
 .profile-customer-footer a{
-	color: red;
+	color: green;
+	font-size: 22px;
 }
+
+
+.profile-customer-footer a:hover{
+	color: #00b300;
+	text-decoration: none;
+}
+
 
 .profile-customer-change-picture{
 	text-align: center;
 	cursor: pointer;
+	margin-top: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .profile-customer-change-picture img{
 	width: 7%;
+	height: 7%;
 }
 
 .profile-customer-change-picture span{
-	margin-left: 10px;
+	margin-left: 15px;
 	padding-right: 20px;
 }
 
@@ -431,13 +454,39 @@ body{
 .profile-customer-edit-submit-button{
 	border: 1px solid #00b300;
 	background-color: white;
-	padding: 10px 30px;
+	padding: 15px 50px;
 	transition: 0.3s ease;
 }
 
+.profile-customer-edit-submit input {
+	color: #00b300;
+}
+
 .profile-customer-edit-submit-button:hover{
-	background-color: grey;
+	background-color: #00b300;
 	color: white;
+}
+
+#error_explanation {
+	text-align: center;
+	margin-bottom: 40px;
+	padding: 20px 0;
+	border: 2px solid red;
+}
+
+#error_explanation li {
+	list-style: none;
+	font-size: 20px;
+	display: block;
+	color: red;
+}
+
+ol, ul {
+	margin: 0 !important;
+}
+
+#error_explanation h2 {
+	display: none;
 }
 
 /* order css */
@@ -458,7 +507,7 @@ body{
 .order-nav{
 	list-style-type: none;
 	overflow: hidden;
-	padding: 45px 35px;
+	padding: 45px 35px 29px;
 }
 
 .order-nav::after{
@@ -473,11 +522,11 @@ body{
 	padding-left: 30px;
 	padding-right: 30px;
 	margin-top: 15px;
+	font-weight: bold;
 }
 
-.order-nav-item a{
-	text-decoration: none;
-	color: #2d2d2d;
+.order-nav-item .active {
+	color: #f09b2f;
 }
 
 .order-logo{
@@ -500,6 +549,11 @@ body{
 	cursor: pointer;
 }
 
+/*.logout-link {
+	margin: 0 auto !important;
+	margin-left: 32px !important;
+}*/
+
 .order-account ul{
 	list-style-type: none;
 	overflow: hidden;
@@ -515,12 +569,14 @@ body{
 	width: 30%;
 	text-align: center;
 	background-color: green;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
 }
 
 .order-account li:nth-of-type(2){
 	width: 70%;
 	line-height: 30px;
-	padding-left: 2px;
+	text-align: center;
 }
 
 .order-account img{
@@ -855,7 +911,7 @@ body{
 /* login driver css */
 
 .login-driver{
-	height: 100vh;
+	height: 100%;
 	width: 100%;
 	background-color: #90c74a;
 }
@@ -930,7 +986,7 @@ body{
 }
 
 .logo-driver{
-	height: 100%;
+	height: 100vh;
 	position: relative;
 }
 
@@ -969,23 +1025,31 @@ body{
 
 .signup-driver-table{
 	margin-top: 8%;
+	margin-bottom: 8%;
 }
 
 /* profile driver css */
 
 .profile-driver{
-	background-color: lightgrey;
+	/*background-color: lightgrey;*/
 }
 
 .profile-driver-item{
-	max-height: 400px;
+	max-height: 540px;
+	height: 100%;
+}
+
+.profile-driver-item-edit{
+	max-height: 680px;
+	height: 100%;
 }
 
 .profile-driver-portrait{
 	background-color: grey;
-	padding-top: 20px;
+	padding-top: 60px;
 	text-align: center;
-	padding-bottom: 50px;
+	height: 700px;
+	/*max-height: 600px;*/
 }
 
 .profile-driver-portrait-image{
@@ -994,10 +1058,41 @@ body{
 	width: 80%;
 	margin: auto;
 	margin-bottom: 20px;
+	overflow: hidden;
 }
 
 .profile-driver-portrait-image img{
 	width: 100%;
+}
+
+.plus-button {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	transform: translate(165px, -140px);
+}
+
+.file-input-label {
+	cursor: pointer;
+}
+
+#file-input {
+	display: none;
+}
+
+.save-button {
+	background-color: transparent;
+	border: none;
+	/*width: 210px;*/
+	color: #90c74a;
+	text-align: center;
+	margin-top: -100px;
+}
+
+
+.save-button:hover {
+	color: #e7eced;
+	text-decoration: none;
 }
 
 .profile-driver-portrait button{
@@ -1010,8 +1105,14 @@ body{
 }
 
 .profile-driver-detail{
-	padding-top: 2px;
+	padding-top: 20px;
 	background-color: #90c74a;
+	height: 700px;
+}
+
+.profile-driver-detail-item input {
+	margin-left: 16px;
+	width: 80%;
 }
 
 .profile-driver-detail-item{
@@ -1020,7 +1121,7 @@ body{
 	border-radius: 10px;
 	width: 90%;
 	padding: 5px 30px;
-	margin: 35px auto;
+	margin: 23px auto;
 }
 
 .profile-driver-detail-item img{
@@ -1035,10 +1136,41 @@ body{
 	display: inline-block;
 }
 
+.m-l-16 {
+	margin-left: 16px;
+}
+
+.error-msg {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	list-style-type: none;
+	background-color: rgba(255,0,0,0.3);
+	margin-bottom: 16px;
+}
+
+.error-msg li {
+	/*color: red;*/
+	list-style-type: none;
+	font-size: 20px;
+	margin-top: 12px;
+	font-weight: bold;
+}
+
+.error-msg h2 {
+	display: none;
+	font-size: 20px;
+}
+
+#save {
+	outline: none;
+}
+
 .profile-driver-rating{
 	background-color: #76aed1;
 	text-align: center;
-	padding: 10% 10px 14%;
+	padding: 13% 10px 14%;
+	height: 700px;
 }
 
 .profile-driver-rating p{
@@ -1063,11 +1195,23 @@ body{
 }
 
 .profile-driver-portrait button {
-	background-color: orange;
+	background-color: #55617f;
 	color: white;
+	width: 210px;
+	height: 60px;
 	font-weight: bold;
-	padding-right: 70px;
-	padding-left: 70px;
+	padding-right: 35px;
+	padding-left: 35px;
+	outline: none;
+}
+
+.edit-profile-button {
+	color: #90c74a;
+}
+
+.edit-profile-button:hover {
+	color: #e7eced;
+	text-decoration: none;
 }
 
 .profile-driver-edit-detail input{

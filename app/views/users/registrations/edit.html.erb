@@ -1,48 +1,46 @@
 <% content_for :css do %>
-  <%= stylesheet_link_tag    'style' %>
-  <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
-  <%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+<%= stylesheet_link_tag    'style' %>
+<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
 <% content_for :js do %>
-  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
-  <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
 <% end %>
 
 <nav class="profile-customer-nav">
-    <ul class="profile-customer-nav-list">
-      <li class="profile-customer-nav-item">
-        <%= link_to "My Account", user_profile_path %>
-      </li>
-      <li class="profile-customer-nav-item profile-customer-nav-selected">
-        <%= link_to "Edit Profile", edit_user_registration_path %>
-      </li>
-      <li class="profile-customer-nav-item profile-customer-nav-rev">
-        <a class="active" href="#">
-          <%= image_tag 'logo_white.png' %>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <ul class="profile-customer-nav-list">
+    <li class="profile-customer-nav-item">
+      <%= link_to "My Account", user_profile_path %>
+    </li>
+    <li class="profile-customer-nav-item profile-customer-nav-selected">
+      <%= link_to "Edit Profile", edit_user_registration_path %>
+    </li>
+    <li class="profile-customer-nav-item profile-customer-nav-rev">
+        <%= link_to image_tag('logo_white.png'), user_home_url %>
+    </li>
+  </ul>
+</nav>
 
-  <div class="profile-customer-content">
+<div class="profile-customer-content">
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= devise_error_messages! %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
 
-    <div class="profile-customer-content-item">
-      <div>
-        <%= image_tag 'profile_customer/profile_picture.jpg' %>
-      </div>
-
-      <div class="profile-customer-change-picture">
-        <%= image_tag 'profile_customer/camera_icon.png' %>
-        <span>Change</span>
-      </div>
-      
+  <div class="profile-customer-content-item">
+    <div>
+      <%= image_tag 'profile_customer/profile_picture.jpg' %>
     </div>
-    <div class="profile-customer-content-item profile-customer-content-item-2">
-      <form>
+
+    <div class="profile-customer-change-picture">
+      <%= image_tag 'profile_customer/camera_icon.png' %>
+      <span>Change</span>
+    </div>
+
+  </div>
+  <div class="profile-customer-content-item profile-customer-content-item-2">
+    
 
       <div class="profile-customer-content-detail">
         <p>Full Name</p>
@@ -76,20 +74,14 @@
 
       <div class="profile-customer-content-detail">
         <p>Current Password</p>
-        <%= f.password_field :current_password, autocomplete: "current-password", class: 'profile-customer-content-detail-fill', placeholder: "(we need your current password to confirm your changes)"  %>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: 'profile-customer-content-detail-fill', placeholder: "(enter current password to update)"  %>
       </div>
 
       <div class="profile-customer-content-detail profile-customer-edit-submit">
-        <%= f.submit "Update", class: 'profile-customer-edit-submit-button' %>
+        <%= f.submit "Save Changes", class: 'profile-customer-edit-submit-button' %>
       </div>
 
-      </form>
-    </div>
-    <% end %>
   </div>
+  <% end %>
+</div>
 
-
-  
-  
-
-<%= link_to "Back", :back %>

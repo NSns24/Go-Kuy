@@ -11,49 +11,33 @@
 
 
 <div class="login-driver">
-    <div class="login-driver-item">
-      <div class="login-driver-table signup-driver-table">
-        <div class="signup-driver-table-header">
-          <%= image_tag 'logo.png' %>
-          <h2>Registration</h2>
-        </div>
-        <div class="signup-driver-table-content">
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%= devise_error_messages! %>
-            <div>
-              <%= f.email_field :email, autocomplete: "email", placeholder: 'Email' %>
-            </div>
-            <div>
-              <%= f.text_field :name, autofocus: true, placeholder: 'Name' %>
-            </div>
-            <div>
-              <%= f.date_field :dob, value: f.object.dob, placeholder: "ASD" %>
-            </div>
-            <div>
-              <%= f.telephone_field :phone, placeholder: 'Phone Number' %>
-            </div>
-            <div>
-              <%= f.text_field :license_plate, placeholder: 'Vehicle License Plate' %>
-            </div>
-            <div>
-              <%= f.password_field :password, autocomplete: "new-password", placeholder: 'Password' %>
-            </div>
-            <div>
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Confirm Password' %>
-            </div>
-            <div class="login-driver-submit">
-              <%= f.submit "Sign Up", class: 'login-driver-submit-button' %>
-            </div>
-          <% end %>
-          </form>
-          <div class="driver-sign-up">
-            <p>Already have an account?<%= link_to "SIGN IN", root_path %></p></p>
+  <div class="login-driver-item">
+    <div class="login-driver-table signup-driver-table">
+      <div class="signup-driver-table-header">
+        <%= image_tag 'logo.png' %>
+        <h2>Registration</h2>
+      </div>
+      <div class="signup-driver-table-content">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div><%= f.email_field :email, autocomplete: "email", placeholder: 'Email' %></div>
+          <div><%= f.text_field :name, autofocus: true, placeholder: 'Name' %></div>
+          <div><%= f.date_field :dob, value: f.object.dob %></div>
+          <div><%= f.telephone_field :phone, placeholder: 'Phone Number' %></div>
+          <div><%= f.text_field :license_plate, placeholder: 'Vehicle License Plate' %></div>
+          <div><%= f.password_field :password, autocomplete: "new-password", placeholder: 'Password' %></div>
+          <div><%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Confirm Password' %></div>
+          <div class="login-driver-submit">
+            <%= f.submit "Sign Up", class: 'login-driver-submit-button' %>
           </div>
+        <% end %>
+        <div class="driver-sign-up">
+          <p>Already have an account? <%= link_to "SIGN IN", root_path %></p>
         </div>
       </div>
-            
-    </div>
-    <div class="login-driver-item logo-driver">
-      <%= image_tag 'login_driver/logo_driver.png' %>
     </div>
   </div>
+  <div class="login-driver-item logo-driver">
+    <%= image_tag 'login_driver/logo_driver.png' %>
+  </div>
+</div>

@@ -100,7 +100,7 @@ describe Driver do
 
 	it "is invalid with a duplicate license plate" do
 		driver1 = create(:driver, license_plate: "18122")
-		driver2 = build(:driver, license_plate: "1812")
+		driver2 = build(:driver, license_plate: "18122")
 		driver2.valid?
 		expect(driver2.errors[:license_plate]).to include("has already been taken")
 	end
@@ -125,6 +125,17 @@ describe Driver do
 
 	it "is valid with password length greater than or equal to 6" do
 		expect(build(:driver, password: "123456")).to be_valid
+	end
+
+	it "is valid with image_url ending with '.gif', '.jpg', or '.png'" do
+		expect(build(:driver, image_url: "food.jpg")).to be_valid
+	end
+
+	it "is invalid with image_url ending not with '.gif', '.jpg', or '.png'" do
+		driver = build(:driver, image_url: "food.csv")
+		driver.valid?
+		expect(driver.errors[:image_url]).to include("must be a URL for GIF, JPG or PNG image.")
+
 	end
 
 end
