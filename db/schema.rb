@@ -16,17 +16,18 @@ ActiveRecord::Schema.define(version: 20180907032624) do
   enable_extension "plpgsql"
 
   create_table "drivers", force: :cascade do |t|
-    t.string   "name",                   default: "", null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "dob",                    default: "", null: false
-    t.string   "phone",                  default: "", null: false
-    t.string   "license_plate",          default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "name",                   default: "",            null: false
+    t.string   "email",                  default: "",            null: false
+    t.string   "dob",                    default: "",            null: false
+    t.string   "phone",                  default: "",            null: false
+    t.string   "license_plate",          default: "",            null: false
+    t.string   "image_url",              default: "profile.png"
+    t.string   "encrypted_password",     default: "",            null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.index ["dob"], name: "index_drivers_on_dob", using: :btree
     t.index ["email"], name: "index_drivers_on_email", unique: true, using: :btree
     t.index ["license_plate"], name: "index_drivers_on_license_plate", unique: true, using: :btree

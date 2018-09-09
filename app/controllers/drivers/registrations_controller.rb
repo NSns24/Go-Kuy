@@ -47,12 +47,12 @@ class Drivers::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :dob, :phone, :license_plate])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :dob, :phone, :license_plate, :image])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :dob, :phone, :license_plate])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :dob, :phone, :license_plate, :image])
   end
 
   # The path used after sign up.
@@ -62,7 +62,7 @@ class Drivers::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    driver_home_url
+    driver_profile_url
   end
 
   # The path used after sign up for inactive accounts.
