@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gokuy</title>
+    <title>GO-KUY Indonesia</title>
     <%= csrf_meta_tags %>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <%= action_cable_meta_tag %>
+=======
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+>>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
+=======
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+>>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
 
     <%= favicon_link_tag 'order/icon_gokuy_circle.png' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>  
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= yield :assets %>
+    <%= yield :css %>
   </head>
   <body>
     <!-- <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> -->
     <%= yield %>
+    <%= yield :js %>
   </body>
 </html>

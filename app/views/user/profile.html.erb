@@ -1,12 +1,56 @@
-Name : <%= current_user.name %> 
-<br>
-Email : <%= current_user.email %>
-<br>
-Date of Birth : <%= current_user.dob %>
-<br>
-Phone Number : <%= current_user.phone %>
+<% content_for :css do %>
+<%= stylesheet_link_tag    'style' %>
+<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+<% end %>
 
+<% content_for :js do %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<% end %>
 
-<br>
-<%= link_to "Back", user_home_url %>
-<%= link_to "Edit", edit_user_registration_path %>
+<nav class="profile-customer-nav">
+	<ul class="profile-customer-nav-list">
+		<li class="profile-customer-nav-item profile-customer-nav-selected">
+			<%= link_to "My Account", user_profile_path %>
+		</li>
+		<li class="profile-customer-nav-item">
+			<%= link_to "Edit Profile", edit_user_registration_path %>
+		</li>
+		<li class="profile-customer-nav-item profile-customer-nav-rev">
+			<%= link_to image_tag('logo_white.png'), user_home_url %>
+		</li>
+	</ul>
+</nav>
+
+<div class="profile-customer-content">
+	<div class="profile-customer-content-item">
+		<%= image_tag 'profile_customer/profile_picture.jpg' %>
+	</div>
+	<div class="profile-customer-content-item profile-customer-content-item-2">
+		<div class="profile-customer-content-detail">
+			<p>Full Name</p>
+			<p class="profile-customer-content-detail-fill"><%= current_user.name %> </p>
+		</div>
+
+		<div class="profile-customer-content-detail">
+			<p>Email Address</p>
+			<p class="profile-customer-content-detail-fill"><%= current_user.email %></p>
+		</div>
+
+		<div class="profile-customer-content-detail">
+			<p>Date of Birth</p>
+			<p class="profile-customer-content-detail-fill"><%= current_user.dob %></p>
+		</div>
+
+		<div class="profile-customer-content-detail">
+			<p>Phone Number</p>
+			<p class="profile-customer-content-detail-fill"><%= current_user.phone %></p>
+		</div>
+	</div>
+</div>
+
+<div class="profile-customer-footer">
+	<%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+</div>
+

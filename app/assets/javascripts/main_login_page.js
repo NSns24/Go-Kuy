@@ -26,14 +26,14 @@ function loginCustomer(){
 	loginAsCustomer.css('position', 'absolute');
 	loginAsCustomer.css('width', '260px');
 	loginAsCustomer.css('height', '260px');
+	loginAsCustomer.css('right', '0');
+	loginAsCustomer.css('top', '80%');
+	loginAsCustomer.css('transform', 'translate(-50%,-50%)');
 	$('.login-home-content-customer').css('height','80vh');
 	loginAsCustomer.animate({
-		"top" : '11%',
-		"left" : '-2.5%',
-		"width" : '464px',
-		"height" : '464px'
+		"left" : '50%',
 	}, "slow", function(){
-		$('.login-driver').fadeIn();
+		$('.login-customer').fadeIn();
 	});
 	var driverImage = $('.login-home-content-customer');
 }

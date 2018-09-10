@@ -1,38 +1,55 @@
-<% content_for :assets do %>
+<% content_for :css do %>
   <%= stylesheet_link_tag    'https://unpkg.com/leaflet@1.2.0/dist/leaflet.css' %>
+  <%= stylesheet_link_tag    'leaflet-routing-machine' %>
+  <%= stylesheet_link_tag    'job' %>  
+<% end %>
+
+<% content_for :js do %>
   <%= javascript_include_tag 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js' %>
   <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_JzzSA9iylcZqkcVOEs6J_sTLVOg_fE&libraries=places' %>
   <%= javascript_include_tag 'https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js' %>
-
-  <%= stylesheet_link_tag    'leaflet-routing-machine' %>
-  <%= stylesheet_link_tag    'job' %>
-
   <%= javascript_include_tag 'jquery.geocomplete' %>
   <%= javascript_include_tag 'leaflet-routing-machine' %>
   <%= javascript_include_tag 'leaflet.smoothmarkerbouncing' %>
   <%= javascript_include_tag 'lrm-google' %>
   <%= javascript_include_tag 'polyline' %>
   <%= javascript_include_tag 'job' %>
+  <%= javascript_include_tag 'https://momentjs.com/downloads/moment.js' %>
+  <%= javascript_include_tag 'cable' %>
 <% end %>
 
 <div class="container-fluid">
   <div id='main-map'></div>
   <div class="row">
-    <div class="col col-lg-4 text-center" id="find-customer">
+    <div class="col col-lg-4 text-center" id="job-div">
       <div id="circle">
         <span id="circle-text">FIND A CUSTOMER NEARBY</span>
       </div>
+      <div id="choices"></div>
     </div>
-    <div class="col col-lg-8 text-center" id="set-location">
+    <div class="col col-lg-8 text-center" id="information-div">
       <span>YOUR LOCATION</span>
-      <div id="current">
+      <div id="pickup">
         <img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">
-        <span id="current-loc"></span>
+        <span>Your Location</span>
+        <br>
+        <span id="pickup-loc"></span>
       </div>
-      <div id="dest"> 
+      <div id="dest" style="display: none;"> 
         <img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">
+        <span>Destination Location</span>
+        <br>
         <span id="dest-loc"></span>
       </div>
+      <div id="detail" style="display: none;"></div>
     </div>
+  </div>
+</div>
+
+<div id="overlay">
+  <div id="text" class="text-center">
+    Searching...
+    <br>
+    Click anywhere to cancel
   </div>
 </div>

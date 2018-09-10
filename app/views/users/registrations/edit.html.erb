@@ -1,58 +1,90 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :date_of_birth %><br />
-    <%= f.date_field :dob, value: f.object.dob %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.telephone_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+<% content_for :css do %>
+<%= stylesheet_link_tag    'style' %>
+<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
-<h3>Cancel my account</h3>
+<% content_for :js do %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<% end %>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<nav class="profile-customer-nav">
+  <ul class="profile-customer-nav-list">
+    <li class="profile-customer-nav-item">
+      <%= link_to "My Account", user_profile_path %>
+    </li>
+    <li class="profile-customer-nav-item profile-customer-nav-selected">
+      <%= link_to "Edit Profile", edit_user_registration_path %>
+    </li>
+    <li class="profile-customer-nav-item profile-customer-nav-rev">
+        <%= link_to image_tag('logo_white.png'), user_home_url %>
+    </li>
+  </ul>
+</nav>
 
-<%= link_to "Back", :back %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<div class="edit-user">
+  <div class="error-msg">
+        <span><%= devise_error_messages! %></span>
+  </div>
+</div>
+
+<div class="profile-customer-content">
+  <div class="profile-customer-content-item">
+    <div>
+      <%= image_tag 'profile_customer/profile_picture.jpg' %>
+    </div>
+
+    <div class="profile-customer-change-picture">
+      <%= image_tag 'profile_customer/camera_icon.png' %>
+      <span>Change</span>
+    </div>
+
+  </div>
+  <div class="profile-customer-content-item profile-customer-content-item-2">
+    
+
+      <div class="profile-customer-content-detail">
+        <p>Full Name</p>
+        <%= f.text_field :name, autofocus: true, class: 'profile-customer-content-detail-fill' %>
+      </div>
+      
+      <div class="profile-customer-content-detail">
+        <p>Email Address</p>
+        <%= f.email_field :email, autocomplete: "email", class: 'profile-customer-content-detail-fill' %>
+      </div>
+
+      <div class="profile-customer-content-detail">
+        <p>Date of Birth</p>
+        <%= f.date_field :dob, value: f.object.dob, class: 'profile-customer-content-detail-fill' %>
+      </div>
+
+      <div class="profile-customer-content-detail">
+        <p>Phone Number</p>
+        <%= f.telephone_field :phone, class: 'profile-customer-content-detail-fill' %>
+      </div>
+
+      <div class="profile-customer-content-detail">
+        <p>Password</p>
+        <%= f.password_field :password, autocomplete: "new-password", class: 'profile-customer-content-detail-fill', placeholder: "(leave blank if you don't want to change it)"  %>
+      </div>
+
+      <div class="profile-customer-content-detail">
+        <p>Password Confirmation</p>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'profile-customer-content-detail-fill'%>
+      </div>
+
+      <div class="profile-customer-content-detail">
+        <p>Current Password</p>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: 'profile-customer-content-detail-fill', placeholder: "(enter current password to update)"  %>
+      </div>
+
+      <div class="profile-customer-content-detail profile-customer-edit-submit">
+        <%= f.submit "Save Changes", class: 'profile-customer-edit-submit-button' %>
+      </div>
+
+  </div>
+<% end %>
+</div>
+

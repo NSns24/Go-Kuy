@@ -9,6 +9,7 @@ class DeviseCreateDrivers < ActiveRecord::Migration[5.0]
       t.string :dob,                null: false, default: ""
       t.string :phone,              null: false, default: ""
       t.string :license_plate,      null: false, default: ""
+      t.string :image_url,          null: true, default: "profile.png"
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable

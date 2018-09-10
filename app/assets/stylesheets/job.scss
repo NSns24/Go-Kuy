@@ -12,18 +12,22 @@ body {
 
 #main-map {
 	width: 100%;
-	height: 500px;
+	height: 400px;
 }
 
-#find-customer {
+.leaflet-routing-container {
+	display: none !important;
+}
+
+#job-div {
 	background-color: grey;
-	height: 350px;
+	height: 400px;
 	padding: 30px 0;
 }
 
 #circle {
-	width: 300px;
-	height: 300px;
+	width: 250px;
+	height: 250px;
 	border-radius: 50%;
 	background-color: orange;
 	border: 7px solid green;
@@ -33,33 +37,87 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	margin-bottom: 15px;
+	margin-top: 15%;
 }
 
-#set-location {
+#information-div {
 	background-color: green;
 	font-size: 20px;
-	height: 350px;
-	padding: 50px 0;
+	height: 400px;
+	padding: 20px 0;
+	padding-top: 8%;
 }
 
-#set-location span:first-child {
+#information-div span:first-child {
 	font-size: 30px;
 }
 
-#current, #dest {
+#pickup, #dest, #detail {
 	width: 50%;
 	background-color: white;
-	padding: 20px;
+	padding: 10px;
 	margin: 10px auto;
 	text-align: left;
 }
 
 .img-location {
-	width: 50px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 }
 
 .container-fluid {
 	padding: 0;
 	margin: 0;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10000;
+    cursor: pointer;
+}
+
+#text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: #ffffff;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+#pickup-loc, #dest-loc {
+	margin-left: 45px;
+}
+
+.btn {
+	padding: 10px 35px;
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#btnAccept, #btnStartWorking, #btnFinishWorking, #btnDoneWorking {
+	background-color: orange;
+}
+
+#btnDecline {
+	background-color: green;
+}
+
+.btn:hover {
+	color: white;
+}
+
+#detail span {
+	font-size: 22px !important;
 }

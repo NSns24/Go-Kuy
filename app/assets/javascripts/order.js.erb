@@ -2,25 +2,49 @@ var mainMap;
 var pickupMap;
 var destMap;
 
+var order = false;
 var allowGPS = false;
 var drag = false;
 
 var currentLoc;
 var destIcon = L.icon({
-  iconUrl: "<%= asset_path('order/destination.png') %>",
+  iconUrl: "<%= asset_path('order/destination.png', type: :images) %>",
   iconSize: [40, 40],
   iconAnchor: [20, 40],
   popupAnchor: [0, -30]
 });
 
 $(document).ready(function(){
-  getCurrentLocation().then(function(msg){
-    mainMap = new Map('main-map');
-    let marker = mainMap.setPickupMarker(currentLoc, false, '#pickup-name');
-    mainMap.setMarkerPopup(marker, msg);
-  }); 
+  checkOrder();  
 
-  if($('.header-order').)
+  App.order.received = function(data) {
+    if(data.order.user_id == $('#userID').val() && order) {
+      alert('Yeah, you get a driver');
+      mainMap.markerBounce();
+      $('#overlay').hide();
+      $('#detail').removeClass('text-center');
+      $('#detail').html('<div class="row">' +
+        '<div class="col col-lg-6">' +
+        '<img src="https://static-cdn.jtvnw.net/jtv_user_pictures/madcitygg-profile_image-d182e6f9183999a2-300x300.jpeg" alt="driver" class="img-driver">' +
+        '</div>' +
+        '<div class="col col-lg-6">' +
+        '<span>Name: ' + data.name + '</span>' + 
+        '<br>' +
+        '<span>Phone: ' + data.phone + '</span>' +
+        '<br>' +
+        '<span>License Plate: ' + data.license_plate + '</span>' +
+        '</div></div>');
+      $('.set-pickup, .set-dest').css('cursor', 'default');
+      $('.set-pickup, .set-dest').unbind('click');
+    }
+  }
+
+  App.finish_order.received = function(data) {
+    if(data.order.user_id == $('#userID').val() && order) {
+      alert('You have arrived');
+      window.location.href = 'order';
+    }
+  }
 
   $('#pickup-loc, #dest-loc').on('focus', function(){
     $(this).parent().append($('.pac-container'));
@@ -137,10 +161,64 @@ $(document).ready(function(){
     }
   });
 
-  $('#btnOrder').click(function(){
+  $('#detail').on('click', '#btnOrder', function() {
     if(allowGPS) {
-      mainMap.markerBounce();
-      $('#overlay').show();
+      if(!mainMap.pickupMarker) {
+        alert('Please select your pickup place');
+      }
+      else if(!mainMap.destMarker) {
+        alert('Please select your destination place');
+      }
+      else {
+        let pickup = {
+          lat: mainMap.pickupMarker.getLatLng().lat,
+          lng: mainMap.pickupMarker.getLatLng().lng
+        }
+
+        let dest = {
+          lat: mainMap.destMarker.getLatLng().lat,
+          lng: mainMap.destMarker.getLatLng().lng
+        }
+
+        $.ajax({
+          method: 'POST',
+          url: 'order/orderDriver',
+          async: false,
+          data: {
+            pickupLoc: pickup,
+            destLoc: dest
+          },
+          beforeSend: function() {
+            mainMap.markerBounce();
+            $('#overlay').show();
+          },
+          success: function(result) {
+            if(result.status == 'Success') {
+              order = true;
+            }
+            else {
+              order = false;
+              alert(result.message);
+              mainMap.markerBounce();
+              $('#overlay').hide();
+            }
+          },
+          error: function(xhr) {
+            order = false;
+            mainMap.markerBounce();
+            $('#overlay').hide();
+            console.log(xhr.statusText + xhr.responseText);
+=======
+            console.log(result);
+            mainMap.markerBounce();
+            $('#overlay').hide();
+          },
+          error: function(xhr) {
+            alert(xhr.statusText + xhr.responseText);
+>>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
+          }
+        });
+      }
     }
     else {
       alert('Please enable your GPS first');
@@ -148,10 +226,81 @@ $(document).ready(function(){
   });
 
   $('#overlay').click(function(){
-    $(this).hide();
-    mainMap.markerBounce();
+    $.ajax({
+      url: 'order/cancelOrder',
+      method: 'GET',
+      async: false,
+      success: function(result) {
+        if(result.status == 'Success') {
+          order = false;
+          mainMap.markerBounce();
+          $('#overlay').hide();
+        }
+        else {
+          alert(result.message);
+        }
+      },
+      error: function(xhr) {
+        order = false;
+        mainMap.markerBounce();
+        $('#overlay').hide();
+        console.log(xhr.statusText + xhr.responseText);
+      }
+    });
   });
 });
+
+function checkOrder() {
+  $.ajax({
+    url: 'order/checkOrderUser',
+    method: 'GET',
+    async: false,
+    success: function(result) {
+      if(result != null) {
+        $('#detail').removeClass('text-center');
+        $('#detail').html('<div class="row">' +
+          '<div class="col col-lg-6">' +
+          '<img src="https://static-cdn.jtvnw.net/jtv_user_pictures/madcitygg-profile_image-d182e6f9183999a2-300x300.jpeg" alt="driver" class="img-driver">' +
+          '</div>' +
+          '<div class="col col-lg-6">' +
+          '<span>Name: ' + result.name + '</span>' + 
+          '<br>' +
+          '<span>Phone: ' + result.phone + '</span>' +
+          '<br>' +
+          '<span>License Plate: ' + result.license_plate + '</span>' +
+          '</div></div>');
+
+        mainMap = new Map('main-map');
+        let pickupMarker = mainMap.setPickupMarker({ 
+          lat: result.pickup_lat,
+          lng: result.pickup_lng
+        }, false, '#pickup-name');
+        mainMap.setMarkerPopup(pickupMarker, 'You are here');
+        let destMarker = mainMap.setDestMarker({
+          lat: result.dest_lat,
+          lng: result.dest_lng
+        }, false, '#dest-name');
+        mainMap.setMarkerPopup(destMarker, 'Your Destination');
+        mainMap.getRoute();
+        $('.set-pickup, .set-dest').css('cursor', 'default');
+        $('.set-pickup, .set-dest').unbind('click');
+        order = true;
+      }
+      else {
+        getCurrentLocation().then(function(msg){
+          mainMap = new Map('main-map');
+          let marker = mainMap.setPickupMarker(currentLoc, false, '#pickup-name');
+          mainMap.setMarkerPopup(marker, msg);
+        }); 
+
+        order = false;
+      }
+    },
+    error: function(xhr) {
+      console.log(xhr.statusText + xhr.responseText);
+    }
+  });
+}
 
 function getCurrentLocationPromise() {
   return new Promise(function(resolve, reject) {
@@ -342,7 +491,7 @@ Map.prototype.getRoute = function() {
         marker = L.marker(start.latLng, {
           draggable: false,
           title: 'Your Destination',
-          icon: destIcon,
+          icon: destIcon
         });
         
         destTemp = marker;

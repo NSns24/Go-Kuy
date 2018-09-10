@@ -4,10 +4,41 @@ class Driver < ApplicationRecord
 	validates :phone, numericality: { only_integer: true, message: "must be a number" }
 	validates :phone, :license_plate, uniqueness: true
 	validate :unique_email
+
+	validates :image_url, allow_blank: true, format: {
+		with: %r{\.(gif|jpg|png)\Z}i, 
+		message: 'must be a URL for GIF, JPG or PNG image.'
+	}
+
+	validates_date :dob, :before => lambda { 16.years.ago },
+                               :before_message => "must be at least 16 years old"
+
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 	devise :database_authenticatable, :registerable,
 		:recoverable, :rememberable, :validatable
+
+	has_one :online_driver
+	has_many :orders
+
+	attr_accessor :image
+
+	after_save :save_image, if: :image
+
+	def save_image
+		filename = image.original_filename
+		folder = "public/driver_profile_image"
+
+		FileUtils::mkdir_p folder
+
+		f = File.open File.join(folder, filename), "wb"
+		f.write image.read()
+		f.close
+
+		self.image = nil
+		update image_url: filename
+		
+	end
 
 	private
 		def unique_email

@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+<<<<<<< HEAD
+#OnlineDriver.create(driver_id: 1, current_lat: -6.202285403792229, current_lng: 106.77932828664781)
+=======
+OnlineDriver.create(driver_id: 1, current_lat: -6.202285403792229, current_lng: 106.77932828664781)
+>>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293

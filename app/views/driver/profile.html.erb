@@ -1,13 +1,73 @@
-Name : <%= current_driver.name %>
-<br>
-Email : <%= current_driver.email %>
-<br>
-Date of Birth : <%= current_driver.dob %>
-<br>
-Phone Number : <%= current_driver.phone %>
-<br>
-License Plate : <%= current_driver.license_plate %>
+<% content_for :css do %>
+	<%= stylesheet_link_tag    'style' %>
+	<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+	<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+<% end %>
 
-<br>
-<%= link_to "Back", driver_home_url %>
-<%= link_to "Edit", edit_driver_registration_path %>
+<% content_for :js do %>
+	<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+	<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<% end %>
+
+<div class="profile-driver">
+	<ul class="order-nav">
+		<li class="order-nav-item order-logo">
+			<%= link_to image_tag("logo.png"), driver_home_url %>
+		</li>
+		<li class="order-nav-item">
+			<%= link_to "My Account", driver_profile_path, class: 'active' %>
+		</li>
+		<li class="order-nav-item">
+			<a href="order_history.html.erb">History</a>
+		</li>
+		<li class="order-nav-item order-account">
+			<ul>
+				<li><%= image_tag 'order/login_icon.png' %></li>
+				<li><%= link_to "Logout", destroy_driver_session_path, :method => :delete %></li>
+			</ul>				
+		</li>
+	</ul>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="error-msg"></div>
+			<div class="col-lg-3 profile-driver-portrait profile-driver-item">
+				<div class="profile-driver-portrait-image">
+					<%= image_tag '/driver_profile_image/'+ current_driver.image_url if current_driver.image_url? %>
+				</div>
+				<button><%= link_to "Edit Profile", edit_driver_registration_path, class: 'edit-profile-button' %></button>
+			</div>
+			<div class="col-lg-5 profile-driver-detail profile-driver-item">
+				<div class="profile-driver-detail-item">
+					<%= image_tag 'profile_driver/email_icon.png' %>
+					<span class="profile-driver-detail-item-input m-l-16"><%= current_driver.email %></span>
+				</div>
+				<div class="profile-driver-detail-item">
+					<%= image_tag 'profile_driver/name_icon.png' %>
+					<span class="profile-driver-detail-item-input m-l-16"><%= current_driver.name %></span>
+				</div>
+				<div class="profile-driver-detail-item">
+					<%= image_tag 'profile_driver/name_icon.png' %>
+					<span class="profile-driver-detail-item-input m-l-16"><%= current_driver.dob %></span>
+				</div>
+				<div class="profile-driver-detail-item">
+					<%= image_tag 'order/call_icon.png' %>
+					<span class="profile-driver-detail-item-input m-l-16"><%= current_driver.phone %></span>
+				</div>
+				<div class="profile-driver-detail-item">
+					<%= image_tag 'profile_driver/email_icon.png' %>
+					<span class="profile-driver-detail-item-input m-l-16"><%= current_driver.license_plate %></span>
+				</div>
+			</div>
+			<div class="col-lg-4 profile-driver-rating profile-driver-item">
+				<p>75% Rating Scale</p>
+				<div class="profile-driver-rating-star">
+				<%= image_tag 'order/star.png' %>
+				<%= image_tag 'order/star.png' %>
+				<%= image_tag 'order/star.png' %>
+				<%= image_tag 'order/half_star.png' %>
+				<%= image_tag 'order/empty_star.png' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

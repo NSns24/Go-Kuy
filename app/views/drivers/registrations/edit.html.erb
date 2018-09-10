@@ -1,63 +1,109 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :date_of_birth %><br />
-    <%= f.date_field :dob, value: f.object.dob %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.telephone_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :license_plate %><br />
-    <%= f.text_field :license_plate %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+<% content_for :css do %>
+<%= stylesheet_link_tag    'style' %>
+<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
-<h3>Cancel my account</h3>
+<% content_for :js do %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<%= javascript_include_tag 'profile' %>
+<% end %>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<div class="profile-driver">
+  <ul class="order-nav">
+    <li class="order-nav-item order-logo">
+      <%= link_to image_tag("logo.png"), driver_home_url %>
+    </li>
+    <li class="order-nav-item">
+      <%= link_to "My Account", driver_profile_path, class: 'active' %>
+    </li>
+    <li class="order-nav-item">
+      <a href="order_history.html.erb">History</a>
+    </li>
+    <li class="order-nav-item order-account">
+      <ul>
+        <li><%= image_tag 'order/login_icon.png' %></li>
+        <li><%= link_to "Logout", destroy_driver_session_path, :method => :delete, class: 'logout-link' %></li>
+      </ul>       
+    </li>
+  </ul>
+  <div class="container-fluid profile-driver-item-container">
+    <div class="row">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <div class="error-msg">
+        <span><%= devise_error_messages! %></span>
+      </div>
+      <div class="col-lg-3 profile-driver-portrait profile-driver-item-edit">
+        <div class="profile-driver-portrait-image">
+          <%= image_tag '/driver_profile_image/'+ current_driver.image_url, class: 'image_to_upload' if current_driver.image_url? %>
+        </div>
+        
+        <label for="file-input" class="file-input-label">
+          <%= image_tag 'profile_driver/plus-button-green.png', class: 'plus-button' %>
+        </label>
+        <%= f.file_field :image, id: 'file-input', class: 'photo_upload' %>
+        <button><%= f.submit "Save", class: 'save-button', id: 'save' %></button>
+      </div>
 
-<%= link_to "Back", :back %>
+      <div class="col-lg-5 profile-driver-detail profile-driver-item-edit profile-driver-edit-detail">
+        <div class="profile-driver-detail-item">
+          <%= image_tag 'profile_driver/email_icon.png' %>
+          <%= f.email_field :email, autocomplete: "email", autofocus: true, class: 'profile-driver-detail-item-input' %>
+        </div>
+
+        <div class="profile-driver-detail-item">
+          <%= image_tag 'profile_driver/name_icon.png' %>
+          <%= f.text_field :name, class: 'profile-driver-detail-item-input' %>
+        </div>
+        <div class="profile-driver-detail-item">
+          <%= image_tag 'profile_driver/name_icon.png' %>
+          <%= f.date_field :dob, value: f.object.dob, class: 'profile-driver-detail-item-input' %>
+        </div>
+        <div class="profile-driver-detail-item">
+          <%= image_tag 'order/call_icon.png' %>
+          <%= f.telephone_field :phone, class: 'profile-driver-detail-item-input' %>
+        </div>
+        <div class="profile-driver-detail-item">
+          <%= image_tag 'profile_driver/email_icon.png' %>
+          <%= f.text_field :license_plate, class: 'profile-driver-detail-item-input' %>
+        </div>
+        <div class="profile-driver-detail-item">
+          <%= image_tag 'profile_driver/name_icon.png' %>
+          <%= f.password_field :password, autocomplete: "new-password", class: 'profile-driver-detail-item-input',placeholder: "Password" %>
+        </div>
+        <div class="profile-driver-detail-item">
+          <%= image_tag 'profile_driver/name_icon.png' %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Password Confirmation', class: 'profile-driver-detail-item-input' %>
+        </div>
+        <div class="profile-driver-detail-item">
+          <%= image_tag 'profile_driver/name_icon.png' %>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: 'profile-driver-detail-item-input', placeholder: "Current Password" %>
+        </div>
+
+      </div>
+      <div class="col-lg-4 profile-driver-rating profile-driver-item-edit">
+        <p>75% Rating Scale</p>
+        <div class="profile-driver-rating-star">
+          <%= image_tag 'order/star.png' %>
+          <%= image_tag 'order/star.png' %>
+          <%= image_tag 'order/star.png' %>
+          <%= image_tag 'order/half_star.png' %>
+          <%= image_tag 'order/empty_star.png' %>
+        </div>
+      </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

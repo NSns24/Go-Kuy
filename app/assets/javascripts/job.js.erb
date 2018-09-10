@@ -1,0 +1,444 @@
+var mainMap;
+var order = {};
+var again = false;
+var request;
+var timeRequest;
+var destIcon = L.icon({
+  iconUrl: "<%= asset_path('order/destination.png', type: :images) %>",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -30]
+});
+
+var pickupIcon = L.icon({
+  iconUrl: "<%= asset_path('order/destination.png', type: :images) %>",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -30]
+});
+
+$(document).ready(function(){
+  checkOrder();
+
+  $('#pickup-loc, #dest-loc').geocomplete({
+    country: 'id',
+    types: []
+  }).bind('geocode:result', function(event, result) {
+    let address = result.formatted_address;
+    let name = (result.name === undefined) ? "" : result.name + ", ";
+    let str = address.substr(0, address.indexOf(','));
+
+    $(this).html(name + str);
+  });
+
+  $('#img-center').click(function(){
+    if(mainMap) {
+      mainMap.setView();
+    }
+  });
+
+  $('#circle').click(function(){
+    if(!mainMap) {
+      alert('Please enable your GPS first');
+    }
+    else {
+      mainMap.markerBounce();
+      $('#overlay').show();
+      timeRequest = moment();
+      findJob();
+    }
+  });
+
+  $('#overlay').click(function(){
+    request.abort();
+    mainMap.markerBounce();
+    $('#overlay').hide();
+  });
+
+  $('#job-div').on('click', '#btnAccept', function(){
+    $.ajax({
+      method: 'POST',
+      url: 'job/createOrder',
+      data: { 
+        order: order,
+        pickup_location: $('#pickup-loc').html(),
+        dest_location: $('#dest-loc').html()
+      },
+      success: function(result){
+        if(result != null) {
+          $('#circle-text').html('OK!<br>Happy Working!!');
+          $('#choices').html('<div class="row">' + 
+          '<button type="button" id="btnStartWorking" class="btn">Start Working</button>' +
+          '</div>');
+          order = result;
+        }
+        else {
+          alert('Customer has been taken');
+          order = {};
+          findJob();
+        }
+      },
+      error: function(xhr){
+        console.log(xhr.statusText + xhr.responseText);
+      }
+    });
+  });
+
+  $('#job-div').on('click', '#btnStartWorking', function(){
+    $.ajax({
+      url: 'order/startWorking',
+      method: 'GET',
+      data: {
+        order_id: order.id
+      },
+      success: function(result){
+        $('#circle-text').html('Drive Safe!!!');
+        $('#choices').html('<div class="row">' + 
+          '<button type="button" id="btnFinishWorking" class="btn">Finish Working</button>' +
+          '</div>');
+        order = result;
+      },
+      error: function(xhr){
+        console.log(xhr.statusText + xhr.responseText);
+      }
+    });
+  });
+
+  $('#job-div').on('click', '#btnFinishWorking', function(){
+    $.ajax({
+      url: 'order/finishWorking',
+      method: 'GET',
+      data: {
+        order_id: order.id
+      },
+      success: function(result){
+        $('#circle-text').html('Good Job!!!');
+        $('#choices').html('<div class="row">' + 
+          '<button type="button" id="btnDoneWorking" class="btn">Done</button>' +
+          '</div>');
+        order = {};
+      },
+      error: function(xhr){
+        console.log(xhr.statusText + xhr.responseText);
+      }
+    });
+  });
+
+  $('#job-div').on('click', '#btnDoneWorking', function(){
+    window.location.href = 'job';
+  });
+
+  $('#job-div').on('click', '#btnDecline', function(){
+    mainMap.markerBounce();
+    $('#overlay').show();
+    findJob();
+  });
+});
+
+function checkOrder() {
+   $.ajax({
+    url: 'order/checkOrderDriver',
+    method: 'GET',
+    async: false,
+    success: function(result) {
+      if(result != null) {
+        order = result;
+        
+        $('#circle').css('background-color', 'inherit');
+        $('#circle-text').css('color', 'orange');
+        $('#circle').css('margin-top', '10%');
+
+        $('#information-div').css('padding-top', '4%');
+        $('#information-div span:first').html('<img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">');
+        $('#pickup span:first').html('Pickup Location');
+        $('#dest').show();
+
+        $('#detail').show();
+        $('#detail').html('<div class="row">' +
+          '<div class="col col-lg-6">' +
+          '<span id="price">Price Rp 0</span>' +
+          '</div>' +
+          '<div class="col col-lg-6 text-center">' +
+          '<span id="distance">Distance 0 KM</span>' +
+          '</div></div></div>');
+
+        if(result.pickup_datetime == null) {
+          $('#circle-text').html('OK!<br>Happy Working!!');
+          $('#choices').html('<div class="row">' + 
+            '<button type="button" id="btnStartWorking" class="btn">Start Working</button>' +
+            '</div>');
+        }
+        else {
+          $('#circle-text').html('Drive Safe!!!');
+          $('#choices').html('<div class="row">' + 
+            '<button type="button" id="btnFinishWorking" class="btn">Finish Working</button>' +
+            '</div>');
+        }
+
+        $('#pickup-loc').geocomplete("find", result.pickup_lat + "," + result.pickup_lng);
+        $('#dest-loc').geocomplete("find", result.dest_lat + "," + result.dest_lng);
+
+        mainMap = new Map('main-map');
+        mainMap.getRoute({
+          lat: result.pickup_lat,
+          lng: result.pickup_lng
+        }, {
+          lat: result.dest_lat,
+          lng: result.dest_lng
+        });
+      }
+      else {
+        getCurrentLocation().then(function(location){
+          mainMap = new Map('main-map', location, '#pickup-loc');
+        }).catch(function(error, location){
+          alert(error);
+          mainMap = new Map('main-map', location, '#pickup-loc');
+        });
+
+        order = {};
+      }
+    },
+    error: function(xhr) {
+      console.log(xhr.statusText + xhr.responseText);
+    }
+  });
+}
+
+function findJob() {
+  let currentLoc = {
+    lat: mainMap.location.lat,
+    lng: mainMap.location.lng
+  }
+
+  request = $.ajax({
+    cache: false,
+    method: 'POST',
+    url: 'job/getCustomer',
+    data: {
+      currentLoc: currentLoc,
+      exOrder: order.id
+    },
+    success: function(result){
+      if(result.status == 'Success') {
+        again = false;
+
+        $('#circle').css('background-color', 'inherit');
+        $('#circle-text').html('Will You Take The Offer?');
+        $('#circle-text').css('color', 'orange');
+        $('#circle').css('margin-top', '10%');
+
+        $('#choices').html('<div class="row">' + 
+          '<div class="col col-lg-6">' +
+          '<button type="button" id="btnAccept" class="btn">Accept</button>' +
+          '</div>' +
+          '<div class="col col-lg-6">' +
+          '<button type="button" id="btnDecline" class="btn">Decline</button>' +
+          '</div></div>');
+
+        $('#information-div').css('padding-top', '4%');
+        $('#information-div span:first').html('<img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">');
+        $('#pickup span:first').html('Pickup Location');
+        $('#dest').show();
+
+        $('#detail').show();
+        $('#detail').html('<div class="row">' +
+          '<div class="col col-lg-6">' +
+          '<span id="price">Price Rp 0</span>' +
+          '</div>' +
+          '<div class="col col-lg-6 text-center">' +
+          '<span id="distance">Distance 0 KM</span>' +
+          '</div></div></div>');
+
+        order = result.data;
+
+        $('#pickup-loc').geocomplete("find", result.data.pickup_lat + "," + result.data.pickup_lng);
+        $('#dest-loc').geocomplete("find", result.data.dest_lat + "," + result.data.dest_lng);
+
+        mainMap.getRoute({
+          lat: result.data.pickup_lat,
+          lng: result.data.pickup_lng
+        }, {
+          lat: result.data.dest_lat,
+          lng: result.data.dest_lng
+        });
+      }
+      else {
+        again = true;
+        order.id = "";
+      }
+    },
+    error: function(xhr){
+      again = false;
+      order.id = "";
+      console.log(xhr.statusText + xhr.responseText);
+    }
+  }).done(function(){
+      if(again && moment().diff(timeRequest, 'minutes') < 1) {
+        findJob();
+      }
+      //timeout
+      else if(moment().diff(timeRequest, 'minutes') >= 1) {
+        alert('Sorry, Server Busy');
+        mainMap.markerBounce();
+        $('#overlay').hide();
+      }
+      else {
+        mainMap.markerBounce();
+        $('#overlay').hide();
+      }
+  });
+}
+
+function calculatePrice(distance) {
+  let price = 2000;
+
+  if(distance <= 5) {
+    return 5000;
+  }
+  else {
+    return Math.ceil(distance * price);
+  }
+}
+
+function getCurrentLocation() {
+  return new Promise(function(resolve, reject) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        //resolve(L.latLng(-6.199872015046871, 106.78535020370487));
+        resolve(L.latLng(position.coords.latitude, position.coords.longitude));
+      });
+    }
+    else {
+      reject('GPS Not Supported', L.latLng(-6.199872015046871, 106.78535020370487));
+    }
+  });
+}
+
+
+//CLASS MAP
+function Map(mapContainer, location = null, placeNameCon = null) {
+  this.location = location;
+  this.route;
+  this.pickupMarker;
+  this.destMarker;
+  this.marker;
+
+  if(this.location != null) {
+    this.map = L.map(mapContainer, {
+      center: this.location,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      zoom: 19
+    });
+
+    this.marker = L.marker(this.location, {
+      draggable: false,
+      title: 'You are here'
+    }).addTo(this.map).bindPopup('You are here').addTo(this.map).openPopup();
+
+    $(placeNameCon).geocomplete("find", this.location.lat + "," + this.location.lng);
+  }
+  else {
+    this.map = L.map(mapContainer, {
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      zoom: 19
+    });
+  }
+  
+  // L.tileLayer('http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+  //   attribution: '© OpenStreetMap contributors'
+  // }).addTo(this.map);
+
+  L.gridLayer.googleMutant({ type: 'roadmap', maxZoom: 22 }).addTo(this.map);
+}
+
+Map.prototype.markerBounce = function() {
+  if(this.marker) {
+    this.marker.toggleBouncing();
+  }
+}
+
+Map.prototype.getRoute = function(pickupLocation, destLocation) {
+  if(this.route) {
+    this.route.remove();
+  }
+
+  if(this.pickupMarker) {
+    this.pickupMarker.remove();
+  }
+
+  if(this.destMarker) {
+    this.destMarker.remove();
+  }
+
+  let pickupTemp;
+  let destTemp;
+
+  this.route = L.Routing.control({
+    waypoints: [
+      pickupLocation,
+      destLocation
+    ],
+    addWaypoints: false,
+    draggableWaypoints: false,
+    createMarker: function (i, start, n){
+      let marker;
+
+      if (i == n-1) {
+        marker = L.marker(start.latLng, {
+          draggable: false,
+          title: 'Destination Location',
+          icon: destIcon
+        });
+        
+        destTemp = marker;
+        return marker.bindPopup('Destination Location', { closeOnClick: false, autoClose: false }).openPopup();
+      }
+      else {
+        marker = L.marker(start.latLng, {
+          draggable: false,
+          title: 'Pickup Location',
+          icon: pickupIcon
+        });
+        
+        pickupTemp = marker;
+        return marker.bindPopup('Pickup Location', { closeOnClick: false, autoClose: false }).openPopup();
+      }
+    },
+    lineOptions: {
+      styles: [{color: '#2e8b57', weight: 5}]
+    },
+    // router: L.Routing.mapbox('pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw')
+    router: L.Routing.google({
+      travelMode: 'DRIVING',
+      avoidTolls: true,
+      unitSystem: google.maps.UnitSystem.METRIC
+    })
+  }).addTo(this.map);
+
+  this.pickupMarker = pickupTemp;
+  this.destMarker = destTemp;
+
+  //this.setMarkerPopup(this.pickupMarker, 'Pickup Location', { closeOnClick: false, autoClose: false });
+  //this.setMarkerPopup(this.destMarker, 'Destination Location', { closeOnClick: false, autoClose: false });
+
+  let tempMap = this.map;
+
+  this.route.on('routesfound', function(result) {
+    let distance = result.routes[0].summary.totalDistance;
+    let distanceInKm = (distance/1000).toFixed(1);
+    let totalPrice = calculatePrice(distanceInKm);
+    $('#distance').html('Destination ' + distanceInKm + ' KM');
+    $('#price').html('Price Rp ' + totalPrice);
+    let line = L.Routing.line(result.routes[0]);
+    let bounds = line.getBounds();
+    tempMap.fitBounds(bounds);
+  });
+}
+
+Map.prototype.setMarkerPopup = function(marker, message, options = {}) {
+  marker.bindPopup(message, options).addTo(this.map).openPopup();
+}
+
+

@@ -10,23 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180827111512) do
+ActiveRecord::Schema.define(version: 20180907032624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "drivers", force: :cascade do |t|
-    t.string   "name",                   default: "", null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "dob",                    default: "", null: false
-    t.string   "phone",                  default: "", null: false
-    t.string   "license_plate",          default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "name",                   default: "",            null: false
+    t.string   "email",                  default: "",            null: false
+    t.string   "dob",                    default: "",            null: false
+    t.string   "phone",                  default: "",            null: false
+    t.string   "license_plate",          default: "",            null: false
+    t.string   "image_url",              default: "profile.png"
+    t.string   "encrypted_password",     default: "",            null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.index ["dob"], name: "index_drivers_on_dob", using: :btree
     t.index ["email"], name: "index_drivers_on_email", unique: true, using: :btree
     t.index ["license_plate"], name: "index_drivers_on_license_plate", unique: true, using: :btree
@@ -35,9 +36,48 @@ ActiveRecord::Schema.define(version: 20180827111512) do
     t.index ["reset_password_token"], name: "index_drivers_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "online_drivers", force: :cascade do |t|
+    t.integer  "driver_id",   null: false
+    t.decimal  "current_lat", null: false
+    t.decimal  "current_lng", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["driver_id"], name: "index_online_drivers_on_driver_id", using: :btree
+  end
+
+  create_table "online_users", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.decimal  "pickup_lat", null: false
+    t.decimal  "pickup_lng", null: false
+    t.decimal  "dest_lat",   null: false
+    t.decimal  "dest_lng",   null: false
+<<<<<<< HEAD
+=======
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_online_users_on_user_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+>>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_online_users_on_user_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "driver_id",       null: false
+    t.integer  "user_id",         null: false
+    t.decimal  "pickup_lat",      null: false
+    t.decimal  "pickup_lng",      null: false
+    t.decimal  "dest_lat",        null: false
+    t.decimal  "dest_lng",        null: false
+    t.datetime "pickup_datetime"
+    t.datetime "finish_datetime"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["driver_id"], name: "index_orders_on_driver_id", using: :btree
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,4 +98,11 @@ ActiveRecord::Schema.define(version: 20180827111512) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "online_drivers", "drivers"
+  add_foreign_key "online_users", "users"
+<<<<<<< HEAD
+  add_foreign_key "orders", "drivers"
+  add_foreign_key "orders", "users"
+=======
+>>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
 end
