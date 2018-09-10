@@ -245,10 +245,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.18)
       execjs (>= 0.3.0, < 3)
-<<<<<<< HEAD
     unicode-display_width (1.4.0)
-=======
->>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
     validates_timeliness (5.0.0.alpha3)
       timeliness (~> 0.3.8)
     warden (1.2.7)

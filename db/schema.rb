@@ -51,15 +51,6 @@ ActiveRecord::Schema.define(version: 20180907032624) do
     t.decimal  "pickup_lng", null: false
     t.decimal  "dest_lat",   null: false
     t.decimal  "dest_lng",   null: false
-<<<<<<< HEAD
-=======
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_online_users_on_user_id", using: :btree
-  end
-
-  create_table "orders", force: :cascade do |t|
->>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_online_users_on_user_id", using: :btree
@@ -100,9 +91,6 @@ ActiveRecord::Schema.define(version: 20180907032624) do
 
   add_foreign_key "online_drivers", "drivers"
   add_foreign_key "online_users", "users"
-<<<<<<< HEAD
   add_foreign_key "orders", "drivers"
   add_foreign_key "orders", "users"
-=======
->>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
 end

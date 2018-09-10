@@ -22,13 +22,9 @@ module Gokuy
 		    g.fixture_replacement :factory_girl, dir: "spec/factories"
 	  	end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	  	config.time_zone = 'Asia/Bangkok'
  		config.active_record.default_timezone = :local
-=======
-=======
->>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
+
 	  	# custom redirect for authenticate
 	  	config.autoload_paths << Rails.root.join('lib')
 
@@ -36,9 +32,5 @@ module Gokuy
 	  	config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
 	  	  html_tag
 	  	}
-<<<<<<< HEAD
->>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
-=======
->>>>>>> de7e8b5ed0cd310da13782d723fa43ce62966293
   end
 end
