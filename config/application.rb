@@ -22,8 +22,10 @@ module Gokuy
 		    g.fixture_replacement :factory_girl, dir: "spec/factories"
 	  	end
 
+	  	# custom redirect for authenticate
 	  	config.autoload_paths << Rails.root.join('lib')
 
+	  	# avoiding 'field_with_error' to change page appearance
 	  	config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
 	  	  html_tag
 	  	}
