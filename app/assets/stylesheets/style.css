@@ -474,6 +474,17 @@ input {
 	border: 2px solid red;
 	border-radius: 10px;
 	margin-top: 30px;
+}
+
+.new_user #error_explanation {
+	text-align: center;
+	margin-bottom: 30px;
+	padding: 20px 0;
+	border: 2px solid red;
+	border-radius: 10px;
+	margin-top: 30px;
+	background-color: white;
+	opacity: 0.7;
 
 }
 
@@ -484,11 +495,16 @@ input {
 	color: red;
 }
 
-ol, ul {
-	/*margin: 0 !important;*/
+.new_user #error_explanation li {
+	list-style: none;
+	font-size: 14px;
+	display: block;
+	color: #FF5252;
+	font-weight: bolder;
 }
 
-.new_driver #error_explanation ul {
+.new_driver #error_explanation ul,
+.new_user #error_explanation ul {
 	padding: 0 !important;
 }
 
@@ -1004,6 +1020,14 @@ input#driver_dob {
 	margin: 0;
 }
 
+.driver-sign-up a {
+	color: orange;
+}
+
+.driver-sign-up a:hover {
+	color: orange;
+}
+
 .logo-driver{
 	height: 100vh;
 	position: relative;
@@ -1168,6 +1192,14 @@ input#driver_dob {
 	background-color: rgba(255,0,0,0.3);
 	margin-bottom: 16px;
 }
+
+.profile-customer-content .error-msg {
+	margin-bottom: 40px;
+}
+
+/*.edit-user .error-msg {
+	margin-top: 10px;
+}*/
 
 .error-msg ul {
 	padding: 0 !important;

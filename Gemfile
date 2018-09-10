@@ -43,6 +43,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'devise', '~> 4.2'
   gem 'carrierwave', '~> 1.0'
+  gem 'validates_timeliness', '~> 5.0.0.alpha3'
 end
 
 group :test do

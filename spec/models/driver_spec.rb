@@ -49,9 +49,15 @@ describe Driver do
 		expect(driver.errors[:dob]).to include("can't be blank")
 	end
 
-	# it "is invalid with age less than 16" do
-		
-	# end
+	it "is invalid with age less than 16" do
+		driver = build(:driver, dob: "26/03/2018")
+		driver.valid?
+		expect(driver.errors[:dob]).to include("must be at least 16 years old")
+	end
+
+	it "is valid with age greater than or equal to 16" do
+		expect(build(:driver, dob: "09/09/2002")).to be_valid
+	end
 
 	it "is invalid without a phone" do
 		driver = build(:driver, phone: nil)
