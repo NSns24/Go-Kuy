@@ -1,0 +1,76 @@
+var ratingStar = $('.scoring-content-rating img');
+
+$(document).ready(function(){
+	ratingStar.on('mouseover', ratingScore);
+	$('.scoring-price').html('Rp ' + calculatePrice(gon.order.distance));
+
+	$('#form_rating').submit(function(e){
+		e.preventDefault();
+		let no_helm = $('#no_helm').is(':checked') ? 1 : 0;
+
+		$.ajax({
+			url: '/order/saveRating',
+			method: 'POST',
+			data: {
+				rating: $('#rating').val(),
+				comments: $('#comments').val(),
+				no_helm: no_helm,
+				id: gon.order.id
+			},
+			success: function(result){
+				alert(result.message);
+				if(result.status == 'Success') {
+					window.location.href = '/user/index';
+				}
+			},
+			error: function(xhr){
+        		console.log(xhr.statusText + xhr.responseText);
+      		}
+		});
+	});
+});
+
+function ratingScore(){
+	if($(this).index() == 0){
+		ratingStar.attr("src", "<%= asset_path('scoring/rating.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(1)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.input-rating-score').attr('value', '1');
+	}else if($(this).index() == 1){
+		ratingStar.attr("src", "<%= asset_path('scoring/rating.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(1)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(2)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.input-rating-score').attr('value', '2');				
+	}else if($(this).index() == 2){
+		ratingStar.attr("src", "<%= asset_path('scoring/rating.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(1)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(2)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(3)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.input-rating-score').attr('value', '3');				
+	}else if($(this).index() == 3){
+		ratingStar.attr("src", "<%= asset_path('scoring/rating.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(1)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(2)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(3)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(4)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.input-rating-score').attr('value', '4');				
+	}else if($(this).index() == 4){
+		ratingStar.attr("src", "<%= asset_path('scoring/rating.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(1)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(2)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(3)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(4)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.scoring-content-rating img:nth-of-type(5)').attr("src", "<%= asset_path('scoring/star.png', type: :images) %>");
+		$('.input-rating-score').attr('value', '5');				
+	}
+}
+
+function calculatePrice(distance) {
+  let price = 2000;
+
+  if(distance <= 5) {
+    return 5000;
+  }
+  else {
+    return Math.ceil(distance * price);
+  }
+}

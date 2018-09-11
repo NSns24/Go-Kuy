@@ -63,8 +63,11 @@ ActiveRecord::Schema.define(version: 20180907032624) do
     t.decimal  "pickup_lng",      null: false
     t.decimal  "dest_lat",        null: false
     t.decimal  "dest_lng",        null: false
+    t.decimal  "distance",        null: false
     t.datetime "pickup_datetime"
     t.datetime "finish_datetime"
+    t.integer  "rating"
+    t.string   "comment"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["driver_id"], name: "index_orders_on_driver_id", using: :btree

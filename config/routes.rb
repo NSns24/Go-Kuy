@@ -10,8 +10,10 @@ Rails.application.routes.draw do
 
   get 'user/profile'
   get 'driver/profile'
+  get 'order/rating/:id' => 'user#rating', as: 'rating'
 
   post 'order/orderDriver' => 'user#orderDriver'
+  post 'order/saveRating' => 'order#saveRating'
   get 'order/cancelOrder' => 'user#cancelOrder'
   get 'order/checkOrderUser' => 'order#checkOrderUser'
   get 'order/checkOrderDriver' => 'order#checkOrderDriver'

@@ -28,11 +28,11 @@ $(document).ready(function(){
         '<img src="' + "<%= asset_path('order/profile.png', type: :images) %>" + '" alt="driver" class="img-driver">' +
         '</div>' +
         '<div class="col col-lg-6">' +
-        '<span>Name: ' + data.name + '</span>' + 
+        '<span>Name: ' + data.order.name + '</span>' + 
         '<br>' +
-        '<span>Phone: ' + data.phone + '</span>' +
+        '<span>Phone: ' + data.order.phone + '</span>' +
         '<br>' +
-        '<span>License Plate: ' + data.license_plate + '</span>' +
+        '<span>License Plate: ' + data.order.license_plate + '</span>' +
         '</div></div>');
       $('.set-pickup, .set-dest').css('cursor', 'default');
       $('.set-pickup, .set-dest').unbind('click');
@@ -42,7 +42,7 @@ $(document).ready(function(){
   App.finish_order.received = function(data) {
     if(data.order.user_id == $('#userID').val() && order) {
       alert('You have arrived');
-      window.location.href = 'order';
+      window.location.href = '/order/rating/' + data.order.id;
     }
   }
 
@@ -182,7 +182,7 @@ $(document).ready(function(){
 
         $.ajax({
           method: 'POST',
-          url: 'order/orderDriver',
+          url: '/order/orderDriver',
           async: false,
           data: {
             pickupLoc: pickup,
@@ -219,7 +219,7 @@ $(document).ready(function(){
 
   $('#overlay').click(function(){
     $.ajax({
-      url: 'order/cancelOrder',
+      url: '/order/cancelOrder',
       method: 'GET',
       async: false,
       success: function(result) {
@@ -244,7 +244,7 @@ $(document).ready(function(){
 
 function checkOrder() {
   $.ajax({
-    url: 'order/checkOrderUser',
+    url: '/order/checkOrderUser',
     method: 'GET',
     async: false,
     success: function(result) {
