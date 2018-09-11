@@ -49,7 +49,7 @@ body {
 	padding-top: 8%;
 }
 
-#information-div span:first-child {
+#information-div #title {
 	font-size: 30px;
 }
 
@@ -62,8 +62,10 @@ body {
 }
 
 .img-location {
-	width: 40px;
-	height: 40px;
+	width: 35px;
+	height: 35px;
+	margin-top: -5px;
+	margin-right: 5px;
 }
 
 .container-fluid {
@@ -120,4 +122,22 @@ body {
 
 #detail span {
 	font-size: 22px !important;
+}
+
+#img-nav {
+	width: 50px;
+	position: absolute;
+	top: 20px;
+	right: 25px;
+	cursor: pointer;
+}
+
+.img-logo {
+	width: 20%;
+	margin-bottom: 10px;
+}
+
+.img-check {
+	width: 100px;
+	height: 100px;
 }

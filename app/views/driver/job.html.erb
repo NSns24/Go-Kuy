@@ -28,15 +28,16 @@
       <div id="choices"></div>
     </div>
     <div class="col col-lg-8 text-center" id="information-div">
-      <span>YOUR LOCATION</span>
+      <%= image_tag 'order/navigation.svg', alt: 'navigation', id: 'img-nav' %>
+      <span id="title">YOUR LOCATION</span>
       <div id="pickup">
-        <img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">
+        <%= image_tag 'order/current_marker.png', class: 'img-location' %>
         <span>Your Location</span>
         <br>
         <span id="pickup-loc"></span>
       </div>
       <div id="dest" style="display: none;"> 
-        <img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">
+        <%= image_tag 'order/destination_marker.png', class: 'img-location' %>
         <span>Destination Location</span>
         <br>
         <span id="dest-loc"></span>

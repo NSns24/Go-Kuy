@@ -1,6 +1,6 @@
 class OrderController < ApplicationController
-  #before_action :authenticate_user!, only: [:checkOrderUser]
-  #before_action :authenticate_driver!, only: [:createOrder, :startWorking, :finishWorking, :checkOrderDriver]
+  before_action :authenticate_user!, only: [:checkOrderUser]
+  before_action :authenticate_driver!, only: [:createOrder, :startWorking, :finishWorking, :checkOrderDriver]
 
   def createOrder
     order = Order.new do |x|
@@ -18,7 +18,7 @@ class OrderController < ApplicationController
       if order.save
         order_success = Order.joins(:driver).select('orders.*, drivers.*').find(order.id)
         ActionCable.server.broadcast 'order', order: order_success
-        return render json: order
+        return render json: order_success
       end
     end
 

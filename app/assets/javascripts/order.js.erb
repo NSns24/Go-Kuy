@@ -8,7 +8,7 @@ var drag = false;
 
 var currentLoc;
 var destIcon = L.icon({
-  iconUrl: "<%= asset_path('order/destination.png', type: :images) %>",
+  iconUrl: "<%= asset_path('order/destination_marker.png', type: :images) %>",
   iconSize: [40, 40],
   iconAnchor: [20, 40],
   popupAnchor: [0, -30]
@@ -25,7 +25,7 @@ $(document).ready(function(){
       $('#detail').removeClass('text-center');
       $('#detail').html('<div class="row">' +
         '<div class="col col-lg-6">' +
-        '<img src="https://static-cdn.jtvnw.net/jtv_user_pictures/madcitygg-profile_image-d182e6f9183999a2-300x300.jpeg" alt="driver" class="img-driver">' +
+        '<img src="' + "<%= asset_path('order/profile.png', type: :images) %>" + '" alt="driver" class="img-driver">' +
         '</div>' +
         '<div class="col col-lg-6">' +
         '<span>Name: ' + data.name + '</span>' + 
@@ -155,7 +155,7 @@ $(document).ready(function(){
     }
   });
 
-  $('#img-center').click(function(){
+  $('#img-nav').click(function(){
     if(mainMap) {
       mainMap.setView();
     }
@@ -252,7 +252,7 @@ function checkOrder() {
         $('#detail').removeClass('text-center');
         $('#detail').html('<div class="row">' +
           '<div class="col col-lg-6">' +
-          '<img src="https://static-cdn.jtvnw.net/jtv_user_pictures/madcitygg-profile_image-d182e6f9183999a2-300x300.jpeg" alt="driver" class="img-driver">' +
+          '<img src="' + "<%= asset_path('order/profile.png', type: :images) %>" + '" alt="driver" class="img-driver">' +
           '</div>' +
           '<div class="col col-lg-6">' +
           '<span>Name: ' + result.name + '</span>' + 

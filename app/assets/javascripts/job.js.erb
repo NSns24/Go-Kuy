@@ -3,15 +3,23 @@ var order = {};
 var again = false;
 var request;
 var timeRequest;
-var destIcon = L.icon({
-  iconUrl: "<%= asset_path('order/destination.png', type: :images) %>",
+
+var currIcon = L.icon({
+  iconUrl: "<%= asset_path('order/current_marker.png', type: :images) %>",
   iconSize: [40, 40],
   iconAnchor: [20, 40],
   popupAnchor: [0, -30]
 });
 
 var pickupIcon = L.icon({
-  iconUrl: "<%= asset_path('order/destination.png', type: :images) %>",
+  iconUrl: "<%= asset_path('order/pickup_marker.png', type: :images) %>",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -30]
+});
+
+var destIcon = L.icon({
+  iconUrl: "<%= asset_path('order/destination_marker.png', type: :images) %>",
   iconSize: [40, 40],
   iconAnchor: [20, 40],
   popupAnchor: [0, -30]
@@ -112,7 +120,7 @@ $(document).ready(function(){
         order_id: order.id
       },
       success: function(result){
-        $('#circle-text').html('Good Job!!!');
+        $('#circle-text').html('<img src="' + "<%= asset_path('order/checked.svg', type: :images) %>" + '" class="img-check"><br>Good Job!!!');
         $('#choices').html('<div class="row">' + 
           '<button type="button" id="btnDoneWorking" class="btn">Done</button>' +
           '</div>');
@@ -133,6 +141,12 @@ $(document).ready(function(){
     $('#overlay').show();
     findJob();
   });
+
+  $('#img-nav').click(function(){
+    if(mainMap) {
+      mainMap.setView();
+    }
+  });
 });
 
 function checkOrder() {
@@ -149,7 +163,8 @@ function checkOrder() {
         $('#circle').css('margin-top', '10%');
 
         $('#information-div').css('padding-top', '4%');
-        $('#information-div span:first').html('<img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">');
+        $('#information-div span:first').html('<img src="' + "<%= asset_path('logo.png', type: :images) %>" + '" class="img-logo">');
+        $('#pickup img').attr("src", "<%= asset_path('order/pickup_marker.png', type: :images) %>");
         $('#pickup span:first').html('Pickup Location');
         $('#dest').show();
 
@@ -236,7 +251,8 @@ function findJob() {
           '</div></div>');
 
         $('#information-div').css('padding-top', '4%');
-        $('#information-div span:first').html('<img src="https://seeklogo.com/images/H/hand-logo-10C1271C98-seeklogo.com.png" class="img-location">');
+        $('#information-div span:first').html('<img src="' + "<%= asset_path('logo.png', type: :images) %>" + '" class="img-logo">');
+        $('#pickup img').attr("src", "<%= asset_path('order/pickup_marker.png', type: :images) %>");
         $('#pickup span:first').html('Pickup Location');
         $('#dest').show();
 
@@ -333,7 +349,8 @@ function Map(mapContainer, location = null, placeNameCon = null) {
 
     this.marker = L.marker(this.location, {
       draggable: false,
-      title: 'You are here'
+      title: 'You are here',
+      icon: currIcon
     }).addTo(this.map).bindPopup('You are here').addTo(this.map).openPopup();
 
     $(placeNameCon).geocomplete("find", this.location.lat + "," + this.location.lng);
@@ -441,4 +458,20 @@ Map.prototype.setMarkerPopup = function(marker, message, options = {}) {
   marker.bindPopup(message, options).addTo(this.map).openPopup();
 }
 
+Map.prototype.setView = function() {
+  let latLngs = [];
+  let markerBounds;
 
+  if(this.pickupMarker && this.destMarker) {
+    latLngs.push(this.pickupMarker.getLatLng());
+    latLngs.push(this.destMarker.getLatLng());
+  }
+  else if(this.marker) {
+    latLngs.push(this.marker.getLatLng());
+  }
+  
+  if(latLngs.length > 0) {
+    markerBounds = L.latLngBounds(latLngs);
+    this.map.fitBounds(markerBounds, { maxZoom: 19 });
+  }
+}
