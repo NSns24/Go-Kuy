@@ -1,4 +1,4 @@
-<h1>User#index</h1>
+<!-- <h1>User#index</h1>
 <h2>Hi <%= current_user.name %></h2>
 <% if current_user %>
 	<%= link_to "My Account", user_profile_path %> <br>
@@ -7,5 +7,54 @@
 <% else %>
 	<%= link_to "Login", new_user_session_path %>
 	<%= link_to "Register", new_user_registration_path %>
+<% end %> -->
+
+<% content_for :css do %>
+<%= stylesheet_link_tag    'style' %>
+<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
+<% content_for :js do %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.min.js' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<%= javascript_include_tag 'main_login_page.js' %>
+<% end %>
+
+<nav class="customer-index-nav">
+	<ul>
+		<li class="customer-index-nav-logo">
+			<%= image_tag 'logo.png'%>
+		</li>
+		<li>
+			<%= link_to "<p>About Us</p>"%>
+		</li>
+		<li>
+			<%= link_to "<p>My Account</p>"%>
+		</li>
+		<li>
+			<%= link_to "<p>History</p>"%>
+		</li>
+		<li>
+			<%= link_to "<p>Help</p>" %>
+		</li>
+		<li class="customer-index-name">
+			<div>
+				<p>Hai, Nabila Putri Sina!</p>
+			</div>
+		</li>
+	</ul>
+</nav>
+<div class="customer-index-content">
+	<div class="customer-index-content-item customer-index-order-button">
+		<%= image_tag 'scoring/bg.jpg' class: 'customer-index-order-button-bg' %>
+		<div class="overlay">
+			<p>ORDER <span><img src="../../assets/images/logo_icon.png"></span> NOW</p>
+			<button class="btn btn-warning">Click This Button <i class="fas fa-angle-right"></i></button>
+		</div>
+	</div>
+	<div class="customer-index-content-item">
+		<img src="../../assets/images/login_customer/bg_login.jpeg">
+		<%= image_tag 'login_customer/bg_login.jpeg'%>
+	</div>
+</div>

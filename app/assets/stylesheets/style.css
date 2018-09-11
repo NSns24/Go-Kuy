@@ -1,9 +1,3 @@
-body{
-	margin: 0;
-	padding: 0;
-	font-family: 'Roboto-Regular';
-}
-
 @font-face{
 	src: url("../fonts/Roboto-Regular.ttf");
 	font-family: 'Roboto-Regular';
@@ -42,6 +36,12 @@ body{
 @font-face{
 	src: url("../fonts/Montserrat-Light.otf");
 	font-family: 'Montserrat-Light';
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto-Regular';
 }
 
 input {
@@ -1592,4 +1592,148 @@ input#user_dob.form-control {
 
 .start-work-circle .fa-key{
 	font-size: 64px;
+}
+
+/* customer index */
+
+.customer-index-nav{
+	max-height: 20vh;
+	overflow: hidden;
+	width: 100%;
+	padding: 15px 35px;
+}
+
+.customer-index-nav ul{
+	padding: 0;
+	list-style-type: none;
+	overflow: hidden;
+	width: 100%;
+}
+
+.customer-index-nav li{
+	float: left;
+	width: 10%;
+	text-align: left;
+}
+
+.customer-index-nav li p{
+	padding-top: 27px;
+	font-size: 24px;
+}
+
+.customer-index-nav li:nth-of-type(2){
+	width: 8%;
+}
+
+.customer-index-nav li:nth-of-type(4){
+	width: 7%;
+}
+
+.customer-index-nav .customer-index-nav-logo{
+	width: 20%;
+}
+
+.customer-index-nav img{
+	width: 80%;
+}
+
+.customer-index-nav .customer-index-name{
+	float: right;
+	width: 15%;
+	text-align: center;
+	margin-right: 5%;
+}
+
+.customer-index-name div{
+	border: 2px solid black;
+	border-radius: 10px;
+	margin-top: 27px;
+	padding: 10px;
+	line-height: 20px;
+}
+
+.customer-index-nav .customer-index-name p{
+	padding: 0;
+	margin: 0;
+	color: orange;
+}
+
+.customer-index-content{
+	max-height: 80vh;
+	overflow: hidden;
+}
+
+.customer-index-content::after{
+	display: block;
+	clear: both;
+	content: '';
+}
+
+.customer-index-content-item{
+	float: left;
+	width: 55%;
+}
+
+.customer-index-content-item:nth-of-type(1){
+	width: 45%;
+}
+
+.customer-index-order-button{
+	position: relative;
+}
+
+.customer-index-order-button-bg{
+	position: absolute;
+	top: 0;
+	left: -20%;
+	z-index: -1;
+	width: 140%;
+}
+
+.customer-index-order-button .overlay{
+	padding-top: 20vh;
+	padding-bottom: 25vh;
+}
+
+.customer-index-order-button p{
+	font-size: 56px;
+	font-weight: bold;
+	color: white;
+	text-align: left;
+	width: 80%;
+	margin-left: 8%;
+	margin-right: auto;
+	letter-spacing: 4px;
+}
+
+.customer-index-order-button img{
+	width: 11%;
+}
+
+.customer-index-order-button button{
+	font-size: 42px;
+	border-radius: 15px;
+	background-color: orange;
+	padding: 25px;
+	padding-left: 75px;
+	width: 70%;
+	margin-left: 8%;
+	letter-spacing: 2px;
+	position: relative;
+	text-align: left;
+}
+
+.customer-index-order-button button .fa-angle-right{
+	font-size: 96px;
+	position: absolute;
+	top: 8px;
+	right: 95px;
+}
+
+.customer-index-content-item:nth-of-type(2){
+	height: 60vh;
+}
+
+.customer-index-content-item:nth-of-type(2) img{
+	width: 100%;
 }
