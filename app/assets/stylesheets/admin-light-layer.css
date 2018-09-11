@@ -1,0 +1,347 @@
+body {
+    background: #ccc;
+}
+
+::-webkit-input-placeholder {
+   color: #90999c!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #90999c!important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #90999c!important;  
+}
+
+:-ms-input-placeholder {  
+   color: #90999c!important;  
+}
+
+.search-button a,
+.push-sidebar, .push-sidebar:link {
+    padding: 25px 20px;
+}
+
+.search-form .input-group button, 
+.search-form .input-group button:focus, 
+.search-form .input-group button:hover {
+    line-height: 70px;
+}
+
+.search-form input::-webkit-input-placeholder {
+   color: #fff!important;
+}
+
+.search-form input:-moz-placeholder { /* Firefox 18- */
+   color: #fff!important;  
+}
+
+.search-form input::-moz-placeholder {  /* Firefox 19+ */
+   color: #fff!important;  
+}
+
+.search-form input:-ms-input-placeholder {  
+   color: #fff!important;  
+}
+
+#main-wrapper {
+    margin-top: 13px;
+}
+
+.page-content {
+    background: #F5F5F5;
+}
+
+.navbar {
+    height: 70px;
+    box-shadow: 0 5px 20px -5px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-inner {
+    background: #8996A2;
+}
+
+.navbar .logo-box {
+    background: #8996A2;
+    width: 180px;
+    height: 70px;
+}
+
+.navbar .logo-box a {
+    color: #fff;
+}
+
+.navbar .logo-box .logo-text {
+    line-height: 70px;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+.navbar .open .dropdown-menu {
+    margin-top: 20px!important;
+}
+
+.topmenu-outer {
+    background: #8996A2;
+    height: 70px;
+    margin-left: 180px;
+}
+
+.top-menu .navbar-nav > li > a {
+    color: #fff;
+    padding: 0 18px;
+}
+
+.sidebar {
+    background: #F5F5F5;
+}
+
+.sidebar-profile span small {
+    color: #899dc1;
+}
+
+.menu {
+    background: #F5F5F5;
+}
+
+.menu.accordion-menu {
+    width: 180px;
+}
+
+.menu.accordion-menu a {
+    color: #5f5f5f;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+.menu.accordion-menu ul.sub-menu li {
+    border: none;
+}
+
+.menu.accordion-menu > li > a:hover {
+    background: #F5F5F5;
+    color: #999999;
+    border-radius: 0;
+}
+
+.menu.accordion-menu > li.active > a,
+.menu.accordion-menu > li.active.open > a {
+    background: #F5F5F5;
+    border-radius: 0;
+}
+
+.menu.accordion-menu > li.active > a p,
+.menu.accordion-menu > li.active.open > a p,
+.menu.accordion-menu > li.active > a,
+.menu.accordion-menu > li.active.open > a {
+    color: #14A2BB;
+}
+
+.menu.accordion-menu > li > a.waves-button,
+.menu.accordion-menu > li > a.waves-circle {
+    -webkit-mask-image: none;
+}
+
+.small-sidebar:not(.page-sidebar-fixed) .accordion-menu li.droplink:hover > a,
+.horizontal-bar .accordion-menu > li.droplink:hover > a,
+.menu.accordion-menu li.open > a,
+.hover-menu .accordion-menu > li.droplink:hover > a {
+    color: #999999;
+}
+
+.menu.accordion-menu ul li a:hover,
+.menu.accordion-menu ul li.active a {
+    color: #5f5f5f;
+}
+
+.menu.accordion-menu ul li a {
+    color: #999999;
+}
+
+.compact-menu .menu.accordion-menu > li > ul > li a,
+.compact-menu.small-sidebar.page-sidebar-fixed .menu.accordion-menu > li > ul > li a {
+    margin-left: 15px;
+}
+
+.compact-menu.small-sidebar:not(.page-sidebar-fixed) .menu.accordion-menu > li > ul > li a {
+    margin-left: 0px;
+}
+
+.top-menu .navbar-nav > li > a > .badge {
+    top: 16px;
+    right: 12px;
+}
+
+.top-menu .navbar-nav > li > a > .user-name {
+    line-height: 70px;
+}
+
+.page-sidebar {
+    width: 180px;
+}
+
+.page-sidebar .page-sidebar-inner {
+    padding-top: 15px;
+}
+
+span.active-page {
+    display: none!important;
+}
+
+.cbp-spmenu {
+    background: #fff;
+}
+
+.cbp-spmenu h3 {
+    background: #fff;
+    color: #5f5f5f;
+    padding: 25px 20px 16px 25px;
+    height: 70px;
+    margin-bottom: 0;
+}
+
+.cbp-spmenu .showRight2 {
+    padding: 18px 22px;
+}
+
+.cbp-spmenu .showRight2:hover {
+    background: #f9f9f9;
+}
+
+.cbp-spmenu a {
+    color: #5f5f5f;
+}
+
+.chat {
+    padding: 10px 10px 130px;
+}
+
+.chat .chat-item.chat-item-left .chat-message {
+    background: #f1f1f1;
+    color: #5f5f5f;
+}
+
+.chat .chat-item.chat-item-right .chat-message {
+    background: #e2e2e2;
+    color: #5f5f5f;
+}
+
+.chat-write input {
+    border-radius: 0;
+    background: #fff!important;
+    color: #5f5f5f;
+    border-top: 1px solid #E2E2E2;
+}
+
+.chat-write input:focus {
+    border-top: 1px solid #d1d1d1;
+}
+
+.search-form.boxed-layout-search .input-group,
+.search-form {
+    background: #8996A2;
+    height: 70px;
+}
+
+.search-form .input-group input {
+    height: 70px;
+}
+
+.page-title {
+    background: #F5F5F5;
+    padding: 28.5px 20px 15px 22px;
+    border: 0;
+}
+
+.page-footer {
+    background: #F5F5F5;
+}
+
+.page-footer p {
+    color: #90999c;
+    text-align: right;
+}
+
+.page-footer p i {
+    color: #c4c4c4;
+}
+
+.page-header-fixed:not(.page-sidebar-fixed):not(.page-horizontal-bar) .page-inner {
+    padding: 70px 0 50px 0;
+}
+
+.page-sidebar-fixed.page-header-fixed .page-inner {
+    padding: 70px 0 50px 180px;
+}
+
+.page-sidebar-fixed:not(.page-header-fixed) .page-inner {
+    padding: 0px 0 50px 180px;
+}
+
+.page-sidebar-fixed:not(.page-header-fixed) .topmenu-outer {
+    margin-left: 180px;
+}
+
+.page-sidebar-fixed .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    padding-top: 70px;
+}
+
+.page-header-fixed .page-sidebar {
+    padding-top: 70px;
+}
+
+.page-horizontal-bar.page-sidebar-fixed.page-header-fixed.compact-menu .page-inner {
+    padding: 120px 0 50px 0;
+}
+
+.page-horizontal-bar.page-header-fixed .horizontal-bar {
+    padding-top: 70px;
+}
+
+.small-sidebar.page-sidebar-fixed.page-header-fixed.page-horizontal-bar .page-inner {
+    padding: 116px 0 50px 0;
+}
+
+.page-horizontal-bar .menu.accordion-menu ul,
+.small-sidebar.page-sidebar-fixed:not(.compact-menu) .menu.accordion-menu ul {
+    background: #F5F5F5;
+    text-align: center;
+}
+
+.hover-menu:not(.page-horizontal-bar) .accordion-menu > li > ul {
+    background: #F5F5F5;
+    margin-left: 4px;
+}
+
+.page-horizontal-bar .menu.accordion-menu ul, .small-sidebar .menu.accordion-menu ul {
+    background: #F5F5F5;
+}
+
+.small-sidebar:not(.page-sidebar-fixed) .accordion-menu li:hover > a {
+    background: #F5F5F5;
+}
+
+.small-sidebar.page-sidebar-fixed.page-header-fixed .page-inner {
+    padding: 70px 0 50px 65px;
+}
+
+.small-sidebar:not(.page-sidebar-fixed) .accordion-menu > li > ul {
+    left: 70px;
+    width: 195px;
+}
+
+.checkout__order::before {
+    background: #F5F5F5;
+}
+
+.top-menu .navbar-nav > li > a > i {
+    line-height: 70px;
+}
+
+.navbar, .top-menu .navbar-nav>li, .topmenu-outer {
+    height: 70px;
+}

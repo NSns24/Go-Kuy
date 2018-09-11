@@ -1,4 +1,4 @@
-<h1>Driver#index</h1>
+<!-- <h1>Driver#index</h1>
 <h2>Hello <%= current_driver.name %></h2>
 
 <% if current_driver %>
@@ -8,5 +8,60 @@
 <% else %>
 	<%= link_to "Login", new_driver_session_path %>
 	<%= link_to "Register", new_driver_registration_path %>
+<% end %> -->
+
+<% content_for :css do %>
+<%= stylesheet_link_tag    'style' %>
+<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
+<% content_for :js do %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.min.js' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<%= javascript_include_tag 'main_login_page.js' %>
+<% end %>
+
+<div class="main-home-page">
+		<ul class="order-nav">
+			<li class="order-nav-item order-logo">
+				<%= link_to image_tag("logo.png"), driver_home_url %>
+			</li>
+			<li class="order-nav-item">
+				<%= link_to "My Account", driver_profile_path, class: 'active' %>
+			</li>
+			<li class="order-nav-item">
+				<a href="order_history.html.erb">History</a>
+			</li>
+			<li class="order-nav-item order-account">
+				<ul>
+					<li><%= image_tag 'order/login_icon.png' %></li>
+					<li><%= link_to "Logout", destroy_driver_session_path, :method => :delete %></li>
+				</ul>				
+			</li>
+		</ul>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-5 home-page-welcome home-page-bg-lightblue">
+					<h2>WELCOME TO</h2>
+					<div>
+						<img src="../../assets/images/logo.png">
+					</div>
+				</div>
+				<div class="col-lg-2 home-page-bg-lightblue">
+					<img src="../../assets/images/main_home_page/driver_icon.png">
+				</div>
+				<div class="col-lg-2 home-page-bg-lightblue">
+					<img src="../../assets/images/main_home_page/driver_icon.png">
+				</div>
+				<div class="col-lg-3 home-page-start-work">
+					<%=link_to "<div class="start-work-circle">
+						<p>START</p>
+						<p>WORKING</p>
+						<p><i class="fas fa-key"></i></p>
+					</div>", job_path %>
+				</div>
+			</div>
+		</div>
+	</div>

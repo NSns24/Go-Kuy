@@ -16,12 +16,12 @@
 #
 default: &default
   adapter: postgresql
-  template: template0
+  #template: template0
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  port: 5433
+  #port: 5433
 
 development:
   <<: *default

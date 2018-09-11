@@ -1,0 +1,108 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag    'admin-simple-line-icons.css' %>
+<%= stylesheet_link_tag    'admin-meteor.min.css' %>
+<%= stylesheet_link_tag    'admin-light-layer.css' %>
+<%= stylesheet_link_tag    'admin-custom.css' %>
+<%= stylesheet_link_tag    'admin-font-awesome.css' %>
+<% end %>
+
+<% content_for :js do %>
+<%= javascript_include_tag 'admin-meteor.min.js' %>
+<%= javascript_include_tag 'admin-jquery-ui.min.js' %>
+<%= javascript_include_tag 'admin-waves.min.js' %>
+<% end %>
+
+<div class="compact-menu">
+        <div class="overlay"></div>
+    
+        <main class="page-content content-wrap">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    
+                    <div class="logo-box">
+                        <a href="index.html" class="logo-text"><span>GO-KUY</span></a>
+                    </div><!-- Logo Box -->
+                    
+                    <div class="topmenu-outer">
+                        <div class="top-menu">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown" >
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="user-name">Admin<i class="fa fa-angle-down"></i></span>
+                                        <img class="img-circle avatar" src="assets/images/avatar1.png" width="40" height="40" alt="">
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-list" role="menu">
+                                        <li role="presentation"><%= link_to "Logout", destroy_admin_session_path, :method => :delete %></li>
+                                    </ul>
+                                </li>
+                               
+                            </ul><!-- Nav -->
+                        </div><!-- Top Menu -->
+                    </div>
+                </div>
+            </div><!-- Navbar -->
+            <div class="page-sidebar sidebar">
+                <div class="page-sidebar-inner slimscroll">
+                    <ul class="menu accordion-menu">
+                        <li class="active"><%= link_to "Dashboard", admin_home_url, class: "waves-effect waves-button" %></li>
+                        <li><%= link_to "User", admin_user_path, class: "waves-effect waves-button" %></li>
+                        <li ><%= link_to "Driver", admin_driver_path, class: "waves-effect waves-button" %></li>
+                        <li ><%= link_to "Order", admin_order_path, class: "waves-effect waves-button" %></li>
+                    </ul>
+                </div><!-- Page Sidebar Inner -->
+            </div><!-- Page Sidebar -->
+            <div class="page-inner">
+                <div class="page-title">
+                    <div class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li><a href="index.html">Home</a></li>
+                            <li class="active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+
+
+                <div id="main-wrapper">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-white">
+                                <div class="panel-heading clearfix">
+                                    <h3 class="panel-title">Overview</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-header-stats">
+                                        <div class="row text-center">
+                                            <div class="col-md-4 col-xs-6">
+                                                <h4>Users</h4>
+                                                <%= link_to image_tag('admin/user.png'), admin_user_path, class: 'overview_img' %>
+                                                <h4 class="no-m"><%= User.count  %></h4>
+                                            </div>
+                                            <div class="col-md-4 col-xs-6">
+                                                <h4>Drivers</h4>
+                                                <%= link_to image_tag('admin/driver.png'), admin_driver_path, class: 'overview_img' %>
+                                                <h4 class="no-m"><%= Driver.count %></h4>
+                                            </div>
+                                            <div class="col-md-4 col-xs-6">
+                                                <h4>Orders</h4>
+                                                <%= link_to image_tag('admin/order.png'), admin_order_path, class: 'overview_img' %>
+                                                <h4 class="no-m"><%= Order.count %></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div><!-- Main Wrapper -->
+                
+                <div class="page-footer">
+                    <p class="no-s">Made with <i class="fa fa-heart"></i> by GOKUY</p>
+                </div>
+            </div><!-- Page Inner -->
+        </main><!-- Page Content -->
+        
+        <div class="cd-overlay"></div>
+
+</div>
