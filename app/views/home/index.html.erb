@@ -1,109 +1,100 @@
 <% content_for :css do %>
-	<%= stylesheet_link_tag    'style' %>
-	<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
-	<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+<%= stylesheet_link_tag    'style' %>
+<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
 <% content_for :js do %>
-	<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.min.js' %>
-	<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
-	<%= javascript_include_tag 'main_login_page.js' %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.min.js' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<%= javascript_include_tag 'main_login_page.js' %>
 <% end %>
 
 <div class="login-home">
-	<div class="login-home-video-wrapper">
-		<video autoplay muted loop class="login-home-background">
-			<source src="<%= asset_path('gojek.mp4', type: :video) %>" type="video/mp4">
-		</video>
-	</div>
+
+		<div class="login-home-video-wrapper">
+			<video autoplay muted loop class="login-home-background">
+				<source src="<%= asset_path('gojek.mp4', type: :video) %>" type="video/mp4">
+			</video>
+		</div>
 		
-	<div class="overlay">
-		<div class="login-home-content">
-			<div class="login-home-content-head">
-				Which one are you?
-			</div>
-			<div class="login-home-content-item login-home-content-driver">
-				<%= image_tag 'main_page/driver_icon.PNG', class: 'login-driver-image' %>
-				<div class="login-home-content-arrow">
-					<i class="fas fa-angle-up"></i>
+		<div class="overlay">
+			<div class="login-home-content">
+				<div class="login-home-content-head">
+					Which one are you?
 				</div>
-			</div>
-			<div class="login-home-content-item login-home-content-customer">
-				<%= image_tag 'main_page/go-ride_icon.PNG', class: 'login-goride-image' %>
-				<div class="login-home-content-arrow login-goride-arrow">
-					<i class="fas fa-angle-up"></i>
+				<div class="login-home-content-item login-home-content-driver">
+					<%= image_tag 'main_page/driver_icon.PNG', class: 'login-driver-image' %>
+					<div class="login-home-content-arrow">
+						<i class="fas fa-angle-up"></i>
+					</div>
+				</div>
+				<div class="login-home-content-item login-home-content-customer">
+					<%= image_tag 'main_page/go-ride_icon.PNG', class: 'login-goride-image' %>
+					<div class="login-home-content-arrow login-goride-arrow">
+						<i class="fas fa-angle-up"></i>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="login-driver" style="position: absolute; top: 0;left: 0;z-index: 9999; display: none;">
-	<div class="login-driver-item">
-		<div class="login-driver-table">
-			<div class="login-driver-table-header">
-				<h2>Welcome to</h2>
-				<%= image_tag 'logo.png' %>
-			</div>
-			<div class="login-driver-table-content">
-				<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	<div class="login-driver" style="position: absolute; top: 0;left: 0;z-index: 9999; display: none;">
+		<div class="login-driver-item">
+			<div class="login-driver-table">
+				<div class="login-driver-table-header">
+					<h2>Welcome to</h2>
+					<%= image_tag 'logo.png' %>
+				</div>
+				<div class="login-driver-table-content">
+					<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 					<%= devise_error_messages! %>
 					<div><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email' %></div>
 					<div><%= f.password_field :password, autocomplete: "current-password", placeholder: 'Password'%></div>
 					<div class="login-driver-submit"><%= f.submit 'Log in', class: 'login-driver-submit-button' %></div>
-				<% end %>
-				<div class="driver-sign-up">
-					<p>Haven't Register?</p>
-					<p><%= link_to "Register Here", new_driver_registration_path %></p>
+					<% end %>
+					<div class="driver-sign-up">
+						<p>Haven't Register?</p>
+						<p><%= link_to "Register Here", new_driver_registration_path %></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="login-driver-item logo-driver">
+			<%= image_tag 'login_driver/logo_driver.png' %>
+		</div>
+	</div>
+
+	<div class="overlay-home">
+		<div class="login-customer" style="position: absolute; top: 0;left: 0;z-index: 9999; display: none;">
+			<div class="overlay p-t-20vh">
+				<div class="login-customer-form">
+					<h2>Log In to <%= image_tag 'logo.png' %></h2>
+					<%= form_for(:user, url: session_path(:user)) do |f| %>
+
+					<div class="form-group">
+						<%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email", placeholder: 'Email'%>
+					</div>
+
+					<div class="form-group">
+						<%= f.password_field :password, class: 'form-control', autocomplete: "current-password", placeholder: 'Password'%>
+					</div>
+
+					<div class="form-group">
+						<%= f.submit 'Log In', class: 'btn btn-warning' %>
+					</div>
+					<% end %>
+					<div class="login-customer-form-footer">
+						New to <span class="login-customer-form-footer-brand">GO-KUY<span class="login-customer-form-footer-symbol">!</span></span>?
+						<span class="login-customer-signup-link"><%= link_to "Sign Up!", new_user_registration_path %></span>
+
+					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="login-driver-item logo-driver">
-		<%= image_tag 'login_driver/logo_driver.png' %>
-	</div>
-</div>
-
-<div class="overlay-home">
-	<div class="login-customer" style="position: absolute; top: 0;left: 0;z-index: 9999; display: none;">
-    <div class="overlay">
-      <div class="login-customer-form">
-        <h2>Log in to <%= image_tag 'logo.png' %></h2>
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-          <div class="form-group">
-            <%= f.email_field :email, class: 'form-control', autofocus:true, autocomplete: "current-email", placeholder: 'Email'%>
-          </div>
-
-          <div class="form-group">
-            <%= f.password_field :password, class: 'form-control', autocomplete: "current-password", placeholder: 'Password'%>
-          </div>
-
-          <div class="form-group">
-            <%= f.submit 'Log in', class: 'btn btn-warning' %>
-          </div>
-        <% end %>
-        <div class="login-customer-form-footer">
-          New to <span class="login-customer-form-footer-brand">GO-KUY<span class="login-customer-form-footer-symbol">!</span></span>?
-          <span class="login-customer-signup-link"><a href="signup_customer.html">Sign Up now >></a></span>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-</div>
 
 
-<% if current_user || current_driver %>
 
-<% else %>
-	User : 
-	<br>
-	<%= link_to "Login", new_user_session_path %>
-	<%= link_to "Register", new_user_registration_path %>
-
-	<br>
-	Driver:
-	<br>
-	<%= link_to "Login", new_driver_session_path %>
-<% end %>
+ 

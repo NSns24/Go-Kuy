@@ -1,6 +1,7 @@
 module ApplicationHelper
 	# helper_method :resource_name, :resource, :devise_mapping, :resource_class
 
+  
   def resource_name
     :driver
   end
@@ -16,4 +17,5 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:driver]
   end
+
 end

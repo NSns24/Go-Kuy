@@ -42,7 +42,9 @@ group :development, :test do
   gem 'factory_girl_rails', "~> 4.4.1"
   gem 'rails-controller-testing'
   gem 'devise', '~> 4.2'
+  gem 'rails_db', '2.0.2'
   gem 'carrierwave', '~> 1.0'
+  gem 'validates_timeliness', '~> 5.0.0.alpha3'
 end
 
 group :test do

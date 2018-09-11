@@ -10,11 +10,16 @@ class Driver < ApplicationRecord
 		message: 'must be a URL for GIF, JPG or PNG image.'
 	}
 
+	validates_date :dob, :before => lambda { 16.years.ago },
+                               :before_message => "must be at least 16 years old"
+
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 	devise :database_authenticatable, :registerable,
 		:recoverable, :rememberable, :validatable
 
+	has_one :online_driver
+	has_many :orders
 
 	attr_accessor :image
 
@@ -34,7 +39,6 @@ class Driver < ApplicationRecord
 		update image_url: filename
 		
 	end
-
 
 	private
 		def unique_email

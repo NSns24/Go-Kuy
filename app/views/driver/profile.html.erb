@@ -23,7 +23,7 @@
 		<li class="order-nav-item order-account">
 			<ul>
 				<li><%= image_tag 'order/login_icon.png' %></li>
-				<li><%= link_to "Logout", destroy_driver_session_path, :method => :delete, class: 'logout-link' %></li>
+				<li><%= link_to "Logout", destroy_driver_session_path, :method => :delete %></li>
 			</ul>				
 		</li>
 	</ul>
@@ -34,7 +34,6 @@
 				<div class="profile-driver-portrait-image">
 					<%= image_tag '/driver_profile_image/'+ current_driver.image_url if current_driver.image_url? %>
 				</div>
-				<!-- <button onclick="window.location ='profile_driver_edit.html';">Edit Profile</button> -->
 				<button><%= link_to "Edit Profile", edit_driver_registration_path, class: 'edit-profile-button' %></button>
 			</div>
 			<div class="col-lg-5 profile-driver-detail profile-driver-item">

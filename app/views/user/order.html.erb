@@ -6,7 +6,7 @@
 
 <% content_for :js do %>
   <%= javascript_include_tag 'https://unpkg.com/leaflet@1.2.0/dist/leaflet.js' %>
-  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?libraries=places' %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_JzzSA9iylcZqkcVOEs6J_sTLVOg_fE&libraries=places' %>
   <%= javascript_include_tag 'https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js' %>
   <%= javascript_include_tag 'jquery.geocomplete' %>
   <%= javascript_include_tag 'leaflet-routing-machine' %>
@@ -14,9 +14,11 @@
   <%= javascript_include_tag 'lrm-google' %>
   <%= javascript_include_tag 'polyline' %>
   <%= javascript_include_tag 'order' %>
+  <%= javascript_include_tag 'cable' %>
 <% end %>
 
 <div class="container-fluid">
+  <input type="hidden" id="userID" value="<%= @myUserID %>" disabled>
   <div id='main-map'></div>
   <div class="header-order">
     <div class="row">
@@ -58,11 +60,11 @@
         <%= image_tag 'order/destination.png', class: 'img-loc' %>
       </div>
       <div class="set-dest">
-        <div class="col col-lg-10 col-md-10 col-sm-10">
+        <div class="col col-lg-10 col-md-10 col-sm-10" disabled>
           <span id="distance">DESTINATION . 0 KM</span>
           <span id="dest-name">Set your destination</span>
         </div>
-        <div class="col col-lg-1 col-md-1 col-sm-1">
+        <div class="col col-lg-1 col-md-1 col-sm-1" disabled>
           <%= image_tag 'order/arrow.png', alt: 'arrow-clickable', class: 'img-arrow' %>
         </div>
       </div>
@@ -79,7 +81,7 @@
       </div>
     </div>
   </div>
-  <div class="text-center">
+  <div class="text-center" id="detail">
     <button type="button" id="btnOrder" class="btn btn-primary">ORDER GO-KUY!</button>
   </div>
 </div>

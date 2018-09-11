@@ -21,3 +21,16 @@
 
 en:
   hello: "Hello world"
+
+
+
+  activerecord:
+    attributes:
+      driver:
+        dob: "Date of birth"
+      user:
+        dob: "Date of birth"
+   
+
+
+

@@ -1,28 +1,4 @@
-<!-- <h2>Log in for User</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
- -->
 
 <% content_for :css do %>
   <%= stylesheet_link_tag    'style' %>
@@ -36,14 +12,15 @@
   <%= javascript_include_tag 'main_login_page.js' %>
 <% end %>
 
+  <div class="overlay-home">
   <div class="login-customer">
-    <div class="overlay">
+    <div class="overlay p-t-20vh">
       <div class="login-customer-form">
-        <h2>Log in to <%= image_tag 'logo.png', class: 'login-goride-image' %></h2>
+        <h2>Log In to <%= image_tag 'logo.png', class: 'login-goride-image' %></h2>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
           <div class="form-group">
-            <%= f.email_field :email, class: 'form-control', autofocus:true, autocomplete: "current-email", placeholder: 'Email'%>
+            <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email", placeholder: 'Email'%>
           </div>
 
           <div class="form-group">
@@ -51,16 +28,16 @@
           </div>
 
           <div class="form-group">
-            <%= f.submit 'Log in', class: 'btn btn-warning' %>
+            <%= f.submit 'Log In', class: 'btn btn-warning' %>
           </div>
         <% end %>
         <div class="login-customer-form-footer">
           New to <span class="login-customer-form-footer-brand">GO-KUY<span class="login-customer-form-footer-symbol">!</span></span>?
-          <span class="login-customer-signup-link"><a href="signup_customer.html">Sign Up now >></a></span>
+          <span class="login-customer-signup-link"><%= link_to "Sign Up!", new_user_registration_path %></span>
         </div>
         
       </div>
     </div>
   </div>
-
-<%= render "users/shared/links" %>
+  </div>
+ 

@@ -467,22 +467,45 @@ input {
 	color: white;
 }
 
-#error_explanation {
+.new_driver #error_explanation {
 	text-align: center;
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 	padding: 20px 0;
 	border: 2px solid red;
+	border-radius: 10px;
+	margin-top: 30px;
 }
 
-#error_explanation li {
+.new_user #error_explanation {
+	text-align: center;
+	margin-bottom: 30px;
+	padding: 20px 0;
+	border: 2px solid red;
+	border-radius: 10px;
+	margin-top: 30px;
+	background-color: white;
+	opacity: 0.7;
+
+}
+
+.new_driver #error_explanation li {
 	list-style: none;
 	font-size: 20px;
 	display: block;
 	color: red;
 }
 
-ol, ul {
-	margin: 0 !important;
+.new_user #error_explanation li {
+	list-style: none;
+	font-size: 14px;
+	display: block;
+	color: #FF5252;
+	font-weight: bolder;
+}
+
+.new_driver #error_explanation ul,
+.new_user #error_explanation ul {
+	padding: 0 !important;
 }
 
 #error_explanation h2 {
@@ -525,6 +548,8 @@ ol, ul {
 	font-weight: bold;
 }
 
+
+
 .order-nav-item .active {
 	color: #f09b2f;
 }
@@ -550,15 +575,16 @@ ol, ul {
 	font-size: 14px;
 }
 
-/*.logout-link {
-	margin: 0 auto !important;
-	margin-left: 32px !important;
-}*/
+
 
 .order-account ul{
 	list-style-type: none;
 	overflow: hidden;
 	padding: 0;
+}
+
+li.order-nav-item.order-account {
+	margin-top: 5px;
 }
 
 .order-account li{
@@ -585,6 +611,10 @@ ol, ul {
 }
 
 .order-account a{
+	color: green;
+}
+
+.order-account a:hover {
 	color: green;
 }
 
@@ -958,6 +988,11 @@ ol, ul {
 	border: solid 2px black;
 }
 
+input#driver_dob {
+	color: grey;
+	font-weight: bolder;
+}
+
 .login-driver-table input::placeholder{
 	font-size: 18px;
 	font-weight: bold;
@@ -984,6 +1019,14 @@ ol, ul {
 
 .driver-sign-up p{
 	margin: 0;
+}
+
+.driver-sign-up a {
+	color: orange;
+}
+
+.driver-sign-up a:hover {
+	color: orange;
 }
 
 .logo-driver{
@@ -1085,7 +1128,8 @@ ol, ul {
 	background-color: transparent;
 	border: none;
 	/*width: 210px;*/
-	color: #90c74a;
+	/*color: #90c74a;*/
+	color: white;
 	text-align: center;
 	margin-top: -100px;
 }
@@ -1150,6 +1194,19 @@ ol, ul {
 	margin-bottom: 16px;
 }
 
+.profile-customer-content .error-msg {
+	margin-bottom: 40px;
+}
+
+/*.edit-user .error-msg {
+	margin-top: 10px;
+}*/
+
+.error-msg ul {
+	padding: 0 !important;
+	margin-bottom: 12px !important;
+}
+
 .error-msg li {
 	/*color: red;*/
 	list-style-type: none;
@@ -1196,7 +1253,8 @@ ol, ul {
 }
 
 .profile-driver-portrait button {
-	background-color: #55617f;
+	/*background-color: #55617f;*/
+	background-color: orange;
 	color: white;
 	width: 210px;
 	height: 60px;
@@ -1207,7 +1265,8 @@ ol, ul {
 }
 
 .edit-profile-button {
-	color: #90c74a;
+	/*color: #90c74a;*/
+	color: white;
 }
 
 .edit-profile-button:hover {
@@ -1334,27 +1393,43 @@ ol, ul {
 	display: block;
 }
 
+<<<<<<< HEAD
+=======
+.overlay-home{
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+}
+
+>>>>>>> fc2c2804f3ed9d92dbf0e51c90f4889300435b36
 /* login customer css */
 
 .login-customer{
-	background-image: url('<%= asset_path("login_customer/bg_login.jpeg") %>');
+	background-image: url('/login_customer/bg_login.jpeg');
 	background-size: cover;
 	background-repeat: no-repeat;
-	height: 100vh;
+	height: 100%;
 	width: 100%;
+	z-index: 200;
 }
 
 .login-customer .overlay{
-	padding-top: 20vh;
+	padding-top: 5vh;
+	padding-bottom: 6vh;
+}
+
+.p-t-20vh {
+	padding-top: 20vh !important;
 }
 
 .login-customer-form{
 	width: 35%;
 	padding-top: 25px;
-	padding-bottom: 25px;
+	/*padding-bottom: 25px;*/
 	margin: auto;
 	text-align: center;
-	background-color: rgba(255,255,255,0.3);
+	background-color: rgba(255,255,255,0.4);
 	border-radius: 5px;
 }
 
@@ -1383,6 +1458,14 @@ ol, ul {
 	border-radius: 5px;
 }
 
+.login-customer-form input:focus{
+	border: 2px solid #f0ad4e ;
+}
+
+input#user_dob.form-control {
+	color: #8e8e8e;
+}
+
 .login-customer-form .btn-warning{
 	border: 1px solid white;
 	width: 30%;
@@ -1406,6 +1489,13 @@ ol, ul {
 .login-customer-form-footer .login-customer-signup-link{
 	margin-left: 20px;
 }
+
+.login-customer-form-footer .login-customer-signup-link a {
+	color: #29B6F6;
+	font-weight: bolder;
+}
+
+
 
 /* signup css */
 .login-customer .signup-customer-form{
