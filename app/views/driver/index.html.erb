@@ -16,10 +16,16 @@
 				<%= link_to image_tag("logo.png"), driver_home_url %>
 			</li>
 			<li class="order-nav-item">
-				<%= link_to "My Account", driver_profile_path, class: 'active' %>
+				<%= link_to "Home", driver_home_url, class: 'active' %>
+			</li>
+			<li class="order-nav-item">
+				<%= link_to "Find Job", job_path %>
 			</li>
 			<li class="order-nav-item">
 				<a href="order_history.html.erb">History</a>
+			</li>
+			<li class="order-nav-item">
+				<%= link_to "My Account", driver_profile_path %>
 			</li>
 			<li class="order-nav-item order-account">
 				<ul>

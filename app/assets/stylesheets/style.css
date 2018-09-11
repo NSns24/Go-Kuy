@@ -550,10 +550,18 @@ input {
 	font-weight: bold;
 }
 
+.order-nav-item a {
+	color: grey;
+}
+
+.order-nav-item a:hover {
+	color: black;
+}
+
 
 
 .order-nav-item .active {
-	color: #f09b2f;
+	color: #f09b2f !important;
 }
 
 .order-logo{
