@@ -1523,7 +1523,7 @@ input#user_dob.form-control {
 /* main homepage */
 
 .main-home-page{
-	background-color: lightgrey;
+	background-color: white;
 	max-height: 100vh;
 	padding-bottom: 30vh;
 }
@@ -1531,6 +1531,7 @@ input#user_dob.form-control {
 .main-home-page .row{
 	max-height: 60vh;
 	overflow: hidden;
+	margin-top: 24px;
 }
 
 .main-home-page .home-page-welcome{
@@ -1558,6 +1559,10 @@ input#user_dob.form-control {
 	background-color: #90c74a;
 	padding-top: 15vh;
 	padding-bottom: 20vh;
+}
+
+.home-page-start-work a {
+	text-decoration: none !important;
 }
 
 .start-work-circle{

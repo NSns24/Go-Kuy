@@ -1,15 +1,3 @@
-<!-- <h1>Driver#index</h1>
-<h2>Hello <%= current_driver.name %></h2>
-
-<% if current_driver %>
-	<%= link_to "My Account", driver_profile_path %> <br>
-	<%= link_to "Logout", destroy_driver_session_path, :method => :delete %> <br>
-	<%= link_to "Find Job", job_path %> <br>
-<% else %>
-	<%= link_to "Login", new_driver_session_path %>
-	<%= link_to "Register", new_driver_registration_path %>
-<% end %> -->
-
 <% content_for :css do %>
 <%= stylesheet_link_tag    'style' %>
 <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
@@ -46,21 +34,23 @@
 				<div class="col-lg-5 home-page-welcome home-page-bg-lightblue">
 					<h2>WELCOME TO</h2>
 					<div>
-						<img src="../../assets/images/logo.png">
+						<%= image_tag 'logo.png' %>
 					</div>
 				</div>
 				<div class="col-lg-2 home-page-bg-lightblue">
-					<img src="../../assets/images/main_home_page/driver_icon.png">
+					<%= image_tag 'main_home_page/driver_icon.png' %>
 				</div>
 				<div class="col-lg-2 home-page-bg-lightblue">
-					<img src="../../assets/images/main_home_page/driver_icon.png">
+					<%= image_tag 'main_home_page/driver_icon.png' %>
 				</div>
 				<div class="col-lg-3 home-page-start-work">
-					<%=link_to "<div class="start-work-circle">
-						<p>START</p>
-						<p>WORKING</p>
-						<p><i class="fas fa-key"></i></p>
-					</div>", job_path %>
+					<%= link_to job_path do %>
+						<div class="start-work-circle">
+							<p>START</p>
+							<p>WORKING</p>
+							<p><i class="fas fa-key"></i></p>
+						</div>
+					<% end %>
 				</div>
 			</div>
 		</div>
