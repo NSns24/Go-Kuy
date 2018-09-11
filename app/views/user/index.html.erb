@@ -27,16 +27,16 @@
 			<%= image_tag 'logo.png'%>
 		</li>
 		<li>
-			<%= link_to "<p>About Us</p>"%>
+			<p><%= link_to "Home", user_home_url, class: 'active' %></p>
 		</li>
 		<li>
-			<%= link_to "<p>My Account</p>"%>
+			<p><%= link_to "Order", order_path %></p>
 		</li>
 		<li>
-			<%= link_to "<p>History</p>"%>
+			<p><%= link_to "History", user_history_path %></p>
 		</li>
 		<li>
-			<%= link_to "<p>Help</p>" %>
+			<p><%= link_to "My Account", user_profile_path %></p>
 		</li>
 		<li class="customer-index-name">
 			<div>
@@ -47,14 +47,13 @@
 </nav>
 <div class="customer-index-content">
 	<div class="customer-index-content-item customer-index-order-button">
-		<%= image_tag 'scoring/bg.jpg' class: 'customer-index-order-button-bg' %>
+		<%= image_tag 'scoring/bg.jpg', class: 'customer-index-order-button-bg' %>
 		<div class="overlay">
-			<p>ORDER <span><img src="../../assets/images/logo_icon.png"></span> NOW</p>
+			<p>ORDER <span><%= image_tag 'logo_icon.png'%></span> NOW</p>
 			<button class="btn btn-warning">Click This Button <i class="fas fa-angle-right"></i></button>
 		</div>
 	</div>
 	<div class="customer-index-content-item">
-		<img src="../../assets/images/login_customer/bg_login.jpeg">
 		<%= image_tag 'login_customer/bg_login.jpeg'%>
 	</div>
 </div>

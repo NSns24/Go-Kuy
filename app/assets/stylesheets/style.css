@@ -936,7 +936,7 @@ li.order-nav-item.order-account {
 }
 
 .history-driver-feedback #driver_name{
-	margin-top: 14px;
+	margin-top: 20px;
 	text-align: center;
 }
 
@@ -1598,12 +1598,21 @@ input#user_dob.form-control {
 
 /* customer index */
 
+/*.customer-index-nav li:nth-of-type(2){
+	width: 8%;
+}
+
+.customer-index-nav li:nth-of-type(4){
+	width: 7%;
+}*/
+
 .customer-index-nav{
 	max-height: 20vh;
 	overflow: hidden;
 	width: 100%;
 	padding: 15px 35px;
 }
+
 
 .customer-index-nav ul{
 	padding: 0;
@@ -1613,23 +1622,34 @@ input#user_dob.form-control {
 }
 
 .customer-index-nav li{
+	/*width: 10%;*/
 	float: left;
-	width: 10%;
 	text-align: left;
+	margin-right: 60px;
+}
+
+.customer-index-nav li:nth-of-type(1){
+	margin-right: 30px;
 }
 
 .customer-index-nav li p{
-	padding-top: 27px;
-	font-size: 24px;
+	padding-top: 44px;
+	font-size: 20px;
+	font-weight: bold;
 }
 
-.customer-index-nav li:nth-of-type(2){
-	width: 8%;
+.customer-index-nav li p a {
+	color: grey;
 }
 
-.customer-index-nav li:nth-of-type(4){
-	width: 7%;
+.customer-index-nav li p a:hover {
+	color: black;
 }
+
+.customer-index-nav .active {
+	color: orange !important;
+}
+
 
 .customer-index-nav .customer-index-nav-logo{
 	width: 20%;
@@ -1637,21 +1657,24 @@ input#user_dob.form-control {
 
 .customer-index-nav img{
 	width: 80%;
+	margin-top: 30px;
+	margin-left: 20px;
 }
 
 .customer-index-nav .customer-index-name{
 	float: right;
 	width: 15%;
 	text-align: center;
-	margin-right: 5%;
+	margin-right: 10%;
 }
 
 .customer-index-name div{
-	border: 2px solid black;
+	border: 1px solid black;
 	border-radius: 10px;
-	margin-top: 27px;
+	margin-top: 35px;
 	padding: 10px;
 	line-height: 20px;
+	width: 250px;
 }
 
 .customer-index-nav .customer-index-name p{
@@ -1661,8 +1684,9 @@ input#user_dob.form-control {
 }
 
 .customer-index-content{
-	max-height: 80vh;
+	max-height: 75vh;
 	overflow: hidden;
+	margin-top: 5vh
 }
 
 .customer-index-content::after{
@@ -1688,22 +1712,23 @@ input#user_dob.form-control {
 	position: absolute;
 	top: 0;
 	left: -20%;
-	z-index: -1;
+	/*z-index: -1;*/
 	width: 140%;
 }
 
 .customer-index-order-button .overlay{
 	padding-top: 20vh;
-	padding-bottom: 25vh;
+	padding-bottom: 24vh;
+
 }
 
 .customer-index-order-button p{
-	font-size: 56px;
+	font-size: 40px;
 	font-weight: bold;
 	color: white;
 	text-align: left;
 	width: 80%;
-	margin-left: 8%;
+	margin-left: 16%;
 	margin-right: auto;
 	letter-spacing: 4px;
 }
@@ -1713,23 +1738,23 @@ input#user_dob.form-control {
 }
 
 .customer-index-order-button button{
-	font-size: 42px;
+	font-size: 32px;
 	border-radius: 15px;
 	background-color: orange;
 	padding: 25px;
-	padding-left: 75px;
-	width: 70%;
-	margin-left: 8%;
+	width: 75%;
+	margin-left: 10%;
+	padding-left: 8%;
 	letter-spacing: 2px;
 	position: relative;
 	text-align: left;
 }
 
 .customer-index-order-button button .fa-angle-right{
-	font-size: 96px;
+	font-size: 60px;
 	position: absolute;
-	top: 8px;
-	right: 95px;
+	top: 18px;
+	right: 35px;
 }
 
 .customer-index-content-item:nth-of-type(2){
