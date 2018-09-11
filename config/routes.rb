@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
+# <<<<<<< HEAD
   
   
-=======
+# =======
 
-  mount ActionCable.server => '/cable'
->>>>>>> b2e13b3fa8fc31b0776695494109156f1e0f0c65
+#   mount ActionCable.server => '/cable'
+# >>>>>>> b2e13b3fa8fc31b0776695494109156f1e0f0c65
 
   get 'order' => 'user#order'
   get 'job' => 'driver#job'
