@@ -11,6 +11,10 @@ class DriverController < ApplicationController
   	session.delete(:excludedOrder)
   end
 
+  def history
+    @order = Order.where(driver_id: current_driver.id).joins(:user)
+  end
+
   def getCustomer 
   	currentLoc = params[:currentLoc]
 

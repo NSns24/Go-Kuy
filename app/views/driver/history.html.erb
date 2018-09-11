@@ -1,0 +1,98 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag    'style' %>
+<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+<% end %>
+
+<% content_for :js do %>
+<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+<% end %>
+
+
+<div class="order">
+	<ul class="order-nav">
+		<li class="order-nav-item order-logo">
+			<%= link_to image_tag("logo.png"), driver_home_url %>
+		</li>
+		<li class="order-nav-item">
+			<%= link_to "Home", driver_home_url %>
+		</li>
+		<li class="order-nav-item">
+			<%= link_to "Find Job", job_path %>
+		</li>
+		<li class="order-nav-item">
+			<%= link_to "History", driver_history_path, class: 'active' %>
+		</li>
+		<li class="order-nav-item">
+			<%= link_to "My Account", driver_profile_path %>
+		</li>
+		<li class="order-nav-item order-account">
+			<ul>
+				<li><%= image_tag 'order/login_icon.png' %></li>
+				<li><%= link_to "Logout", destroy_driver_session_path, :method => :delete %></li>
+			</ul>				
+		</li>
+	</ul>
+
+	<% @order.each do |order| %>
+		<div class="container-fluid">
+			<div class="row history">
+				<div class="col-lg-2 history-item">
+					<%= image_tag 'order/goride_logo.png' %>
+				</div>
+				<div class="col-lg-5 history-item">
+					<div class="history-destination">
+						<div class="row">
+							<div class="col-lg-2 history-destination-icon">
+								<%= image_tag 'order/destination_marker.png' %>
+							</div>
+							<div class="col-lg-10 history-destination-detail">
+								<span class="order-destination">DESTINATION</span>
+								<p class="history-address">Jl. Salemba Tengah, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10440</p>
+								<div class="history-sub-detail">
+									<p class="history-price">
+
+									<% if order.distance <= 5 %>
+									Price: Rp. 5000,-
+									<% else %>
+									Price: Rp. <%= (order.distance*2000).to_s.gsub('.0','') %>,-
+									<% end %>	
+									
+
+									</p>
+									<p class="history-distance">
+										Distance: <%= order.distance.to_s + " km" %>
+									</p>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5 history-item history-feedback">
+					<div class="history-driver-feedback">
+						<p id="driver_name"><%= order.user.name %></p>
+						<div class="history-driver-feedback-rating">
+
+							<% order.rating.times do |i|  %>
+								<%= image_tag 'order/star.png' %>
+							<% end %>
+
+							<% (order.rating-5).abs.times do |i| %>
+								<%= image_tag 'order/empty_star.png' %>
+							<% end %>
+
+						</div>
+						<p class="history-driver-feedback-comments">
+							Comment:
+						</p>
+						<p class="history-driver-feedback-comments">
+							<%= order.comment %>
+						</p>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	<% end %>
+</div>

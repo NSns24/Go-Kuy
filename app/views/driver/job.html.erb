@@ -31,12 +31,13 @@
     <li class="order-nav-item">
       <%= link_to "Find Job", job_path, class: 'active' %>
     </li>
+     <li class="order-nav-item">
+      <%= link_to "History", driver_history_path %>
+    </li>
     <li class="order-nav-item">
       <%= link_to "My Account", driver_profile_path %>
     </li>
-    <li class="order-nav-item">
-      <a href="order_history.html.erb">History</a>
-    </li>
+   
     <li class="order-nav-item order-account">
       <ul>
         <li><%= image_tag 'order/login_icon.png' %></li>

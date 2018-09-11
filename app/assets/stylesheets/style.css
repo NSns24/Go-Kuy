@@ -517,7 +517,7 @@ input {
 /* order css */
 
 .order{
-	background-color: lightgrey;
+	background-color: white;
 }
 
 .order-nav .order-current-page{
@@ -879,16 +879,18 @@ li.order-nav-item.order-account {
 }
 
 .history .col-lg-2{
-	padding: 55px 5px 0 20px;
-	text-align: center;
+	display: flex; 
+	/*text-align: center;*/
+	align-items: center;
 }
 
 .history .col-lg-2 img{
 	width: 100%;
+	height: 35px;
 }
 
 .history .history-destination .history-destination-icon{
-	padding: 10px;
+	padding: 24px 24px;
 	padding-right: 0;
 	text-align: center;
 }
@@ -899,7 +901,7 @@ li.order-nav-item.order-account {
 }
 
 .history .history-destination-detail{
-	margin-top: 15px;
+	margin-top: 24px;
 	width: 80%;
 	padding-left: 0;
 }
@@ -933,8 +935,8 @@ li.order-nav-item.order-account {
 	width: 6%;
 }
 
-.history-driver-feedback h2{
-	margin-top: 5px;
+.history-driver-feedback #driver_name{
+	margin-top: 14px;
 	text-align: center;
 }
 
@@ -944,8 +946,8 @@ li.order-nav-item.order-account {
 }
 
 .history-driver-feedback-comments{
-	font-size: 18px;
-	font-weight: bold;
+	/*font-size: 18px;*/
+	/*font-weight: bold;*/
 	margin-bottom: 0;
 }
 
