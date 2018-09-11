@@ -1,0 +1,24 @@
+/* Write your custom CSS here */
+
+.login-admin .page-content,
+.register-admin .page-content {
+	padding-top: 7% !important;
+	padding-bottom: 7% !important;
+}
+
+.overview_img img {
+	width: 100px;
+	height: 100px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	cursor: pointer;
+}
+
+table.dataTable.no-footer {
+	border: none;
+}
+
+.dataTables_info,
+.dataTables_paginate,.paging_simple_numbers {
+	margin-top: 24px;
+}

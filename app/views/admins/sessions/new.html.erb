@@ -1,0 +1,54 @@
+<% content_for :css do %>
+<%= stylesheet_link_tag    'admin-pace-theme-flash.css' %>
+<%= stylesheet_link_tag    'admin-default.css' %>
+<%= stylesheet_link_tag    'admin-bootstrap.min.css' %>
+<%= stylesheet_link_tag    'admin-font-awesome.css' %>
+<%= stylesheet_link_tag    'admin-simple-line-icons.css' %>
+<%= stylesheet_link_tag    'admin-menu_cornerbox.css' %>
+<%= stylesheet_link_tag    'admin-waves.min.css' %>
+<%= stylesheet_link_tag    'admin-switchery.min.css' %>
+<%= stylesheet_link_tag    'admin-style.css' %>
+<%= stylesheet_link_tag    'admin-meteor.min.css' %>
+<%= stylesheet_link_tag    'admin-light-layer.css' %>
+<%= stylesheet_link_tag    'admin-custom.css' %>
+<% end %>
+
+<% content_for :js do %>
+
+<% end %>
+
+    <div class="login-admin">
+        <main class="page-content">
+            <div class="page-inner">
+                <div id="main-wrapper">
+                    <div class="row">
+                        <div class="col-md-3 center">
+                            <div class="panel panel-white" id="js-alerts">
+                                <div class="panel-body">
+                                    <div class="login-box">
+                                        <a href="index.html" class="logo-name text-lg text-center m-t-xs">GOKUY</a>
+                                        <p class="text-center m-t-md">Please login into your account.</p>
+                                        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+                                            <div class="form-group">
+                                                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email' %>
+                                            </div>
+                                            <div class="form-group">
+                                                <%= f.password_field :password, autocomplete: "current-password", class: 'form-control', placeholder: 'Password' %>
+                                            </div>
+                                            <%= f.submit "Login", class: 'btn btn-success btn-block' %>
+                                        
+                                            <p class="text-center m-t-xs text-sm">Do not have an account?</p>
+                                            <%= link_to "Create an account", new_admin_registration_path, class: 'btn btn-default btn-block m-t-md' %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
