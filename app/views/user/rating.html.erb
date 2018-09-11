@@ -1,0 +1,55 @@
+<% content_for :css do %>
+  <%= stylesheet_link_tag    'style' %>
+  <%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+<% end %>
+
+<% content_for :js do %>
+  <%= javascript_include_tag 'rating' %>
+<% end %>
+
+<div class="scoring">
+  <div class="scoring-header" style="background-image: url('<%= asset_path('scoring/bg.jpg', type: :images) %>');">
+    <div class="overlay">
+      <div class="scoring-header-content">
+        <h2>Thank you for using GO-KUY !</h2> 
+        <div class="scoring-header-content-item">
+          <%= image_tag 'scoring/user.png' %>
+        </div>
+        <div class="scoring-header-content-item">
+          <p>
+            <%= @order.name %>
+          </p>
+          <p>
+            <%= @order.phone %>
+          </p>
+          <p class="scoring-price">
+            Rp 0
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoring-content container">
+    <h2>RATE YOUR BOOKING</h2>
+    <form id="form_rating">
+      <div class="scoring-content-rating">
+        <%= image_tag 'scoring/rating.png' %>
+        <%= image_tag 'scoring/rating.png' %>
+        <%= image_tag 'scoring/rating.png' %>
+        <%= image_tag 'scoring/rating.png' %>
+        <%= image_tag 'scoring/rating.png' %>
+        <input class="input-rating-score" type="hidden" id="rating" name="rating" value="0">
+      </div>
+      <div class="scoring-content-comments">
+        <textarea rows="4" placeholder="Enter your comments here . . ." name="comments" id="comments"></textarea>
+      </div>
+      <div class="scoring-content-helmet">
+        <input type="checkbox" name="no_helm" id="no_helm"><label for="no_helm">This Driver doesn't provide helm.</label>
+      </div>
+      <div class="scoring-content-submit">
+        <input class="btn btn-success" type="submit" value="SUBMIT">
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 class UserController < ApplicationController
   before_action :authenticate_user!
+  before_action :checkRating
+  skip_before_action :checkRating, only: [:orderDriver, :cancelOrder, :rating]
 
   def index
   end
@@ -79,6 +81,25 @@ class UserController < ApplicationController
       return render json: { status: 'Success' }
     else
       return render json: { status: 'Failed', message: 'Error while processing data' }
+    end
+  end
+
+  def rating
+    order = Order.joins(:driver).select('orders.*, drivers.*').where(user_id: current_user.id, rating: nil, id: params[:id]).where.not(finish_datetime: nil).first
+    
+    if order.nil?
+      redirect_to user_home_path
+    end
+    
+    @order = order
+    gon.order = @order
+  end
+
+  def checkRating 
+    order = Order.where(user_id: current_user.id, rating: nil).where.not(finish_datetime: nil).order('finish_datetime DESC').first
+    
+    if !order.nil?
+      redirect_to rating_path(order.id)
     end
   end
 end

@@ -1,5 +1,5 @@
 class OrderController < ApplicationController
-  before_action :authenticate_user!, only: [:checkOrderUser]
+  before_action :authenticate_user!, only: [:checkOrderUser, :saveRating]
   before_action :authenticate_driver!, only: [:createOrder, :startWorking, :finishWorking, :checkOrderDriver]
 
   def createOrder
@@ -10,6 +10,7 @@ class OrderController < ApplicationController
       x.pickup_lng = params[:order][:pickup_lng]
       x.dest_lat = params[:order][:dest_lat]
       x.dest_lng = params[:order][:dest_lng]
+      x.distance = params[:distance]
     end
 
     user =  OnlineUser.find(params[:order][:id])
@@ -58,5 +59,27 @@ class OrderController < ApplicationController
     end
 
     return render json: order
+  end
+
+  def saveRating
+    comments = (params[:comments].strip == '') ? nil : params[:comments].strip
+
+    if params[:no_helm].to_i == 1
+      if comments.nil?
+        comments = "This Driver doesn't provide helm."
+      else
+        comments += " This Driver doesn't provide helm."
+      end
+    end
+
+    order = Order.find(params[:id]);
+    order.rating = params[:rating]
+    order.comment = comments
+
+    if order.save
+      return render json: { status: 'Success', message: 'Thank you for your rating' }
+    else
+      return render json: { status: 'Success', message: 'Error while processing data' }
+    end
   end
 end

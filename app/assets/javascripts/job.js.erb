@@ -3,6 +3,7 @@ var order = {};
 var again = false;
 var request;
 var timeRequest;
+var distanceInKm = 0;
 
 var currIcon = L.icon({
   iconUrl: "<%= asset_path('order/current_marker.png', type: :images) %>",
@@ -66,11 +67,10 @@ $(document).ready(function(){
   $('#job-div').on('click', '#btnAccept', function(){
     $.ajax({
       method: 'POST',
-      url: 'job/createOrder',
+      url: '/job/createOrder',
       data: { 
         order: order,
-        pickup_location: $('#pickup-loc').html(),
-        dest_location: $('#dest-loc').html()
+        distance: distanceInKm
       },
       success: function(result){
         if(result != null) {
@@ -94,7 +94,7 @@ $(document).ready(function(){
 
   $('#job-div').on('click', '#btnStartWorking', function(){
     $.ajax({
-      url: 'order/startWorking',
+      url: '/order/startWorking',
       method: 'GET',
       data: {
         order_id: order.id
@@ -114,7 +114,7 @@ $(document).ready(function(){
 
   $('#job-div').on('click', '#btnFinishWorking', function(){
     $.ajax({
-      url: 'order/finishWorking',
+      url: '/order/finishWorking',
       method: 'GET',
       data: {
         order_id: order.id
@@ -133,7 +133,7 @@ $(document).ready(function(){
   });
 
   $('#job-div').on('click', '#btnDoneWorking', function(){
-    window.location.href = 'job';
+    window.location.href = '/job';
   });
 
   $('#job-div').on('click', '#btnDecline', function(){
@@ -151,7 +151,7 @@ $(document).ready(function(){
 
 function checkOrder() {
    $.ajax({
-    url: 'order/checkOrderDriver',
+    url: '/order/checkOrderDriver',
     method: 'GET',
     async: false,
     success: function(result) {
@@ -228,7 +228,7 @@ function findJob() {
   request = $.ajax({
     cache: false,
     method: 'POST',
-    url: 'job/getCustomer',
+    url: '/job/getCustomer',
     data: {
       currentLoc: currentLoc,
       exOrder: order.id
@@ -444,7 +444,7 @@ Map.prototype.getRoute = function(pickupLocation, destLocation) {
 
   this.route.on('routesfound', function(result) {
     let distance = result.routes[0].summary.totalDistance;
-    let distanceInKm = (distance/1000).toFixed(1);
+    distanceInKm = (distance/1000).toFixed(1);
     let totalPrice = calculatePrice(distanceInKm);
     $('#distance').html('Destination ' + distanceInKm + ' KM');
     $('#price').html('Price Rp ' + totalPrice);
