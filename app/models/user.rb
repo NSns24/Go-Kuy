@@ -9,6 +9,9 @@ class User < ApplicationRecord
 	devise :database_authenticatable, :registerable,
 		:recoverable, :rememberable, :validatable
 
+	has_one :online_user
+	has_many :orders
+
 	private
 		def unique_email
 			errors.add(:email, 'has already been taken') unless Driver.where(email: self.email).blank?

@@ -18,6 +18,8 @@ class Driver < ApplicationRecord
 	devise :database_authenticatable, :registerable,
 		:recoverable, :rememberable, :validatable
 
+	has_one :online_driver
+	has_many :orders
 
 	attr_accessor :image
 
@@ -37,7 +39,6 @@ class Driver < ApplicationRecord
 		update image_url: filename
 		
 	end
-
 
 	private
 		def unique_email

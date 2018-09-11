@@ -22,6 +22,9 @@ module Gokuy
 		    g.fixture_replacement :factory_girl, dir: "spec/factories"
 	  	end
 
+	  	config.time_zone = 'Asia/Bangkok'
+ 		config.active_record.default_timezone = :local
+
 	  	# custom redirect for authenticate
 	  	config.autoload_paths << Rails.root.join('lib')
 

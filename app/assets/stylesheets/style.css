@@ -572,6 +572,7 @@ input {
 	border-radius: 10px;
 	width: 150px;
 	cursor: pointer;
+	font-size: 14px;
 }
 
 
@@ -1392,6 +1393,8 @@ input#driver_dob {
 	display: block;
 }
 
+<<<<<<< HEAD
+=======
 .overlay-home{
 	width: 100%;
 	height: 100vh;
@@ -1399,6 +1402,7 @@ input#driver_dob {
 	top: 0;
 }
 
+>>>>>>> fc2c2804f3ed9d92dbf0e51c90f4889300435b36
 /* login customer css */
 
 .login-customer{
@@ -1514,4 +1518,66 @@ input#user_dob.form-control {
 	margin-top: -20px;
 	font-size: 22px;
 	font-weight: bold;
+}
+
+/* main homepage */
+
+.main-home-page{
+	background-color: lightgrey;
+	max-height: 100vh;
+	padding-bottom: 30vh;
+}
+
+.main-home-page .row{
+	max-height: 60vh;
+	overflow: hidden;
+}
+
+.main-home-page .home-page-welcome{
+	text-align: center;
+	color: #90c74a;
+}
+
+.main-home-page .home-page-welcome h2{
+	font-weight: bold;
+	font-size: 48px;
+	margin-top: 0;
+}
+
+.main-home-page .home-page-welcome img{
+	width: 50%;
+}
+
+.main-home-page .home-page-bg-lightblue{
+	background-color: #def5fd;
+	padding-top: 18vh;
+	padding-bottom: 25vh;
+}
+
+.home-page-start-work{
+	background-color: #90c74a;
+	padding-top: 15vh;
+	padding-bottom: 20vh;
+}
+
+.start-work-circle{
+	width: 225px;
+	height: 225px;
+	margin: auto;
+	border-radius: 100%;
+	border: 15px solid grey;
+	background-color: orange;
+	text-align: center;
+	padding-top: 5vh;
+	font-size: 32px;
+	color: white;
+}
+
+.start-work-circle p{
+	margin: 0;
+	line-height: 42px;
+}
+
+.start-work-circle .fa-key{
+	font-size: 64px;
 }

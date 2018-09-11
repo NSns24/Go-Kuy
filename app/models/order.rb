@@ -1,4 +1,4 @@
 class Order < ApplicationRecord
-	def index
-	end
+	belongs_to :driver
+	belongs_to :user
 end
