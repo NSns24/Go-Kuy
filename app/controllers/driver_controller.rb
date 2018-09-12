@@ -12,7 +12,8 @@ class DriverController < ApplicationController
   end
 
   def history
-    @order = Order.where(driver_id: current_driver.id).joins(:user)
+    @orders = Order.joins(:user).where(driver_id: current_driver.id).where.not(finish_datetime: nil).order('finish_datetime DESC')
+    gon.orders = @orders
   end
 
   def getCustomer 
