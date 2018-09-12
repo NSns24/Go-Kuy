@@ -1354,7 +1354,7 @@ input#driver_dob {
 }
 
 .login-home-content-item{
-	max-height: 80vh;
+	max-height: 74vh;
 	float: left;
 	width: 50%;
 	padding-top: 13%;
@@ -1669,7 +1669,7 @@ input#user_dob.form-control {
 	float: right;
 	width: 15%;
 	text-align: center;
-	margin-right: 10%;
+	margin-right: 8%;
 }
 
 .customer-index-name div{
@@ -1678,7 +1678,8 @@ input#user_dob.form-control {
 	margin-top: 35px;
 	padding: 10px;
 	line-height: 20px;
-	width: 250px;
+	min-width: 1px;
+	width: 224px;
 }
 
 .customer-index-nav .customer-index-name p{
@@ -1688,7 +1689,7 @@ input#user_dob.form-control {
 }
 
 .customer-index-content{
-	max-height: 75vh;
+	max-height: 70vh;
 	overflow: hidden;
 	margin-top: 5vh
 }
@@ -1712,11 +1713,11 @@ input#user_dob.form-control {
 	position: relative;
 }
 
-.customer-index-order-button-bg{
+.customer-index-content .customer-index-order-button-bg{
 	position: absolute;
 	top: 0;
 	left: -20%;
-	/*z-index: -1;*/
+	z-index: -1;
 	width: 140%;
 }
 
@@ -1752,6 +1753,15 @@ input#user_dob.form-control {
 	letter-spacing: 2px;
 	position: relative;
 	text-align: left;
+	outline: none;
+}
+
+.customer-index-order-button button:active,
+.customer-index-order-button button:link,
+.customer-index-order-button button:hover,
+.customer-index-order-button button:visited
+{
+	outline: none !important;
 }
 
 .customer-index-order-button button .fa-angle-right{

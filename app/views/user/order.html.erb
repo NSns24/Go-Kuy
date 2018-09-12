@@ -3,6 +3,8 @@
   <%= stylesheet_link_tag    'leaflet-routing-machine' %>
   <%= stylesheet_link_tag    'order' %>
   <%= stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css' %>
+  <%= stylesheet_link_tag    'style' %>
+  <%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
 <% content_for :js do %>
@@ -17,7 +19,33 @@
   <%= javascript_include_tag 'order' %>
   <%= javascript_include_tag 'cable' %>
   <%= javascript_include_tag 'https://momentjs.com/downloads/moment.js' %>
+  <%= javascript_include_tag 'main_login_page.js' %>
 <% end %>
+
+<nav class="customer-index-nav">
+  <ul>
+    <li class="customer-index-nav-logo">
+      <%= link_to image_tag('logo.png'), user_home_url %>
+    </li>
+    <li>
+      <p><%= link_to "Home", user_home_url, class: 'active' %></p>
+    </li>
+    <li>
+      <p><%= link_to "Order", order_path %></p>
+    </li>
+    <li>
+      <p><%= link_to "History", user_history_path %></p>
+    </li>
+    <li>
+      <p><%= link_to "My Account", user_profile_path %></p>
+    </li>
+    <li class="customer-index-name">
+      <div>
+        <p>Hai, <%= current_user.name %>!</p>
+      </div>
+    </li>
+  </ul>
+</nav>
 
 <div class="container-fluid">
   <div id='main-map'></div>

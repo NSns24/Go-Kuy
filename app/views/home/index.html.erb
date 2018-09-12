@@ -41,7 +41,7 @@
 			<div class="login-driver-table">
 				<div class="login-driver-table-header">
 					<h2>Welcome to</h2>
-					<%= image_tag 'logo.png' %>
+					<%= link_to image_tag('logo.png'), root_path %>
 				</div>
 				<div class="login-driver-table-content">
 					<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -66,7 +66,7 @@
 		<div class="login-customer" style="position: absolute; top: 0;left: 0;z-index: 9999; display: none;">
 			<div class="overlay p-t-20vh">
 				<div class="login-customer-form">
-					<h2>Log In to <%= image_tag 'logo.png' %></h2>
+					<h2>Log In to <%= link_to image_tag('logo.png'), root_path %></h2>
 					<%= form_for(:user, url: session_path(:user)) do |f| %>
 
 					<div class="form-group">
