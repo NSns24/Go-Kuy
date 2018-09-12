@@ -2,6 +2,7 @@
   <%= stylesheet_link_tag    'https://unpkg.com/leaflet@1.2.0/dist/leaflet.css' %>
   <%= stylesheet_link_tag    'leaflet-routing-machine' %>
   <%= stylesheet_link_tag    'order' %>
+  <%= stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css' %>
 <% end %>
 
 <% content_for :js do %>
@@ -15,10 +16,10 @@
   <%= javascript_include_tag 'polyline' %>
   <%= javascript_include_tag 'order' %>
   <%= javascript_include_tag 'cable' %>
+  <%= javascript_include_tag 'https://momentjs.com/downloads/moment.js' %>
 <% end %>
 
 <div class="container-fluid">
-  <input type="hidden" id="userID" value="<%= @myUserID %>" disabled>
   <div id='main-map'></div>
   <div class="header-order">
     <div class="row">
@@ -84,6 +85,7 @@
   <div class="text-center" id="detail">
     <button type="button" id="btnOrder" class="btn btn-primary">ORDER GO-KUY!</button>
   </div>
+  <div id="chat-div" class="text-center"></div>
 </div>
   
 <!-- modal set pickup -->
@@ -129,6 +131,32 @@
         <input type="text" name="destLoc" id="dest-loc" placeholder="Search for a destination">
         <!-- <button type="button" id="btn-search-dest" class="btn btn-info">Search</button> -->
         <button type="button" id="btn-save-dest" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal chat -->
+<div class="modal fade" id="modal-chat">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">Feel Free to Chat Your Driver</h4>
+      </div>
+      <div class="modal-body">
+        <div class="mesgs">
+          <div class="msg_history"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="type_msg">
+          <div class="input_msg_write">
+            <input type="text" class="write_msg" id="user_msg" placeholder="Type a message" />
+            <button class="msg_send_btn" type="button" id="btnSendChat"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <p class="text-center top_spac">Design by Sunil Rajput</p>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 App.order = App.cable.subscriptions.create "OrderChannel",
   connected: ->
-    console.log('Connected')
+    console.log('Order Connected')
 
   disconnected: ->
-    console.log('Disconnected')
+    console.log('Order Disconnected')
     

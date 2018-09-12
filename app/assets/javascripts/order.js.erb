@@ -14,11 +14,15 @@ var destIcon = L.icon({
   popupAnchor: [0, -30]
 });
 
+var userID = gon.user_id;
+var driverID = "";
+var msgCount = 0;
+
 $(document).ready(function(){
   checkOrder();  
 
   App.order.received = function(data) {
-    if(data.order.user_id == $('#userID').val() && order) {
+    if(data.order.user_id == userID && order) {
       alert('Yeah, you get a driver');
       mainMap.markerBounce();
       $('#overlay').hide();
@@ -36,15 +40,67 @@ $(document).ready(function(){
         '</div></div>');
       $('.set-pickup, .set-dest').css('cursor', 'default');
       $('.set-pickup, .set-dest').unbind('click');
+      $('#chat-div').html('<span>Chat Driver</span>' +
+        '<img src="' + "<%= asset_path('order/email_logo.png', type: :images) %>" + '" alt="chat" class="img-chat">');
+      $('#chat-div').show();
+      $('#user_msg').val(''); 
+      driverID = data.order.driver_id;
     }
   }
 
   App.finish_order.received = function(data) {
-    if(data.order.user_id == $('#userID').val() && order) {
+    if(data.order.user_id == userID && order) {
       alert('You have arrived');
+      $('#chat-div').html('');
+      $('#chat-div').hide();
       window.location.href = '/order/rating/' + data.order.id;
     }
   }
+
+  App.chat.received = function(data) {
+    if(data.type == 'user' && data.id == userID && order) {
+      let date = moment().local();
+      $('.msg_history').append('<div class="incoming_msg">' +
+        '<div class="received_msg">' +
+        '<div class="received_withd_msg">' +
+        '<p>' + data.msg + '</p>' +
+        '<span class="time_date">' + date.format('hh:mm A') + ' | ' + date.format('MMMM DD') + '</span>' + 
+        '</div></div></div>');
+
+      if(!$('#modal-chat').is(':visible')) {
+        msgCount++;
+        $('#chat-div span:nth-child(3)').remove();
+        $('#chat-div').append('<span>(' + msgCount + ')</span>');
+      }
+      else {
+        msgCount = 0;
+      }
+    }
+  }
+
+  $('#btnSendChat').click(function(){
+    let msg = $('#user_msg').val().trim();
+
+    if(msg != "") {
+      let date = moment().local();
+
+      $('.msg_history').append('<div class="outgoing_msg">' + 
+      '<div class="sent_msg">' +
+      '<p>' + msg + '</p>' +
+      '<span class="time_date">' + date.format('hh:mm A') + ' | ' + date.format('MMMM DD') + '</span>' + 
+      '</div></div>');
+
+      App.chat.sendMsg(msg, driverID, 'driver');
+    }
+
+    $('#user_msg').val('');    
+  });
+
+  $(document).on('click', '#chat-div', function(){
+    $('#modal-chat').modal('toggle');
+    msgCount = 0;
+    $('#chat-div span:nth-child(3)').remove();
+  });
 
   $('#pickup-loc, #dest-loc').on('focus', function(){
     $(this).parent().append($('.pac-container'));
@@ -276,6 +332,11 @@ function checkOrder() {
         mainMap.getRoute();
         $('.set-pickup, .set-dest').css('cursor', 'default');
         $('.set-pickup, .set-dest').unbind('click');
+        $('#chat-div').html('<span>Chat Driver</span>' +
+        '<img src="' + "<%= asset_path('order/email_logo.png', type: :images) %>" + '" alt="chat" class="img-chat">');
+        $('#chat-div').show();
+        $('#user_msg').val(''); 
+        driverID = result.driver_id;
         order = true;
       }
       else {

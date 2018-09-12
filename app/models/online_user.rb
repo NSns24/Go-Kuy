@@ -3,5 +3,5 @@ class OnlineUser < ApplicationRecord
 	validates :user_id, numericality: { only_integer: true }
 	validates :pickup_lat, :pickup_lng, :dest_lat, :dest_lng, numericality: true
 
-	belongs_to :user
+	belongs_to :user, :foreign_key => 'user_id'
 end
