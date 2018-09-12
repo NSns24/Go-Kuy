@@ -1,12 +1,12 @@
 <% content_for :css do %>
-<%= stylesheet_link_tag    'style' %>
-<%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
-<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
+	<%= stylesheet_link_tag    'style' %>
+	<%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
 <% content_for :js do %>
-<%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js' %>
-<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+	<%= javascript_include_tag 'history' %>
+	<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_JzzSA9iylcZqkcVOEs6J_sTLVOg_fE&libraries=places' %>
+	<%= javascript_include_tag 'jquery.geocomplete' %>
 <% end %>
 
 
@@ -35,7 +35,7 @@
 		</li>
 	</ul>
 
-	<% @order.each do |order| %>
+	<% @orders.each do |order| %>
 		<div class="container-fluid">
 			<div class="row history">
 				<div class="col-lg-2 history-item">
@@ -49,20 +49,11 @@
 							</div>
 							<div class="col-lg-10 history-destination-detail">
 								<span class="order-destination">DESTINATION</span>
-								<p class="history-address">Jl. Salemba Tengah, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10440</p>
+								<p class="history-address"></p>
 								<div class="history-sub-detail">
-									<p class="history-price">
-
-									<% if order.distance <= 5 %>
-									Price: Rp. 5000,-
-									<% else %>
-									Price: Rp. <%= (order.distance*2000).to_s.gsub('.0','') %>,-
-									<% end %>	
-									
-
-									</p>
+									<p class="history-price"></p>
 									<p class="history-distance">
-										Distance: <%= order.distance.to_s + " km" %>
+										Distance: <%= order.distance.to_s + " KM" %>
 									</p>
 								</div>	
 							</div>
@@ -73,22 +64,28 @@
 					<div class="history-driver-feedback">
 						<p id="driver_name"><%= order.user.name %></p>
 						<div class="history-driver-feedback-rating">
+							<% if order.rating.nil? %>
+								This user has not given rating yet
+							<% else %>
+								<% order.rating.times do |i|  %>
+									<%= image_tag 'order/star.png' %>
+								<% end %>
 
-							<% order.rating.times do |i|  %>
-								<%= image_tag 'order/star.png' %>
+								<% (order.rating-5).abs.times do |i| %>
+									<%= image_tag 'order/empty_star.png' %>
+								<% end %>
 							<% end %>
-
-							<% (order.rating-5).abs.times do |i| %>
-								<%= image_tag 'order/empty_star.png' %>
-							<% end %>
-
 						</div>
 						<p class="history-driver-feedback-comments">
-							Comment:
+							Comment(s):
 						</p>
-						<p class="history-driver-feedback-comments">
-							<%= order.comment %>
-						</p>
+						<% if order.comment.nil? || order.comment == '' %>
+							No Comments from this user
+						<% else %>
+							<p class="history-driver-feedback-comments">
+								<%= order.comment %>
+							</p>
+						<% end %>
 					</div>
 				</div>
 			</div>
