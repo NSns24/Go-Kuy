@@ -24,13 +24,18 @@ Things you may want to cover:
 * ... -->
 # GO-KUY
 
-<!-- One Paragraph of project description goes here -->
+GO-KUY is a web based application for users as their alternative public transportation.
+User could create their account, edit their profile, order go-ride, view order history, and give rating to the driver. In the other side, driver could also create their account, edit their profile, get a job, view order history, the receive rating from customer.
+
 
 ## Getting Started
 
 <!-- These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. -->
 
 ### Prerequisites
+
+Ruby Version - 2.5.1
+Rails Version - 5.0.7
 
 Get Ruby on Rails Installed on Your Laptop or PC
 
