@@ -34,9 +34,9 @@ RSpec.describe UserController, type: :controller do
         get :index
         expect(response).to have_http_status(302)
       end
-      it "redirects to main page" do
+      it "redirects to user login page" do
         get :index
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to new_user_session_path
       end
     end
     # redirect kalo belom signed in
@@ -56,6 +56,40 @@ RSpec.describe UserController, type: :controller do
 
     context "user is not signed in" do
     end 
+  end
+
+
+   describe "GET #history" do
+  
+    context "user is signed in" do
+      before :each do
+        sign_in @user
+      end
+      it "returns http success when user is signed in" do
+        get :index
+        expect(response).to have_http_status(:success)
+      end
+      it "renders the :history template when user is signed in" do
+          get :history
+          expect(response).to  render_template :history
+      end
+    end
+
+    context "user is not signed in" do
+      it "returns status code 302 when user is not signed in" do
+        get :index
+        expect(response).to have_http_status(302)
+      end
+      it "returns status code 302 when driver tries to access" do
+        sign_in @driver
+        get :index
+        expect(response).to have_http_status(302)
+      end
+      it "redirects to user login page" do
+        get :index
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
   end
 
   describe "GET #order" do

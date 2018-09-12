@@ -34,17 +34,11 @@ RSpec.describe DriverController, type: :controller do
         get :index
         expect(response).to have_http_status(302)
       end
-      it "redirects to main page" do
+      it "redirects to driver login page" do
         get :index
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to new_driver_session_path
       end
     end
-
-    # it "has already login" do
-    #   driver = create(:driver)
-    #   sign_in driver
-    #   expect(assigns(:driver)).to sign_in
-    # end
   end
 
 
@@ -60,8 +54,56 @@ RSpec.describe DriverController, type: :controller do
       end
     end
 
+     context "driver is not signed in" do
+      it "returns status code 302 when driver is not signed in" do
+        get :index
+        expect(response).to have_http_status(302)
+      end
+      it "returns status code 302 when user tries to access" do
+        sign_in @user
+        get :index
+        expect(response).to have_http_status(302)
+      end
+      it "redirects to driver login page" do
+        get :index
+        expect(response).to redirect_to new_driver_session_path
+      end
+    end
+  end
+
+
+
+  describe "GET #history" do
+  
+    context "driver is signed in" do
+      before :each do
+        sign_in @driver
+      end
+      it "returns http success when driver is signed in" do
+        get :index
+        expect(response).to have_http_status(:success)
+      end
+      it "renders the :history template when driver is signed in" do
+          get :history
+          expect(response).to  render_template :history
+      end
+    end
+
     context "driver is not signed in" do
-    end 
+      it "returns status code 302 when driver is not signed in" do
+        get :index
+        expect(response).to have_http_status(302)
+      end
+      it "returns status code 302 when user tries to access" do
+        sign_in @user
+        get :index
+        expect(response).to have_http_status(302)
+      end
+      it "redirects to driver login page" do
+        get :index
+        expect(response).to redirect_to new_driver_session_path
+      end
+    end
   end
 
 
