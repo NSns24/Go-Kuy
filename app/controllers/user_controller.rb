@@ -9,6 +9,11 @@ class UserController < ApplicationController
   def profile
   end
 
+  def history 
+     @orders = Order.joins(:driver).where(user_id: current_user.id).where.not(finish_datetime: nil).order('finish_datetime DESC')
+    gon.orders = @orders
+  end
+
   def order
     gon.user_id = current_user.id
     order = OnlineUser.find_by(user_id: current_user.id)
