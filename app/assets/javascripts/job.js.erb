@@ -118,6 +118,9 @@ $(document).ready(function(){
         order: order,
         distance: distanceInKm
       },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      },
       success: function(result){
         if(result != null) {
           $('#circle-text').html('OK!<br>Happy Working!!');
@@ -149,6 +152,9 @@ $(document).ready(function(){
       data: {
         order_id: order.id
       },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      },
       success: function(result){
         $('#circle-text').html('Drive Safe!!!');
         $('#choices').html('<div class="row">' + 
@@ -168,6 +174,9 @@ $(document).ready(function(){
       method: 'GET',
       data: {
         order_id: order.id
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
       },
       success: function(result){
         $('#circle-text').html('<img src="' + "<%= asset_path('order/checked.svg', type: :images) %>" + '" class="img-check"><br>Good Job!!!');
@@ -206,6 +215,9 @@ function checkOrder() {
     url: '/order/checkOrderDriver',
     method: 'GET',
     async: false,
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
     success: function(result) {
       if(result != null) {
         order = result;
@@ -289,6 +301,9 @@ function findJob() {
     data: {
       currentLoc: currentLoc,
       exOrder: order.id
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
     },
     success: function(result){
       if(result.status == 'Success') {
