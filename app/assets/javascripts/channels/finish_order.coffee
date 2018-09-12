@@ -1,6 +1,6 @@
 App.finish_order = App.cable.subscriptions.create "FinishOrderChannel",
   connected: ->
-    console.log('Connected')
+    console.log('Finish Order Connected')
 
   disconnected: ->
-    console.log('Disconnected')
+    console.log('Finish Order Disconnected')

@@ -184,6 +184,10 @@ input {
 	margin: 15px 0;
 }
 
+.scoring-content-submit input {
+	padding: 15px 30px;
+}
+
 /* waiting to pickup css */
 
 .waiting{

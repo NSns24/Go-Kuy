@@ -21,7 +21,7 @@ body {
 
 #job-div {
 	background-color: grey;
-	height: 400px;
+	height: 450px;
 	padding: 30px 0;
 }
 
@@ -44,7 +44,7 @@ body {
 #information-div {
 	background-color: green;
 	font-size: 20px;
-	height: 400px;
+	height: 450px;
 	padding: 20px 0;
 	padding-top: 8%;
 }
@@ -140,4 +140,128 @@ body {
 .img-check {
 	width: 100px;
 	height: 100px;
+}
+
+#chat-div {
+	width: 20%;
+	height: 40px;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background-color: #c6e2ff;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 20px;
+	padding: 10px 0;
+	color: #bc3e1a;
+	display: none;
+}
+
+.img-chat {
+	width: 30px;
+	margin: 0 10px;
+}
+
+#modal-chat .modal-body {
+	height: 400px;
+}
+
+#modal-chat .modal-footer {
+	text-align: left;
+	padding: 0 10px;
+	padding-top: 10px;
+}
+
+#modal-chat {
+	.type_msg {
+		border-top: 1px solid #c4c4c4;
+		border-bottom: 1px solid #c4c4c4;
+		position: relative;
+	}
+
+	.input_msg_write input {
+		background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+		border: medium none;
+	  	color: #4c4c4c;
+	  	font-size: 15px;
+	  	min-height: 48px;
+	  	width: 100%;
+	}
+
+	.msg_send_btn {
+		background: #05728f none repeat scroll 0 0;
+		border: medium none;
+		border-radius: 50%;
+		color: #fff;
+		cursor: pointer;
+		font-size: 17px;
+		height: 33px;
+		position: absolute;
+		right: 0;
+		top: 11px;
+		width: 33px;
+	}
+
+	.top_spac { 
+		margin: 0;
+	}
+
+	.mesgs {
+	  	float: left;
+	  	padding: 20px 15px 0 0;
+	  	width: 100%;
+	}
+
+	.msg_history {
+	  	height: 350px;
+	  	overflow-y: auto;
+	}
+
+	.received_msg {
+	  	display: inline-block;
+	  	padding: 0 0 0 10px;
+	  	vertical-align: top;
+	  	width: 92%;
+	  	margin-bottom: 25px;
+	}
+
+  	.received_withd_msg p {
+	  	background: #ebebeb none repeat scroll 0 0;
+	  	border-radius: 3px;
+	  	color: #646464;
+	  	font-size: 14px;
+	  	margin: 0;
+	  	padding: 5px 10px 5px 12px;
+	  	width: 100%;
+	}
+
+	.received_withd_msg { 
+		width: 57%;
+	}
+
+	.time_date {
+  		color: #747474;
+	 	display: block;
+	  	font-size: 12px;
+	  	margin: 8px 0 0;
+	}
+
+	.outgoing_msg { 
+		overflow: hidden; 
+		margin-bottom: 25px;
+	}
+
+	.sent_msg p {
+	  	background: #05728f none repeat scroll 0 0;
+	  	border-radius: 3px;
+	  	font-size: 14px;
+	  	margin: 0; color:#fff;
+	  	padding: 5px 10px 5px 12px;
+	  	width:100%;
+	}
+
+	.sent_msg {
+	  	float: right;
+	  	width: 46%;
+	}
 }

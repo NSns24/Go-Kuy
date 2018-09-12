@@ -17,7 +17,7 @@ class OrderController < ApplicationController
    
     if user.destroy
       if order.save
-        order_success = Order.joins(:driver).select('orders.*, drivers.*').find(order.id)
+        order_success = Order.joins(:driver).select('orders.*, drivers.name, drivers.phone, drivers.license_plate').find(order.id)
         ActionCable.server.broadcast 'order', order: order_success
         return render json: order_success
       end
@@ -27,7 +27,7 @@ class OrderController < ApplicationController
   end
 
   def checkOrderUser
-    order = Order.joins(:driver).select('orders.*, drivers.*').where(user_id: current_user.id, finish_datetime: nil).first
+    order = Order.joins(:driver).select('orders.*, drivers.name, drivers.phone, drivers.license_plate').where(user_id: current_user.id, finish_datetime: nil).first
     return render json: order
   end
 

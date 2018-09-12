@@ -10,8 +10,9 @@ class UserController < ApplicationController
   end
 
   def order
-    @myUserID = current_user.id
+    gon.user_id = current_user.id
     order = OnlineUser.find_by(user_id: current_user.id)
+    
     if !order.nil?
       order.destroy
     end
@@ -85,7 +86,7 @@ class UserController < ApplicationController
   end
 
   def rating
-    order = Order.joins(:driver).select('orders.*, drivers.*').where(user_id: current_user.id, rating: nil, id: params[:id]).where.not(finish_datetime: nil).first
+    order = Order.joins(:driver).select('orders.*, drivers.name, drivers.phone, drivers.license_plate').where(user_id: current_user.id, rating: nil, id: params[:id]).where.not(finish_datetime: nil).first
     
     if order.nil?
       redirect_to user_home_path

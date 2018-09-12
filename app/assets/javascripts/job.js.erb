@@ -4,6 +4,7 @@ var again = false;
 var request;
 var timeRequest;
 var distanceInKm = 0;
+var msgCount = 0;
 
 var currIcon = L.icon({
   iconUrl: "<%= asset_path('order/current_marker.png', type: :images) %>",
@@ -64,6 +65,51 @@ $(document).ready(function(){
     $('#overlay').hide();
   });
 
+  $(document).on('click', '#chat-div', function(){
+    $('#modal-chat').modal('toggle');
+    msgCount = 0;
+    $('#chat-div span:nth-child(3)').remove();
+  });
+
+  App.chat.received = function(data) {
+    if(data.type == 'driver' && order != {} && data.id == order.driver_id) {
+      let date = moment().local();
+      $('.msg_history').append('<div class="incoming_msg">' +
+        '<div class="received_msg">' +
+        '<div class="received_withd_msg">' +
+        '<p>' + data.msg + '</p>' +
+        '<span class="time_date">' + date.format('hh:mm A') + ' | ' + date.format('MMMM DD') + '</span>' + 
+        '</div></div></div>');
+
+      if(!$('#modal-chat').is(':visible')) {
+        msgCount++;
+        $('#chat-div span:nth-child(3)').remove();
+        $('#chat-div').append('<span>(' + msgCount + ')</span>');
+      }
+      else {
+        msgCount = 0;
+      }
+    }
+  }
+
+  $('#btnSendChat').click(function(){
+    let msg = $('#driver_msg').val().trim();
+
+    if(msg != "") {
+      let date = moment().local();
+
+      $('.msg_history').append('<div class="outgoing_msg">' + 
+        '<div class="sent_msg">' +
+        '<p>' + msg + '</p>' +
+        '<span class="time_date">' + date.format('hh:mm A') + ' | ' + date.format('MMMM DD') + '</span>' + 
+        '</div></div>');
+
+      App.chat.sendMsg(msg, order.user_id, 'user');
+    }   
+
+    $('#driver_msg').val(''); 
+  });
+
   $('#job-div').on('click', '#btnAccept', function(){
     $.ajax({
       method: 'POST',
@@ -78,6 +124,10 @@ $(document).ready(function(){
           $('#choices').html('<div class="row">' + 
           '<button type="button" id="btnStartWorking" class="btn">Start Working</button>' +
           '</div>');
+          $('#chat-div').html('<span>Chat User</span>' +
+            '<img src="' + "<%= asset_path('order/email_logo.png', type: :images) %>" + '" alt="chat" class="img-chat">');
+          $('#chat-div').show();
+          $('#driver_msg').val(''); 
           order = result;
         }
         else {
@@ -124,6 +174,8 @@ $(document).ready(function(){
         $('#choices').html('<div class="row">' + 
           '<button type="button" id="btnDoneWorking" class="btn">Done</button>' +
           '</div>');
+        $('#chat-div').html('');
+        $('#chat-div').hide();
         order = {};
       },
       error: function(xhr){
@@ -201,6 +253,11 @@ function checkOrder() {
           lat: result.dest_lat,
           lng: result.dest_lng
         });
+
+        $('#chat-div').html('<span>Chat Driver</span>' +
+        '<img src="' + "<%= asset_path('order/email_logo.png', type: :images) %>" + '" alt="chat" class="img-chat">');
+        $('#chat-div').show();
+        $('#driver_msg').val(''); 
       }
       else {
         getCurrentLocation().then(function(location){
