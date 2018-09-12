@@ -1350,7 +1350,7 @@ input#driver_dob {
 }
 
 .login-home-content-item{
-	max-height: 80vh;
+	max-height: 74vh;
 	float: left;
 	width: 50%;
 	padding-top: 13%;
@@ -1674,7 +1674,7 @@ input#user_dob.form-control {
 	margin-top: 35px;
 	padding: 10px;
 	line-height: 20px;
-	width: 250px;
+	min-width: 1px;
 }
 
 .customer-index-nav .customer-index-name p{
@@ -1684,7 +1684,7 @@ input#user_dob.form-control {
 }
 
 .customer-index-content{
-	max-height: 75vh;
+	max-height: 70vh;
 	overflow: hidden;
 	margin-top: 5vh
 }
@@ -1708,11 +1708,11 @@ input#user_dob.form-control {
 	position: relative;
 }
 
-.customer-index-order-button-bg{
+.customer-index-content .customer-index-order-button-bg{
 	position: absolute;
 	top: 0;
 	left: -20%;
-	/*z-index: -1;*/
+	z-index: -1;
 	width: 140%;
 }
 
