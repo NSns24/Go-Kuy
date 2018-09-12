@@ -1,6 +1,11 @@
 /* Write your custom CSS here */
 
-.login-admin .page-content,
+.login-admin .page-content {
+	padding-top: 9% !important;
+	padding-bottom: 9% !important;
+}
+
+
 .register-admin .page-content {
 	padding-top: 7% !important;
 	padding-bottom: 7% !important;
