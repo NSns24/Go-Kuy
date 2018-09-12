@@ -79,7 +79,7 @@ class OrderController < ApplicationController
     if order.save
       return render json: { status: 'Success', message: 'Thank you for your rating' }
     else
-      return render json: { status: 'Success', message: 'Error while processing data' }
+      return render json: { status: 'Failed', message: 'Error while processing data' }
     end
   end
 end

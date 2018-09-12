@@ -244,7 +244,8 @@ $(document).ready(function(){
             pickupLoc: pickup,
             destLoc: dest
           },
-          beforeSend: function() {
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
             mainMap.markerBounce();
             $('#overlay').show();
           },
@@ -278,6 +279,9 @@ $(document).ready(function(){
       url: '/order/cancelOrder',
       method: 'GET',
       async: false,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      },
       success: function(result) {
         if(result.status == 'Success') {
           order = false;
@@ -303,6 +307,9 @@ function checkOrder() {
     url: '/order/checkOrderUser',
     method: 'GET',
     async: false,
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
     success: function(result) {
       if(result != null) {
         $('#detail').removeClass('text-center');

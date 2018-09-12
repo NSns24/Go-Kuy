@@ -10,7 +10,7 @@ class UserController < ApplicationController
   end
 
   def history 
-     @orders = Order.joins(:driver).where(user_id: current_user.id).where.not(finish_datetime: nil).order('finish_datetime DESC')
+    @orders = Order.joins(:driver).where(user_id: current_user.id).where.not(finish_datetime: nil).order('finish_datetime DESC')
     gon.orders = @orders
   end
 
