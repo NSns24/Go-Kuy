@@ -26,7 +26,7 @@
                             <div class="panel panel-white" id="js-alerts">
                                 <div class="panel-body">
                                     <div class="login-box">
-                                        <a href="index.html" class="logo-name text-lg text-center m-t-xs">GOKUY</a>
+                                        <%= link_to "GOKUY", root_path, class: 'logo-name text-lg text-center m-t-xs' %>
                                         <p class="text-center m-t-md">Please login into your account.</p>
                                         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 

@@ -1665,7 +1665,7 @@ input#user_dob.form-control {
 	float: right;
 	width: 15%;
 	text-align: center;
-	margin-right: 10%;
+	margin-right: 8%;
 }
 
 .customer-index-name div{
@@ -1675,6 +1675,7 @@ input#user_dob.form-control {
 	padding: 10px;
 	line-height: 20px;
 	min-width: 1px;
+	width: 224px;
 }
 
 .customer-index-nav .customer-index-name p{
@@ -1734,7 +1735,7 @@ input#user_dob.form-control {
 }
 
 .customer-index-order-button img{
-	width: 100%;
+	width: 11%;
 }
 
 .customer-index-order-button button{
@@ -1748,6 +1749,15 @@ input#user_dob.form-control {
 	letter-spacing: 2px;
 	position: relative;
 	text-align: left;
+	outline: none;
+}
+
+.customer-index-order-button button:active,
+.customer-index-order-button button:link,
+.customer-index-order-button button:hover,
+.customer-index-order-button button:visited
+{
+	outline: none !important;
 }
 
 .customer-index-order-button button .fa-angle-right{

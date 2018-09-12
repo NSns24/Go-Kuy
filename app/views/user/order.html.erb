@@ -2,6 +2,9 @@
   <%= stylesheet_link_tag    'https://unpkg.com/leaflet@1.2.0/dist/leaflet.css' %>
   <%= stylesheet_link_tag    'leaflet-routing-machine' %>
   <%= stylesheet_link_tag    'order' %>
+  <%= stylesheet_link_tag    'style' %>
+  <%= stylesheet_link_tag    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.3.1/css/all.css' %>
 <% end %>
 
 <% content_for :js do %>
@@ -15,7 +18,35 @@
   <%= javascript_include_tag 'polyline' %>
   <%= javascript_include_tag 'order' %>
   <%= javascript_include_tag 'cable' %>
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.min.js' %>
+  <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' %>
+  <%= javascript_include_tag 'main_login_page.js' %>
 <% end %>
+
+<nav class="customer-index-nav">
+  <ul>
+    <li class="customer-index-nav-logo">
+      <%= link_to image_tag('logo.png'), user_home_url %>
+    </li>
+    <li>
+      <p><%= link_to "Home", user_home_url, class: 'active' %></p>
+    </li>
+    <li>
+      <p><%= link_to "Order", order_path %></p>
+    </li>
+    <li>
+      <p><%= link_to "History", user_history_path %></p>
+    </li>
+    <li>
+      <p><%= link_to "My Account", user_profile_path %></p>
+    </li>
+    <li class="customer-index-name">
+      <div>
+        <p>Hai, <%= current_user.name %>!</p>
+      </div>
+    </li>
+  </ul>
+</nav>
 
 <div class="container-fluid">
   <input type="hidden" id="userID" value="<%= @myUserID %>" disabled>

@@ -13,7 +13,7 @@
 <div class="login-customer">
     <div class="overlay">
       <div class="login-customer-form signup-customer-form">
-        <h2><%= image_tag 'logo.png', class: 'login-goride-image' %></h2>
+        <h2><%= link_to image_tag('logo.png'), root_path, class: 'login-goride-image' %></h2>
         <h2>Registration</h2>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= devise_error_messages! %>
@@ -48,7 +48,7 @@
         <% end %>
         <div class="login-customer-form-footer">
           Already have an account?
-          <span class="login-customer-signup-link"><%= link_to "Sign In!", root_path %></span>
+          <span class="login-customer-signup-link"><%= link_to "Sign In!", new_user_session_path %></span>
         </div>
       </div>
     </div>
