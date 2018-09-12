@@ -16,6 +16,10 @@
 <%= javascript_include_tag 'admin-jquery.datatables.min.js' %>
 <%= javascript_include_tag 'admin-meteor.min.js' %>
 <%= javascript_include_tag 'admin-table-data.js' %>
+
+<%= javascript_include_tag 'history' %>
+<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBa_JzzSA9iylcZqkcVOEs6J_sTLVOg_fE&libraries=places' %>
+<%= javascript_include_tag 'jquery.geocomplete' %>
 <% end %>
 
 <div class="compact-menu">
@@ -80,21 +84,35 @@
                                     <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Date Of Birth</th>
-                                                <th>Phone</th>
-                                                <th>License Plate</th>
+                                                <th>Driver</th>
+                                                <th>User</th>
+                                                <th>Address</th>
+                                                <th>Comment</th>
+                                                <th>Rating</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% Driver.all.each do |driver| %>
+                                            <% @orders.each do |order| %>
                                                 <tr>
-                                                    <td><%= driver.name %></td>
-                                                    <td><%= driver.email %></td>
-                                                    <td><%= driver.dob %></td>
-                                                    <td><%= driver.phone %></td>
-                                                    <td><%= driver.license_plate %></td>
+                                                    <td><%= order.driver.name %></td>
+                                                    <td><%= order.user.name %></td>
+                                                    <td class="history-address"></td>
+                                                    <td><%= order.comment %></td>
+                                                    <td>
+                                                        <% if order.rating.nil? %>
+                                                            This user has not given rating yet
+                                                        <% else %>
+                                                            <% order.rating.times do |i|  %>
+                                                                <%= image_tag 'order/star.png' %>
+                                                            <% end %>
+
+                                                            <% (order.rating-5).abs.times do |i| %>
+                                                                <%= image_tag 'order/empty_star.png' %>
+                                                            <% end %>
+                                                        <% end %>
+                                                            
+                                                    </td>
+                                                    
                                                 </tr>
                                             <% end %>
                                         </tbody>

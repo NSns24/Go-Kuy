@@ -27,3 +27,8 @@ table.dataTable.no-footer {
 .dataTables_paginate,.paging_simple_numbers {
 	margin-top: 24px;
 }
+
+tbody img {
+	width: 10px;
+	height: 10px;
+}
