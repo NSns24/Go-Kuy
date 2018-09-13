@@ -105,6 +105,8 @@ These tests are used to ensure that models and controllers are running as expect
 * [Factory Girl Rails](https://github.com/kenoir/factory_girl_rails) - Test Driven Development
 * [Faker](https://github.com/stympy/faker) - Dummy data
 * [Validates Timeliness](https://github.com/adzap/validates_timeliness) - Validate Date
+* [Rails DB](https://github.com/igorkasyanchuk/rails_db) - Rails Database Viewer and SQL Query Runner
+* [Gon](https://github.com/gazay/gon) - Rails Variables in JavaScript
 
 
 ## Authors
@@ -124,4 +126,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 <!-- * Hat tip to anyone whose code was used
 * Inspiration
 * etc -->
+
+* GO-JEK
+* GO-RIDE
 
