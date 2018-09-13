@@ -31,6 +31,7 @@ User could create their account, edit their profile, order go-ride, view order h
 ## Getting Started
 
 <!-- These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system. -->
+Clone the project and you're ready to go.
 
 ### Prerequisites
 
@@ -57,7 +58,8 @@ Take a look at  http://railsapps.github.io/installrubyonrails-ubuntu.html  on ho
 4. Install Bundler
 5. Rails Installation Options
 
-### Installing
+<!-- ### Installing -->
+### Running
 
 <!-- A step by step series of examples that tell you how to get a development env running
 
@@ -117,9 +119,9 @@ These tests are used to ensure that models and controllers are running as expect
 * **Novi Steven** 
 * **Tommy Willianto**
 
-## License
+<!-- ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details -->
 
 ## Acknowledgments
 
